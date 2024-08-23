@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My portofilio</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/115d442487.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <div id="header">
+        <div class="container">
+            <nav>
+                <h1 class="name">
+                    Mohamed <span class="suliman">Suliman</span></h1>
+                    <ul id="sidemenu">
+                        <li><a href="#header">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#portofolio">portofolio</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                        <i class="fas fa-solid fa-xmark" onclick="closemenu()"></i>
+                    </ul>
+                    <i class="fas fa-solid fa-bars" onclick="openmenu()"></i>
+            </nav>
+
+
+
+            <div class="imgpro">
+                <img src="images/main2.jpg" alt="" width="00px" height="400px">
+            </div>
+
+            <div class="header-text">
+                <p>Mobile App Developer📱</p>
+                <h1>Hi, I'm <span>Mohamed</span><br> Suliman From Egypt</h1>
+            </div>
+        </div>
+    </div>
+    <!-- -----------------------about------------------- -->
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="images/img55.jpg" alt="Mohamed Suliman">
+                </div>
+                <div class="about-col-2">
+                    <h1 class="sub-title">About Me</h1>
+                    <h5 class="about-description">
+                        I am an enthusiastic Flutter Developer specializing in crafting high-quality mobile applications for Android and iOS platforms. With a solid foundation in Dart programming and hands-on experience with Flutter and Firebase, I have a proven track record of designing, developing, and deploying innovative solutions. My expertise includes building interactive user interfaces, managing state effectively with Bloc, and optimizing app performance. I am eager to contribute my skills to a dynamic team and grow in a collaborative environment. I am committed to continuous learning and achieving excellence in mobile app development.
+                    </h5>
+
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                    </div>
+                    <div class="tab-contents active-tap"
+                         id="skills">
+                        <ul >
+                            <li><span>Flutter</span> | Dart</li>
+                            <li>SQLite | <span>Firebase</span></li>
+                            <li><span>Restful API</span> | Bloc State Management </li>
+                            <li>Git | <span>GitHub</span></li>
+                            <li><span>Restful API</span> | Design Patterns</li>
+                            <li>MVVM | <span>Clean Code</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li><span>Mobile Application Development Training</span><br> at Digital Egypt Pioneers Initiative</li>
+                            <li><span>News App Development</span><br>Created a news application with article bookmarking, category filtering, and push notifications for breaking news.</li>
+                            <li><span>Graduation Project: Smart Safe</span><br>Developed a smart safe with secure access features and real-time monitoring capabilities.</li>
+                            <li><span>News App</span><br>Developed a news application that aggregates and displays news articles from various sources in real-time.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li><h3>Graduated From Delta Technological University (2020 - 2024)</h3></li>
+                            <li>Major: Software Engineering</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ---------------------------------------services--------------- -->
+    <div id="services">
+        <div class="container">
+            <h1 class="sub-title">My Services</h1>
+            <div class="services-list">
+                <div>
+                    <i class="fa-brands fa-android fa-beat-fade"></i>
+                    <h2>Mobile Apps</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam modi officiis, corporis laboriosam
+                        saepe sequi facilis. Impedit vitae quidem ratione voluptates qui voluptatum, nam architecto
+                        veniam, deleniti autem nulla praesentium!
+                    </p>
+                    <a href="">Learn more</a>
+                </div>
+                <div>
+                    <i class="fa-brands fa-app-store fa-beat-fade"></i>
+                    <h2>UI/UX Design</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam modi officiis, corporis laboriosam
+                        saepe sequi facilis. Impedit vitae quidem ratione voluptates qui voluptatum, nam architecto
+                        veniam, deleniti autem nulla praesentium!
+                    </p>
+                    <a href="">Learn more</a>
+                </div>
+                <div>
+                    <i class="fa-solid fa-code fa-beat-fade"></i>
+                    <h2>Web Design</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quam modi officiis, corporis laboriosam
+                        saepe sequi facilis. Impedit vitae quidem ratione voluptates qui voluptatum, nam architecto
+                        veniam, deleniti autem nulla praesentium!
+                    </p>
+                    <a href="">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- ------------------------portofolio----------------- -->
+    <div id="portofolio">
+        <div class="container">
+            <h1 class="sub-title">My Work</h1>
+            <div class="work-list">
+                <div class="work">
+                    <img src="images/ninjaH.jpg">
+                    <div class="layer">
+                        <h3>Ninja Box App</h3>
+                        <p>Developed a smart safe with secure access features and real-time monitoring capabilities.</p>
+                        <a href="images/ninjaBoxApp.pdf"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="videos/ninja-app.mp4"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="images/notes.png">
+                    <div class="layer">
+                        <h3>News App</h3>
+                        <p>
+                            Stay informed and connected with the latest news from around the globe.
+                            Our app delivers personalized content, breaking news alerts, and in-depth analysis.
+
+                        </p>
+                        <a href="images/ninjaBoxApp.pdf"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="images/notes.png">
+                    <div class="layer">
+                        <h3>Notes App</h3>
+                        <p>
+                            Organize and access your notes easily anytime, anywhere.
+                            Perfect for students, professionals, and anyone in need of efficient note-taking.
+                        </p>
+                        <a href="images/ninjaBoxApp.pdf"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="images/rothabit2x.png">
+                    <div class="layer">
+                        <h3>News App</h3>
+                        <p>
+                            Stay informed and connected with the latest news from around the globe.
+                            Our app delivers personalized content, breaking news alerts, and in-depth analysis.
+
+                        </p>
+                        <a href="images/ninjaBoxApp.pdf"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+            </div>
+            <a href="#" class="btn">See More</a>
+        </div>
+    </div>
+
+    <!-- --------------------------------contact--------------- -->
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="sub-title">Contact Me</h1>
+                    <p><i class="fa-solid fa-paper-plane"></i>mohamedsolaiman707@gmail.com</p>
+                    <p><i class="fa-solid fa-phone"></i> +201014250577</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/mohamed-solaiman-a2b9921b4">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61556941828639">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="https://x.com/MoSuliman110?t=YcWZ2nae-d89e5ll5mZu8g&s=09"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="https://github.com/mohamedSolaiman11/"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://wa.me/qr/BFLIOWSSP63AH1"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                    <a href="images/updatedCv.pdf" download class="btn btn2">Download CV</a>
+                </div>
+
+                <div class="contact-right">
+                    <form action="https://formspree.io/f/xnqkrjyg" method="POST">
+
+                        <input type="text" name="Name" placeholder="Your name" required>
+                        <input type="email" name="Email" placeholder="Your email" required>
+                        <textarea name="Message" id="" rows="6" placeholder="Your message"></textarea>
+                        <button type="submit" class="btn btn2">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copy Right 2023 <i class="fa-regular fa-copyright"></i> Made By Mohamed Solaiman.All Right Reserved.</p>
+        </div>
+    </div>
+
+    <script>
+
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+        function opentab(tabname) {
+            for (tablink of tablinks) {
+                tablink.classList.remove("active-link");
+            }
+            for (tabcontent of tabcontents) {
+                tabcontent.classList.remove("active-tap");
+            }
+            event.currentTarget.classList.add("active-link");
+            document.getElementById(tabname).classList.add("active-tap");
+        }
+    </script>
+
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+        function openmenu() {
+            sidemenu.style.right = "0";
+        }
+        function closemenu() {
+            sidemenu.style.right = "-200px";
+        }
+    </script>
+
+    <!------------------------------------------- Back to Top Button ------------------------------>
+    <button class="scroll-to-top" id="scrollToTopBtn" style="display: none;">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ربط ملف JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
