@@ -485,7 +485,7 @@ form .btn2 {
     border-radius: 40px;
     padding: 4px 10px;
     cursor: pointer;
-    display: flex; /* يظهر فقط عند التمرير لأسفل */
+    display: flex;
     font-size: 18px;
     animation: moveUpDownForBacktoTopButton 5s ease-in-out infinite;
 }
