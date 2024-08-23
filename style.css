@@ -155,7 +155,7 @@ nav ul li {
 
 /* -------------------------about----------------------- */
 #about {
-    padding: 70px 0;
+    padding: 60px 0;
     color: #ababab;
 }
 
@@ -248,7 +248,7 @@ nav ul li {
 
 /* -------------------------services---------------- */
 #services {
-    padding: 130px 0;
+    padding: 150px 0;
 }
 
 .services-list {
@@ -392,6 +392,7 @@ nav ul li {
     }
 
 /* ------------------contact----------------- */
+
 .contact-left {
     flex-basis: 35%;
 }
@@ -482,7 +483,7 @@ form .btn2 {
     color: #ff004f;
     border: none;
     border-radius: 40px;
-    padding: 8px 15px;
+    padding: 4px 10px;
     cursor: pointer;
     display: flex; /* يظهر فقط عند التمرير لأسفل */
     font-size: 18px;
@@ -527,7 +528,7 @@ nav .fas {
         width: 100vw;
     }
     .container {
-        padding: 0px 25px 0px 25px; /* تقليل المسافة من الجوانب */
+        padding: 10px 25px 0px 25px; /* تقليل المسافة من الجوانب */
         max-width: 768px; /* وضع حد أقصى لعرض الحاوية */
         margin: auto auto; /* توسيط الحاوية */
     }
@@ -554,7 +555,7 @@ nav .fas {
         overflow: hidden;
         border-radius: 50%;
         background: linear-gradient(to right bottom, #212428, #16181c);
-        margin-top:140px;
+        margin-top:120px;
         position: absolute;
         right: 110px;
         animation: slideInFromRight 3s ease-out forwards, floatUpDown 3s ease-in-out infinite 3s; /* حركة من اليمين مع حركة لأعلى وأسفل */
@@ -568,7 +569,7 @@ nav .fas {
 
     .header-text {
         font-size: 20px; /* تقليل حجم الخط على الشاشات الصغيرة */
-        margin-top: 95%;
+        margin-top: 100%;
 
         text-align:center
     }
@@ -625,7 +626,7 @@ nav .fas {
 
 
     #about {
-        padding: 70px 0;
+       text-align:center
         color: #ababab;
     }
 
@@ -874,6 +875,169 @@ nav .fas {
         .scroll-to-top i {
             font-size: 16px;
         }
+
+
+
+/* ------------------contact----------------- */
+.contact-left {
+    flex-basis: 35%;
+}
+
+.contact-right {
+    flex-basis: 60%;
+}
+
+.contact-left p {
+    margin-top: 30px;
+}
+
+    .contact-left p i {
+        color: #ff004f;
+        margin-right: 15px;
+        font-size: 25px;
+    }
+
+.social-icons a {
+    text-decoration: none;
+    font-size: 30px;
+    margin-right: 15px;
+    margin-top: 30px;
+    color: #ababab;
+    display: inline-block;
+    transition: transform 0.5s;
+}
+
+    .social-icons a:hover {
+        color: #ff004f;
+        transform: translateY(-5px);
+    }
+
+.btn.btn2 {
+    display: inline-block;
+    background: #ff004f;
+}
+
+.contact-right form {
+    width: 100%;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: #262626;
+    padding: 12px;
+    color: #fff;
+    margin: 15px 0;
+    font-size: 16px;
+    border-radius: 6px;
+}
+.btn {
+    padding: 10px 20px;
+    font-size: 16px; /* تقليل حجم الأزرار على الشاشات الصغيرة */
+}
+form .btn2 {
+    padding: 14px 60px;
+    font-size: 18px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.copyright {
+    width: 100%;
+
+    text-align: center;
+    padding: 25px 0;
+    background: #262626;
+    font-weight: 300;
+    margin-top: 20px;
+}
+
+    .copyright i {
+        color: #ff004f;
+    }
+
+/* ------------------contact----------------- */
+.contact-left {
+    flex-basis: 100%;
+}
+
+.contact-right {
+    flex-basis: 100%;
+}
+
+.contact-left p {
+    margin-top: 30px;
+}
+
+    .contact-left p i {
+        color: #ff004f;
+        margin-right: 15px;
+        font-size: 18px;
+    }
+
+.social-icons a {
+    text-decoration: none;
+    font-size: 24px;
+    margin-right: 15px;
+    margin-top: 30px;
+    color: #ababab;
+    display: inline-block;
+    transition: transform 0.5s;
+}
+
+    .social-icons a:hover {
+        color: #ff004f;
+        transform: translateY(-5px);
+    }
+
+.btn.btn2 {
+    display: inline-block;
+    background: #ff004f;
+
+}
+
+.contact-right form {
+    width: 100%;
+}
+
+form input,
+form textarea {
+    width: 100%;
+    border: 0;
+    outline: none;
+    background: #262626;
+    padding: 12px;
+    color: #fff;
+    margin: 15px 0;
+    font-size: 12px;
+    border-radius: 6px;
+}
+.btn {
+    padding: 12px 20px;
+    font-size: 14px; /* تقليل حجم الأزرار على الشاشات الصغيرة */
+}
+form .btn2 {
+    padding: 12p x 15px;
+    font-size: 14px;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.copyright {
+    width: 100%;
+
+    text-align: center;
+    padding: 25px 0;
+    background: #262626;
+    font-weight: 300;
+    margin-top: 20px;
+}
+
+    .copyright i {
+        color: #ff004f;
+    }
 
 
 }
