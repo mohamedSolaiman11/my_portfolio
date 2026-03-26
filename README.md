@@ -50,8 +50,6 @@ Simply open `index.html` in your favorite browser.
 
 | Dark Mode (English) | Light Mode (Arabic) |
 |---|---|
-| ![Dark Theme](https://via.placeholder.com/400x250?text=Dark+Mode+English) | ![Light Theme](https://via.placeholder.com/400x250?text=Light+Mode+Arabic) |
-
 ---
 
 ## 🤝 Contact Me
