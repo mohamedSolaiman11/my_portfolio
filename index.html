@@ -4,13 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mohamed Suliman | Flutter & Mobile App Developer</title>
-    
-    <!-- SEO & Meta Tags -->
-    <meta name="description" content="Senior Flutter Developer specializing in high-performance Android & iOS applications.">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="portfolio/style.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
+        /* Fix for Image Zoom/Crop issue */
+        .work img {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 16 / 9;
+            object-fit: contain; /* Shows full image without cropping */
+            background: #111; /* Black background for empty space */
+        }
         .loading-container { text-align: center; width: 100%; grid-column: 1/-1; padding: 50px 0; }
         .error-msg { color: #ff4d4d; grid-column: 1/-1; text-align: center; }
     </style>
@@ -19,7 +24,7 @@
 
     <nav id="navbar">
         <div class="container">
-            <a href="#" class="logo">M.<span>Suliman</span></a>
+            <a href="#" class="logo">Mohamed <span>Solaiman</span></a>
             <ul id="nav-links">
                 <li><a href="#header">Home</a></li>
                 <li><a href="#about">About</a></li>
@@ -39,7 +44,7 @@
             <div class="header-text">
                 <p>Crafting Digital Experiences</p>
                 <h1>Flutter <span>Developer</span> Building Apps That Users Love</h1>
-                <p style="font-size: 1.1rem; color: var(--text-dim); margin-top: 1rem;">I specialize in high-performance mobile applications with clean architecture and pixel-perfect UIs.</p>
+                <p style="font-size: 1.1rem; color: var(--text-dim); margin-top: 1rem;">Specializing in high-performance mobile applications with clean architecture.</p>
                 <div class="cta-group">
                     <a href="#portfolio" class="btn-primary">View My Projects</a>
                     <a href="images/updatedCv.pdf" download class="btn-outline">Download CV</a>
@@ -47,6 +52,53 @@
             </div>
         </div>
     </header>
+
+    <section id="about" style="padding: 100px 0;">
+        <div class="container">
+            <div style="display: flex; gap: 60px; align-items: center; flex-wrap: wrap;">
+                <div style="flex: 1; min-width: 300px;">
+                    <img src="images/finalImg.png" alt="Mohamed Suliman" style="width: 100%; border-radius: 32px; box-shadow: var(--card-shadow);">
+                </div>
+                <div style="flex: 1.5; min-width: 300px;">
+                    <h2 class="sub-title">Building the <span style="color: var(--primary-color)">Future</span> of Mobile</h2>
+                    <p>Enthusiastic Flutter Developer specializing in crafting high-quality mobile applications. Expert in <strong>Dart</strong>, <strong>Bloc</strong>, and <strong>Firebase</strong>, focusing on scalable architectures and pixel-perfect UIs.</p>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 40px;">
+                        <div class="skill-card" style="background: var(--surface-dark); padding: 20px; border-radius: 16px;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 10px;"><i class="fas fa-mobile-alt"></i> Mobile</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-dim);">Flutter, Dart, Bloc, Provider, UI Implementation</p>
+                        </div>
+                        <div class="skill-card" style="background: var(--surface-dark); padding: 20px; border-radius: 16px;">
+                            <h4 style="color: var(--primary-color); margin-bottom: 10px;"><i class="fas fa-server"></i> Backend</h4>
+                            <p style="font-size: 0.85rem; color: var(--text-dim);">Firebase, Supabase, Restful APIs, SQLite</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" style="padding: 100px 0; background: rgba(255,255,255,0.02);">
+        <div class="container">
+            <h2 class="sub-title">What I <span style="color: var(--primary-color)">Do</span></h2>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+                <div style="background: var(--surface-dark); padding: 40px; border-radius: 24px;">
+                    <i class="fab fa-android" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px;"></i>
+                    <h3>App Development</h3>
+                    <p style="color: var(--text-dim); margin-top: 15px;">Native-quality Android and iOS apps from a single codebase with seamless performance.</p>
+                </div>
+                <div style="background: var(--surface-dark); padding: 40px; border-radius: 24px;">
+                    <i class="fas fa-paint-brush" style="font-size: 2.5rem; color: var(--accent-color); margin-bottom: 20px;"></i>
+                    <h3>UI Implementation</h3>
+                    <p style="color: var(--text-dim); margin-top: 15px;">Converting complex designs into smooth, interactive, and responsive Flutter UIs.</p>
+                </div>
+                <div style="background: var(--surface-dark); padding: 40px; border-radius: 24px;">
+                    <i class="fas fa-code" style="font-size: 2.5rem; color: #4CAF50; margin-bottom: 20px;"></i>
+                    <h3>API Integration</h3>
+                    <p style="color: var(--text-dim); margin-top: 15px;">Connecting mobile apps with powerful backends and third-party services.</p>
+                </div>
+            </div>
+        </div>
+    </section>
 
     <section id="portfolio" style="padding: 100px 0;">
         <div class="container">
@@ -60,8 +112,37 @@
         </div>
     </section>
 
-    <!-- باقي الأقسام (About, Services, Contact) ستظل كما هي في التصميم السابق -->
-    <!-- سأركز هنا على إصلاح كود الجلب -->
+    <section id="contact" style="padding: 100px 0; background: rgba(255,255,255,0.02);">
+        <div class="container">
+            <div style="background: var(--surface-dark); padding: 60px; border-radius: 32px; display: flex; flex-wrap: wrap; gap: 40px; align-items: center;">
+                <div style="flex: 1; min-width: 300px;">
+                    <h2 style="font-size: 2.5rem;">Let's Build Something <span style="color: var(--primary-color)">Great</span>.</h2>
+                    <p style="color: var(--text-dim); margin: 20px 0;">Open for freelance opportunities and full-time roles.</p>
+                    <div style="margin-top: 30px;">
+                        <p><i class="fas fa-envelope" style="color: var(--primary-color);"></i> mohamedsolaiman707@gmail.com</p>
+                        <p style="margin-top: 10px;"><i class="fas fa-phone" style="color: var(--primary-color);"></i> +201014250577</p>
+                    </div>
+                    <div class="social-icons" style="display: flex; gap: 20px; margin-top: 30px;">
+                        <a href="https://github.com/mohamedSolaiman11/" target="_blank" style="font-size: 1.5rem; color: white;"><i class="fab fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/mohamed-solaiman-a2b9921b4" target="_blank" style="font-size: 1.5rem; color: white;"><i class="fab fa-linkedin"></i></a>
+                        <a href="https://wa.me/201014250577" target="_blank" style="font-size: 1.5rem; color: white;"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div style="flex: 1.2; min-width: 300px;">
+                    <form action="https://formspree.io/f/xnqkrjyg" method="POST" style="display: grid; gap: 15px;">
+                        <input type="text" name="name" placeholder="Name" required style="padding: 15px; border-radius: 12px; border: none; background: #0f172a; color: white;">
+                        <input type="email" name="email" placeholder="Email" required style="padding: 15px; border-radius: 12px; border: none; background: #0f172a; color: white;">
+                        <textarea name="message" placeholder="Message" rows="5" required style="padding: 15px; border-radius: 12px; border: none; background: #0f172a; color: white;"></textarea>
+                        <button type="submit" class="btn-primary" style="cursor: pointer;">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer style="padding: 40px 0; text-align: center;">
+        <p style="color: var(--text-dim); font-size: 0.9rem;">&copy; 2024 Mohamed Suliman. All Rights Reserved.</p>
+    </footer>
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
@@ -83,10 +164,10 @@
             const container = document.getElementById("firestoreProjects");
             try {
                 const querySnapshot = await getDocs(collection(db, "projects"));
-                container.innerHTML = ""; // إخفاء الـ Spinner
+                container.innerHTML = "";
 
                 if (querySnapshot.empty) {
-                    container.innerHTML = "<p class='error-msg'>No projects found in database. Go to Admin to add some.</p>";
+                    container.innerHTML = "<p class='error-msg'>No projects found. Use Admin panel to add projects.</p>";
                     return;
                 }
 
@@ -97,7 +178,7 @@
                     
                     const card = `
                         <div class="work">
-                            <img src="${p.coverImage || p.imageUrl || 'images/placeholder.jpg'}" alt="${p.appName || 'Project'}">
+                            <img src="${p.coverImage || p.imageUrl || 'images/placeholder.jpg'}" alt="${p.appName || 'Project'}" loading="lazy">
                             <div class="work-info">
                                 <div class="work-header">
                                     <h3>${p.appName || p.name || 'Untitled'}</h3>
@@ -118,17 +199,20 @@
                 });
             } catch (error) {
                 console.error("Firebase Error:", error);
-                container.innerHTML = `<p class='error-msg'>Error: ${error.message}. <br> Make sure your Firebase Rules allow reading.</p>`;
+                container.innerHTML = `<p class='error-msg'>Error loading projects. Check internet connection.</p>`;
             }
         }
 
-        // تشغيل الدالة
         loadProjects();
 
-        // Mobile Menu Logic
-        document.getElementById('mobile-menu').onclick = () => {
-            document.getElementById('nav-links').classList.toggle('active');
-        };
+        // Mobile Menu
+        const menuToggle = document.getElementById('mobile-menu');
+        const navLinks = document.getElementById('nav-links');
+        if(menuToggle) {
+            menuToggle.onclick = () => {
+                navLinks.classList.toggle('active');
+            };
+        }
     </script>
 </body>
 </html>

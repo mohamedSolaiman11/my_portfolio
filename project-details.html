@@ -9,18 +9,81 @@
     <style>
         .details-wrapper { padding: 120px 0; }
         .project-hero { margin-bottom: 60px; text-align: center; }
-        .project-hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
-        .badge-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+        .project-hero h1 { font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 10px; }
+        .badge-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
         .badge { background: rgba(2, 125, 253, 0.1); color: var(--primary-color); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; }
         
-        .main-showcase { width: 100%; border-radius: 32px; overflow: hidden; margin-bottom: 60px; box-shadow: var(--card-shadow); border: 1px solid rgba(255, 255, 255, 0.05); }
-        .main-showcase img { width: 100%; height: auto; display: block; }
+        /* --- Professional Dynamic Gallery --- */
+        .gallery-container { margin-bottom: 60px; }
+        
+        .main-showcase { 
+            width: 100%; 
+            max-height: 75vh; /* Limit height for large screens */
+            border-radius: 24px; 
+            overflow: hidden; 
+            margin-bottom: 25px; 
+            box-shadow: var(--card-shadow); 
+            background: #0a0f1a; /* Darker neutral background */
+            cursor: zoom-in;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px; /* Space around image */
+        }
+        
+        .main-showcase img { 
+            max-width: 100%; 
+            max-height: 70vh; 
+            object-fit: contain; /* Ensure full image visibility */
+            transition: transform 0.3s ease;
+            border-radius: 12px;
+        }
+        
+        .thumbnails-grid { 
+            display: flex; 
+            gap: 12px; 
+            overflow-x: auto; 
+            padding: 10px 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--primary-color) transparent;
+            justify-content: center; /* Center thumbnails if few */
+        }
+        
+        /* Fix: Responsive Thumbnails that show full image */
+        .thumbnail { 
+            height: 140px; /* Fixed height for consistency */
+            width: auto;   /* Width adjusts to image ratio */
+            min-width: 60px;
+            border-radius: 12px; 
+            overflow: hidden; 
+            cursor: pointer; 
+            border: 2px solid transparent; 
+            transition: var(--transition);
+            background: #111;
+            flex-shrink: 0;
+        }
+        
+        .thumbnail img { 
+            height: 100%; 
+            width: auto; 
+            object-fit: contain; /* No cropping */
+            opacity: 0.5; 
+            transition: 0.3s;
+        }
+        
+        .thumbnail.active { 
+            border-color: var(--primary-color); 
+            background: rgba(2, 125, 253, 0.1);
+        }
+        .thumbnail.active img { opacity: 1; transform: scale(1.05); }
+        .thumbnail:hover img { opacity: 0.8; }
 
         .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; }
         .story-section { margin-bottom: 40px; }
         .story-section h2 { font-size: 1.8rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
         .story-section h2 i { color: var(--primary-color); font-size: 1.2rem; }
-        .story-section p { color: var(--text-dim); font-size: 1.1rem; }
+        .story-section p { color: var(--text-dim); font-size: 1.1rem; line-height: 1.8; }
 
         .sidebar-card { background: var(--surface-dark); padding: 30px; border-radius: 24px; position: sticky; top: 120px; border: 1px solid rgba(255, 255, 255, 0.05); }
         .sidebar-card h3 { margin-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 10px; }
@@ -29,12 +92,21 @@
         .spec-item label { display: block; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
         .spec-item span { font-weight: 600; color: var(--text-main); }
 
-        .video-box { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 20px; overflow: hidden; margin-top: 20px; }
+        .video-box { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 20px; overflow: hidden; margin-top: 20px; background: #000; }
         .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        #lightbox {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.95); z-index: 2000;
+            display: none; align-items: center; justify-content: center;
+            cursor: zoom-out;
+        }
+        #lightbox img { max-width: 90%; max-height: 90%; border-radius: 10px; object-fit: contain; }
 
         @media (max-width: 992px) {
             .content-grid { grid-template-columns: 1fr; }
-            .project-hero h1 { font-size: 2.5rem; }
+            .thumbnails-grid { justify-content: flex-start; } /* Scrollable on mobile */
+            .thumbnail { height: 100px; }
         }
     </style>
 </head>
@@ -43,64 +115,99 @@
     <nav>
         <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
             <a href="index.html" class="logo">M.<span>Suliman</span></a>
-            <a href="index.html" style="color: var(--text-main); text-decoration: none; font-weight: 600;"><i class="fas fa-arrow-left"></i> Back</a>
+            <a href="index.html" style="color: var(--text-main); text-decoration: none; font-weight: 600;"><i class="fas fa-arrow-left"></i> Back to Projects</a>
         </div>
     </nav>
 
     <div class="container details-wrapper" id="details-content">
-        <!-- Will be populated by JS -->
         <div style="text-align: center; padding: 100px;">
             <div class="spinner"></div>
-            <p>Loading case study...</p>
+            <p>Loading project details...</p>
         </div>
     </div>
 
-    <script type="module">
-        import { db, doc, getDoc } from './js/firebase.js';
+    <div id="lightbox" onclick="this.style.display='none'">
+        <img id="lightbox-img" src="" alt="Full preview">
+    </div>
 
-        async function loadProject() {
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyAFGihdfZEWJM7iJYh45wRWYCYphVG4-G0",
+            authDomain: "portfolio-9fd63.firebaseapp.com",
+            projectId: "portfolio-9fd63",
+            storageBucket: "portfolio-9fd63.appspot.com",
+            messagingSenderId: "562837517190",
+            appId: "1:562837517190:web:173b5edb9f4ebdafdf7207"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        async function loadProjectDetails() {
             const params = new URLSearchParams(window.location.search);
             const id = params.get('id');
             const container = document.getElementById('details-content');
 
             if (!id) {
-                window.location.href = 'index.html';
+                container.innerHTML = "<div style='text-align:center; padding:100px;'><h2>Project ID missing.</h2></div>";
                 return;
             }
 
             try {
                 const docSnap = await getDoc(doc(db, "projects", id));
                 if (!docSnap.exists()) {
-                    container.innerHTML = "<h1>Project not found.</h1>";
+                    container.innerHTML = "<h2>Project not found.</h2>";
                     return;
                 }
 
                 const p = docSnap.data();
                 const tags = p.techStack ? p.techStack.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join('') : '';
+                
+                let allImages = [];
+                if (p.coverImage) allImages.push(p.coverImage);
+                if (p.screenshots && Array.isArray(p.screenshots)) {
+                    allImages = [...allImages, ...p.screenshots];
+                }
 
                 container.innerHTML = `
                     <div class="project-hero">
                         <div class="badge-group">
                             <span class="badge">${p.category || 'Mobile App'}</span>
                             <span class="badge">${p.status || 'Completed'}</span>
+                            <span class="badge">${p.platforms || 'Android / iOS'}</span>
                         </div>
                         <h1>${p.appName || p.name}</h1>
-                        <p style="font-size: 1.2rem; color: var(--text-dim); max-width: 700px; margin: 0 auto;">${p.tagline || ''}</p>
+                        <p style="font-size: 1.1rem; color: var(--text-dim); max-width: 700px; margin: 0 auto;">${p.tagline || ''}</p>
                     </div>
 
-                    <div class="main-showcase">
-                        <img src="${p.coverImage || p.imageUrl}" alt="${p.appName}">
+                    <div class="gallery-container">
+                        <div class="main-showcase" id="main-view" onclick="openLightbox(this.querySelector('img').src)">
+                            <img src="${allImages[0] || 'images/placeholder.jpg'}" id="current-img" alt="Project main view">
+                        </div>
+                        
+                        ${allImages.length > 1 ? `
+                        <div class="thumbnails-grid">
+                            ${allImages.map((img, index) => `
+                                <div class="thumbnail ${index === 0 ? 'active' : ''}" onclick="switchImage('${img}', this)">
+                                    <img src="${img}" alt="Thumbnail ${index + 1}">
+                                </div>
+                            `).join('')}
+                        </div>
+                        ` : ''}
                     </div>
 
                     <div class="content-grid">
                         <div class="main-content">
                             <div class="story-section">
                                 <h2><i class="fas fa-bullseye"></i> The Problem</h2>
-                                <p>${p.problem || 'Description not provided.'}</p>
+                                <p>${(p.problem || 'Not specified').replace(/\n/g, '<br>')}</p>
                             </div>
                             <div class="story-section">
                                 <h2><i class="fas fa-lightbulb"></i> The Solution</h2>
-                                <p>${p.solution || 'Description not provided.'}</p>
+                                <p>${(p.solution || 'Not specified').replace(/\n/g, '<br>')}</p>
                             </div>
                             ${p.videoLink ? `
                             <div class="story-section">
@@ -113,42 +220,56 @@
 
                         <div class="sidebar">
                             <div class="sidebar-card">
-                                <h3>Project Details</h3>
+                                <h3>Project Specs</h3>
                                 <div class="spec-item">
-                                    <label>Platforms</label>
-                                    <span>${p.platforms || 'Android / iOS'}</span>
-                                </div>
-                                <div class="spec-item">
-                                    <label>Tech Stack</label>
+                                    <label>Technologies</label>
                                     <div class="tech-stack-tags" style="margin-top:10px;">${tags}</div>
                                 </div>
                                 <div class="spec-item">
-                                    <label>Role</label>
-                                    <span>Lead Flutter Developer</span>
+                                    <label>Main Platform</label>
+                                    <span>${p.platforms || 'Flutter'}</span>
                                 </div>
                                 
                                 <div style="display: grid; gap: 10px; margin-top: 30px;">
                                     ${p.githubLink ? `<a href="${p.githubLink}" target="_blank" class="btn-primary" style="text-align:center; padding: 12px;"><i class="fab fa-github"></i> View Source</a>` : ''}
-                                    <a href="https://wa.me/201014250577?text=I saw your project: ${p.appName}" target="_blank" class="btn-outline" style="text-align:center; padding: 12px;">Discuss Project</a>
+                                    <a href="https://wa.me/201014250577?text=Interested in: ${p.appName}" target="_blank" class="btn-outline" style="text-align:center; padding: 12px;">Contact Me</a>
                                 </div>
                             </div>
                         </div>
                     </div>
                 `;
+
+                window.switchImage = (src, thumbEl) => {
+                    const mainImg = document.getElementById('current-img');
+                    mainImg.style.opacity = '0';
+                    setTimeout(() => {
+                        mainImg.src = src;
+                        mainImg.style.opacity = '1';
+                    }, 200);
+                    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+                    thumbEl.classList.add('active');
+                };
+
+                window.openLightbox = (src) => {
+                    const lightbox = document.getElementById('lightbox');
+                    const img = document.getElementById('lightbox-img');
+                    img.src = src;
+                    lightbox.style.display = 'flex';
+                };
+
             } catch (error) {
-                console.error(error);
-                container.innerHTML = "<h1>Error loading project details.</h1>";
+                console.error("Fetch error:", error);
+                container.innerHTML = "<h2>Error loading project.</h2>";
             }
         }
 
         function formatVideoUrl(url) {
-            if (url.includes('youtube.com/watch?v=')) {
-                return url.replace('watch?v=', 'embed/');
-            }
+            if (url.includes('youtube.com/watch?v=')) return url.replace('watch?v=', 'embed/');
+            if (url.includes('youtu.be/')) return url.replace('youtu.be/', 'youtube.com/embed/');
             return url;
         }
 
-        loadProject();
+        loadProjectDetails();
     </script>
 </body>
 </html>

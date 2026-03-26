@@ -27,6 +27,8 @@
         
         .status-pill { padding: 4px 10px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; }
         .status-active { background: #dcfce7; color: #166534; }
+        
+        .hint { font-size: 0.75rem; color: #94a3b8; margin-top: 4px; display: block; }
     </style>
 </head>
 <body>
@@ -39,7 +41,7 @@
         <button id="btn-login" class="btn-primary" style="width: 100%;">Sign In</button>
     </div>
 
-    <!-- Dashboard View (Hidden by default) -->
+    <!-- Dashboard View -->
     <div id="dashboard-view" style="display: none;">
         <div class="admin-nav">
             <div class="dashboard-container" style="display: flex; justify-content: space-between; align-items: center;">
@@ -81,12 +83,18 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label>Cover Image URL *</label>
-                            <input type="text" id="p-cover" required>
+                            <label>Main Cover Image URL *</label>
+                            <input type="text" id="p-cover" required placeholder="https://...">
+                            <span class="hint">This is the image shown on the home page card.</span>
                         </div>
                         <div class="form-group">
                             <label>Demo Video Link</label>
                             <input type="text" id="p-video" placeholder="YouTube/Drive URL">
+                        </div>
+                        <div class="form-group full-row">
+                            <label>Additional Screenshots (Gallery)</label>
+                            <textarea id="p-screenshots" rows="4" placeholder="https://image1.jpg&#10;https://image2.jpg"></textarea>
+                            <span class="hint">Enter one image URL per line. These will appear in the project gallery.</span>
                         </div>
                         <div class="form-group">
                             <label>GitHub URL</label>
@@ -130,16 +138,28 @@
 
     <!-- Scripts -->
     <script type="module">
-        import { db, collection, getDocs, addDoc, deleteDoc, doc, updateDoc, query, orderBy } from './js/firebase.js';
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getFirestore, collection, getDocs, addDoc, deleteDoc, doc, updateDoc, query, orderBy } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
 
-        const auth = getAuth();
+        const firebaseConfig = {
+            apiKey: "AIzaSyAFGihdfZEWJM7iJYh45wRWYCYphVG4-G0",
+            authDomain: "portfolio-9fd63.firebaseapp.com",
+            projectId: "portfolio-9fd63",
+            storageBucket: "portfolio-9fd63.appspot.com",
+            messagingSenderId: "562837517190",
+            appId: "1:562837517190:web:173b5edb9f4ebdafdf7207"
+        };
 
-        // 1. Auth Logic
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const auth = getAuth(app);
+
+        // Auth Logic
         document.getElementById('btn-login').onclick = () => {
             const email = document.getElementById('login-email').value;
             const pass = document.getElementById('login-password').value;
-            signInWithEmailAndPassword(auth, email, pass).catch(err => alert(err.message));
+            signInWithEmailAndPassword(auth, email, pass).catch(err => alert("Login Failed: " + err.message));
         };
 
         document.getElementById('btn-logout').onclick = () => signOut(auth);
@@ -156,11 +176,16 @@
             }
         });
 
-        // 2. Project CRUD Logic
+        // Project CRUD Logic
         const form = document.getElementById('project-form');
         form.onsubmit = async (e) => {
             e.preventDefault();
             const editId = document.getElementById('edit-id').value;
+            
+            // Convert textarea links to array
+            const screenshotsText = document.getElementById('p-screenshots').value;
+            const screenshotsArray = screenshotsText.split('\n').map(link => link.trim()).filter(link => link !== "");
+
             const data = {
                 appName: document.getElementById('p-name').value,
                 tagline: document.getElementById('p-tagline').value,
@@ -174,56 +199,59 @@
                 solution: document.getElementById('p-solution').value,
                 platforms: document.getElementById('p-platforms').value,
                 featured: document.getElementById('p-featured').value === 'true',
+                screenshots: screenshotsArray,
                 updatedAt: new Date().toISOString()
             };
 
             try {
                 if (editId) {
                     await updateDoc(doc(db, "projects", editId), data);
-                    alert("Project Updated!");
+                    alert("Project Updated Successfully!");
                 } else {
                     data.createdAt = new Date().toISOString();
                     await addDoc(collection(db, "projects"), data);
-                    alert("Project Added!");
+                    alert("New Project Added!");
                 }
                 resetForm();
                 loadAdminProjects();
-            } catch (err) { alert(err.message); }
+            } catch (err) { alert("Error saving project: " + err.message); }
         };
 
         async function loadAdminProjects() {
             const list = document.getElementById('admin-list');
             list.innerHTML = "<h3>Current Projects</h3>";
-            const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
-            const snap = await getDocs(q);
-            
-            snap.forEach(docSnap => {
-                const p = docSnap.data();
-                const item = document.createElement('div');
-                item.className = 'admin-p-item';
-                item.innerHTML = `
-                    <div style="display:flex; align-items:center; gap:20px;">
-                        <img src="${p.coverImage}" alt="">
-                        <div>
-                            <strong>${p.appName}</strong><br>
-                            <span class="status-pill status-active">${p.category}</span>
-                        </div>
-                    </div>
-                    <div>
-                        <button class="btn-edit-action" style="background:none; border:none; color:var(--primary-color); cursor:pointer; margin-right:15px;"><i class="fas fa-edit"></i> Edit</button>
-                        <button class="btn-delete-action" style="background:none; border:none; color:#ef4444; cursor:pointer;"><i class="fas fa-trash"></i> Delete</button>
-                    </div>
-                `;
+            try {
+                const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
+                const snap = await getDocs(q);
                 
-                item.querySelector('.btn-edit-action').onclick = () => fillEditForm(docSnap.id, p);
-                item.querySelector('.btn-delete-action').onclick = async () => {
-                    if(confirm("Delete this project?")) {
-                        await deleteDoc(doc(db, "projects", docSnap.id));
-                        loadAdminProjects();
-                    }
-                };
-                list.appendChild(item);
-            });
+                snap.forEach(docSnap => {
+                    const p = docSnap.data();
+                    const item = document.createElement('div');
+                    item.className = 'admin-p-item';
+                    item.innerHTML = `
+                        <div style="display:flex; align-items:center; gap:20px;">
+                            <img src="${p.coverImage}" alt="">
+                            <div>
+                                <strong>${p.appName}</strong><br>
+                                <span class="status-pill status-active">${p.category}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn-edit-action" style="background:none; border:none; color:var(--primary-color); cursor:pointer; margin-right:15px;"><i class="fas fa-edit"></i> Edit</button>
+                            <button class="btn-delete-action" style="background:none; border:none; color:#ef4444; cursor:pointer;"><i class="fas fa-trash"></i> Delete</button>
+                        </div>
+                    `;
+                    
+                    item.querySelector('.btn-edit-action').onclick = () => fillEditForm(docSnap.id, p);
+                    item.querySelector('.btn-delete-action').onclick = async () => {
+                        if(confirm("Are you sure you want to delete this project?")) {
+                            await deleteDoc(doc(db, "projects", docSnap.id));
+                            loadAdminProjects();
+                        }
+                    };
+                    list.appendChild(item);
+                });
+            } catch (err) { console.error("Error loading projects: ", err); }
         }
 
         function fillEditForm(id, p) {
@@ -240,6 +268,13 @@
             document.getElementById('p-solution').value = p.solution || '';
             document.getElementById('p-platforms').value = p.platforms || '';
             document.getElementById('p-featured').value = p.featured ? 'true' : 'false';
+            
+            // Convert screenshots array back to newline-separated text
+            if (p.screenshots && Array.isArray(p.screenshots)) {
+                document.getElementById('p-screenshots').value = p.screenshots.join('\n');
+            } else {
+                document.getElementById('p-screenshots').value = '';
+            }
             
             document.getElementById('form-title').innerText = "Edit Project";
             document.getElementById('btn-cancel').style.display = 'block';
