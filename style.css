@@ -613,6 +613,84 @@ button {
         background-color: #0056b3; /* Darken button on hover */
     }
 
+/* تعديل لتنسيق الهيدر في الموبايل */
+@media (max-width: 480px) {
+    nav .container {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 0 10px;
+    }
+
+    .logo {
+        font-size: 1.1rem; /* تصغير اللوجو شوية في الموبايل */
+        white-space: nowrap;
+    }
+
+    .back-btn { /* الزرار بتاع العودة للمشاريع */
+        font-size: 0.8rem;
+        white-space: nowrap;
+    }
+    .section-title {
+        display: flex;
+        align-items: center;
+        gap: 15px; /* مسافة بين الأيقونة والكلام */
+        margin-top: 30px;
+        margin-bottom: 15px;
+        font-size: 1.5rem;
+    }
+
+    /* لو الصفحة عربي، خلي الأيقونة على اليمين */
+    [dir="rtl"] .section-title {
+        flex-direction: row;
+    }
+    .details-container {
+        padding: 20px;
+        max-width: 100%;
+        overflow-x: hidden; /* عشان ميبقاش فيه سكرول بالعرض */
+    }
+
+        .story-section h2 {
+            margin-top: 20px !important; /* زودنا المسافة فوق كلمة Problem */
+            font-size: 1.2rem !important; /* تصغير حجم الخط (حوالي 19-20 بيكسل) */
+            display: flex;
+            align-items: center;
+            gap: 10px; /* مسافة بين الأيقونة والكلام */
+        }
+
+
+            /* المسافة تحت شبكة الصور */
+            .thumbnails-grid {
+                margin-bottom: 30px !important; /* دي هتعمل مسافة بين الصور وبين كلمة Problem */
+            }
+
+            /* لزيادة التأكيد، ممكن ندي مسافة لمنطقة المحتوى بالكامل */
+            .content-grid {
+                margin-top: 20px !important;
+            }
+
+            /* تنسيق العنوان نفسه زي ما طلبته (تصغير الحجم ومسافة إضافية) */
+            .story-section h2 {
+                margin-top: 10px !important;
+                font-size: 1.2rem !important;
+                display: flex;
+                align-items: center;
+                gap: 12px; /* مسافة بين الأيقونة والكلمة */
+            }
+
+        /* تصغير الأيقونة اللي جوه الـ h2 عشان تمشي مع حجم الخط الجديد */
+        .story-section h2 i {
+            font-size: 1.1rem !important;
+        }
+
+        /* اختيارياً: لو عايز تدي مسافة بسيطة للفقرة اللي تحت العنوان */
+        .story-section p.text-content {
+            margin-top: 10px;
+            font-size: 0.95rem; /* حجم خط الفقرة مناسب للموبايل */
+            line-height: 1.6;
+        }
+
+}
 
 
 /* ------------------- تصميم للأجهزة اللوحية ------------------- */
@@ -735,6 +813,47 @@ nav .fas {
         margin-top: 10px; /* Add top margin */
     }
 
+
+
+    .story-section h2 {
+        margin-top: 20px !important; /* زودنا المسافة فوق كلمة Problem */
+        font-size: 1.2rem !important; /* تصغير حجم الخط (حوالي 19-20 بيكسل) */
+        display: flex;
+        align-items: center;
+        gap: 10px; /* مسافة بين الأيقونة والكلام */
+    }
+
+
+        /* المسافة تحت شبكة الصور */
+        .thumbnails-grid {
+            margin-bottom: 30px !important; /* دي هتعمل مسافة بين الصور وبين كلمة Problem */
+        }
+
+        /* لزيادة التأكيد، ممكن ندي مسافة لمنطقة المحتوى بالكامل */
+        .content-grid {
+            margin-top: 20px !important;
+        }
+
+        /* تنسيق العنوان نفسه زي ما طلبته (تصغير الحجم ومسافة إضافية) */
+        .story-section h2 {
+            margin-top: 10px !important;
+            font-size: 1.2rem !important;
+            display: flex;
+            align-items: center;
+            gap: 12px; /* مسافة بين الأيقونة والكلمة */
+        }
+
+    /* تصغير الأيقونة اللي جوه الـ h2 عشان تمشي مع حجم الخط الجديد */
+    .story-section h2 i {
+        font-size: 1.1rem !important;
+    }
+
+    /* اختيارياً: لو عايز تدي مسافة بسيطة للفقرة اللي تحت العنوان */
+    .story-section p.text-content {
+        margin-top: 10px;
+        font-size: 0.95rem; /* حجم خط الفقرة مناسب للموبايل */
+        line-height: 1.6;
+    }
 
 
 

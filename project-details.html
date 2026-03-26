@@ -82,6 +82,20 @@
             cursor: pointer; transition: var(--transition);
         }
 
+        /* يوضع في ملف الـ CSS */
+.text-content {
+    text-align: start; /* بيخلي الكلام يبدأ من الشمال لو إنجليزي ومن اليمين لو عربي */
+    line-height: 1.8;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+}
+
+/* حل مشكلة النقطة اللي في أول السطر للإنجليزي */
+[dir="rtl"] .english-text {
+    direction: ltr;
+    text-align: left;
+}
+
         /* Details Styles */
         .details-wrapper { padding: 120px 0; }
         .project-hero { margin-bottom: 60px; text-align: center; }
@@ -130,6 +144,15 @@
             .content-grid { grid-template-columns: 1fr; }
             .thumbnails-grid { justify-content: flex-start; }
             .sidebar-card { position: static; margin-top: 40px; }
+            
+            .story-section h2 { 
+                font-size: 1.3rem; 
+                margin-bottom: 10px; 
+            }
+            .story-section p { 
+                padding: 0 15px; 
+                font-size: 0.95rem; 
+            }
         }
 
         /* RTL Adjustments */
@@ -300,11 +323,11 @@
                         <div class="main-content">
                             <div class="story-section">
                                 <h2><i class="fas fa-bullseye"></i> ${translations[currentLang].problem_title}</h2>
-                                <p>${problem.replace(/\n/g, '<br>')}</p>
+                                <p class="text-content english-text">${problem.replace(/\n/g, '<br>')}</p>
                             </div>
                             <div class="story-section">
                                 <h2><i class="fas fa-lightbulb"></i> ${translations[currentLang].solution_title}</h2>
-                                <p>${solution.replace(/\n/g, '<br>')}</p>
+                                <p class="text-content english-text">${solution.replace(/\n/g, '<br>')}</p>
                             </div>
                             ${p.videoLink ? `
                             <div class="story-section">
