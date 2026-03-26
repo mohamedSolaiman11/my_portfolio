@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,120 +7,212 @@
     
     <!-- Icons & Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     
     <style>
         /* --- Premium Master CSS --- */
-        :root {
+        :root[data-theme="dark"] {
             --primary-color: #027dfd;
-            --bg-dark: #0f172a;
-            --surface-dark: #1e293b;
+            --bg-body: #0f172a;
+            --surface: #1e293b;
+            --surface-alt: #0f172a;
             --text-main: #f8fafc;
             --text-dim: #94a3b8;
+            --nav-bg: rgba(15, 23, 42, 0.9);
+            --border-color: rgba(255, 255, 255, 0.05);
             --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --input-bg: #0f172a;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        :root[data-theme="light"] {
+            --primary-color: #027dfd;
+            --bg-body: #f8fafc;
+            --surface: #ffffff;
+            --surface-alt: #f1f5f9;
+            --text-main: #0f172a;
+            --text-dim: #475569;
+            --nav-bg: rgba(248, 250, 252, 0.9);
+            --border-color: rgba(0, 0, 0, 0.05);
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --input-bg: #ffffff;
+        }
+
+        /* --- Global Reset & Typography --- */
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s ease, color 0.3s ease; }
+        
+        body { 
+            font-family: 'Inter', sans-serif; 
+            background-color: var(--bg-body); 
+            color: var(--text-main); 
+            line-height: 1.6; 
+            overflow-x: hidden; 
+            width: 100%;
+        }
+
+        [lang="ar"] body, [lang="ar"] button, [lang="ar"] input, [lang="ar"] textarea { font-family: 'Cairo', sans-serif; }
+
+        .fas, .fab, .far, .fa-solid, .fa-brands { 
+            font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands" !important; 
+        }
+
         html { scroll-behavior: smooth; }
-        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.2rem; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.2rem; width: 100%; }
 
         /* Navigation */
         nav {
             position: fixed; top: 0; width: 100%; padding: 1.2rem 0;
-            background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(16px);
-            z-index: 1000; border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            background: var(--nav-bg); backdrop-filter: blur(16px);
+            z-index: 1000; border-bottom: 1px solid var(--border-color);
         }
         nav .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.4rem; font-weight: 900; color: #fff; text-decoration: none; }
+        .logo { font-size: 1.4rem; font-weight: 900; color: var(--text-main); text-decoration: none; }
         .logo span { color: var(--primary-color); }
-        nav ul { display: flex; gap: 2rem; list-style: none; }
+        
+        .nav-content { display: flex; align-items: center; gap: 2rem; }
+        nav ul { display: flex; gap: 2rem; list-style: none; align-items: center; }
         nav ul a { color: var(--text-dim); text-decoration: none; font-weight: 500; font-size: 0.95rem; }
         nav ul a:hover { color: var(--primary-color); }
-        .menu-toggle { font-size: 1.5rem; cursor: pointer; color: #fff; display: none; }
+        
+        /* Controls */
+        .nav-controls { display: flex; align-items: center; gap: 1rem; }
+        .control-btn { 
+            background: var(--surface-alt); border: 1px solid var(--border-color); color: var(--text-main); 
+            width: 40px; height: 40px; border-radius: 10px; display: flex; 
+            align-items: center; justify-content: center; cursor: pointer; transition: 0.3s;
+            font-size: 0.9rem; font-weight: 700;
+        }
+        .control-btn:hover { border-color: var(--primary-color); color: var(--primary-color); }
+        .lang-switch { width: auto; padding: 0 10px; font-size: 0.8rem; }
 
-        /* Hero */
-        #header { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; background: radial-gradient(circle at 80% 20%, rgba(2, 125, 253, 0.1), transparent 40%); }
-        .header-text h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; }
-        .header-text h1 span { background: linear-gradient(to right, var(--primary-color), #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .cta-group { display: flex; gap: 1rem; margin-top: 2.5rem; }
+        .menu-toggle { font-size: 1.5rem; cursor: pointer; color: var(--text-main); display: none; z-index: 1001; position: relative; }
 
-        /* Buttons */
-        .btn-primary { background: var(--primary-color); color: #fff !important; padding: 0.9rem 2.2rem; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block; transition: var(--transition); border: 2px solid var(--primary-color); }
-        .btn-primary:hover { transform: translateY(-3px); box-shadow: 0 10px 20px -10px var(--primary-color); }
-        .btn-outline { border: 2px solid rgba(255,255,255,0.1); color: #fff; padding: 0.9rem 2.2rem; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block; transition: var(--transition); }
-        .btn-outline:hover { border-color: var(--primary-color); color: var(--primary-color); }
-
-        /* Sections Header */
-        section { padding: 100px 0; }
-        .sub-title { font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 3rem; font-weight: 800; }
-
-        /* Portfolio Cards */
-        .work-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; }
-        .work { background: var(--surface-dark); border-radius: 28px; overflow: hidden; border: 1px solid rgba(255, 255, 255, 0.05); transition: var(--transition); }
-        .work:hover { transform: translateY(-10px); border-color: rgba(2, 125, 253, 0.3); }
-        .work img { width: 100%; aspect-ratio: 16/9; object-fit: contain; background: #000; border-bottom: 1px solid rgba(255,255,255,0.05); }
-        .work-info { padding: 1.8rem; }
-        .tag { font-size: 0.75rem; color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 0.3rem 0.8rem; border-radius: 50px; font-weight: 600; margin-right: 5px; }
-
-        /* Contact Section */
-        .contact-wrapper { background: var(--surface-dark); border-radius: 32px; padding: clamp(25px, 5vw, 60px); display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; border: 1px solid rgba(255, 255, 255, 0.05); }
-        .contact-info-side h2 { font-size: clamp(1.8rem, 5vw, 3rem); line-height: 1.2; margin-bottom: 20px; }
-        .contact-item { display: flex; align-items: center; gap: 12px; text-decoration: none; color: #fff; background: rgba(15, 23, 42, 0.3); padding: 12px 16px; border-radius: 12px; margin-bottom: 12px; transition: var(--transition); }
-        .contact-item i { width: 36px; height: 36px; background: rgba(2, 125, 253, 0.1); color: var(--primary-color); display: flex; align-items: center; justify-content: center; border-radius: 10px; flex-shrink: 0; }
-        .contact-item span { font-size: 0.9rem; word-break: break-all; }
-        .social-links { display: flex; gap: 12px; margin-top: 20px; }
-        .social-btn { width: 50px; height: 50px; background: #0f172a; color: #fff; display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 1.3rem; text-decoration: none; border: 1px solid rgba(255,255,255,0.05); }
-        .social-btn:hover { background: var(--primary-color); transform: translateY(-5px); }
-
-        .contact-form { display: grid; gap: 15px; }
-        .form-input { width: 100%; background: #0f172a; border: 2px solid transparent; border-radius: 12px; padding: 16px; color: #fff; font-size: 1rem; }
-        .form-input:focus { outline: none; border-color: var(--primary-color); }
-
-        /* Mobile Adjustments */
+        /* Mobile Drawer */
         @media (max-width: 992px) {
-            .contact-wrapper { grid-template-columns: 1fr; }
-            .contact-info-side { text-align: center; align-items: center; }
-            .social-links, .contact-item { justify-content: center; width: 100%; }
-            nav ul { position: fixed; top: 0; right: -100%; width: 75%; height: 100vh; background: var(--surface-dark); flex-direction: column; justify-content: center; align-items: center; transition: 0.4s; }
+            .nav-content { gap: 1rem; }
+            nav ul { 
+                position: fixed; top: 0; right: -100%; width: 280px; height: 100vh; 
+                background: var(--surface); flex-direction: column; justify-content: center; 
+                align-items: center; transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1); 
+                box-shadow: -10px 0 30px rgba(0,0,0,0.2); z-index: 1000;
+            }
             nav ul.active { right: 0; }
             .menu-toggle { display: block; }
+            .nav-controls.desktop-only { display: none; }
+            .nav-controls.mobile-only { display: flex; margin-top: 2rem; }
+            
+            .nav-overlay {
+                position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+                background: rgba(0,0,0,0.5); visibility: hidden; opacity: 0;
+                transition: 0.3s; z-index: 999;
+            }
+            .nav-overlay.active { visibility: visible; opacity: 1; }
         }
-        @media (max-width: 480px) {
-            .header-text h1 { font-size: 2.2rem; }
-            .cta-group { flex-direction: column; }
+        
+        @media (min-width: 993px) { .nav-controls.mobile-only { display: none; } }
+
+        /* Sections & Content */
+        section { padding: 60px 0; }
+        #header { 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            padding-top: 100px; 
+            background: radial-gradient(circle at 80% 20%, rgba(2, 125, 253, 0.05), transparent 40%); 
         }
 
-        .spinner { width: 40px; height: 40px; border: 4px solid rgba(255,255,255,0.1); border-left-color: var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
+        .header-text h1 { font-size: clamp(2.5rem, 8vw, 4rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; }
+        .header-text h1 span { background: linear-gradient(to right, var(--primary-color), #38bdf8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .btn-primary { background: var(--primary-color); color: #fff !important; padding: 0.9rem 2.2rem; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block; transition: 0.3s; border: 2px solid var(--primary-color); text-align: center; cursor: pointer; }
+        .btn-outline { border: 2px solid var(--border-color); color: var(--text-main); padding: 0.9rem 2.2rem; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block; transition: 0.3s; text-align: center; }
+        
+        .work-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; }
+        .work { background: var(--surface); border-radius: 28px; overflow: hidden; border: 1px solid var(--border-color); transition: 0.4s; box-shadow: var(--card-shadow); }
+        .work:hover { transform: translateY(-10px); border-color: rgba(2, 125, 253, 0.3); }
+        .work img { width: 100%; aspect-ratio: 16/9; object-fit: contain; background: #000; border-bottom: 1px solid var(--border-color); }
+        .work-info { padding: 1.5rem; }
+        .tag { font-size: 0.75rem; color: #38bdf8; background: rgba(56, 189, 248, 0.1); padding: 0.3rem 0.8rem; border-radius: 50px; font-weight: 600; margin-right: 5px; }
+
+        /* Fixed Contact Wrapper for Mobile */
+        .contact-wrapper { 
+            background: var(--surface); 
+            border-radius: 32px; 
+            padding: clamp(20px, 5vw, 60px); 
+            display: grid; 
+            grid-template-columns: 1fr 1.2fr; 
+            gap: 40px; 
+            border: 1px solid var(--border-color); 
+            box-shadow: var(--card-shadow); 
+            width: 100%;
+        }
+
+        @media (max-width: 992px) {
+            .contact-wrapper { grid-template-columns: 1fr !important; gap: 30px; }
+            .contact-info-side { text-align: center; }
+            .contact-details { display: flex; flex-direction: column; align-items: center; width: 100%; }
+            .social-links { justify-content: center; }
+            .contact-form-side { width: 100%; }
+            .contact-item { width: 100%; max-width: none; }
+        }
+
+        .contact-item { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); background: var(--surface-alt); padding: 12px 16px; border-radius: 12px; margin-bottom: 12px; transition: 0.3s; border: 1px solid var(--border-color); }
+        .contact-item i { width: 36px; height: 36px; background: rgba(2, 125, 253, 0.1); color: var(--primary-color); display: flex; align-items: center; justify-content: center; border-radius: 10px; flex-shrink: 0; }
+        .contact-item span { font-size: 0.85rem; word-break: break-all; }
+
+        .contact-form { display: grid; gap: 15px; width: 100%; }
+        .form-input { width: 100%; background: var(--input-bg); border: 2px solid var(--border-color); border-radius: 12px; padding: 16px; color: var(--text-main); font-size: 1rem; }
+        .form-input:focus { outline: none; border-color: var(--primary-color); }
+
+        .spinner { width: 40px; height: 40px; border: 4px solid var(--border-color); border-left-color: var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* RTL */
+        [dir="rtl"] nav ul { right: auto; left: -100%; }
+        [dir="rtl"] nav ul.active { left: 0; right: auto; }
+        [dir="rtl"] .contact-item i { margin-left: 12px; margin-right: 0; }
     </style>
 </head>
 <body>
 
+    <div class="nav-overlay" id="nav-overlay"></div>
+
     <nav id="navbar">
         <div class="container">
-            <a href="#" class="logo">Mohamed <span>Solaiman</span></a>
-            <ul id="nav-links">
-                <li><a href="#header">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#portfolio">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="admin.html" style="color:var(--primary-color)">Admin</a></li>
-            </ul>
-            <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+            <a href="#" class="logo">Mohamed <span data-i18n="logo_last">Solaiman</span></a>
+            
+            <div class="nav-content">
+                <ul id="nav-links">
+                    <li><a href="#header" data-i18n="nav_home">Home</a></li>
+                    <li><a href="#about" data-i18n="nav_about">About</a></li>
+                    <li><a href="#portfolio" data-i18n="nav_projects">Projects</a></li>
+                    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="admin.html" style="color:var(--primary-color)" data-i18n="nav_admin">Admin</a></li>
+                    
+                    <div class="nav-controls mobile-only">
+                        <button class="control-btn theme-toggle"><i class="fas fa-moon"></i></button>
+                        <button class="control-btn lang-switch" onclick="toggleLanguage()">AR</button>
+                    </div>
+                </ul>
+
+                <div class="nav-controls desktop-only">
+                    <button class="control-btn theme-toggle"><i class="fas fa-moon"></i></button>
+                    <button class="control-btn lang-switch" onclick="toggleLanguage()">AR</button>
+                </div>
+
+                <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+            </div>
         </div>
     </nav>
 
     <header id="header">
         <div class="container">
             <div class="header-text">
-                <p style="color:var(--primary-color); font-weight:600; text-transform:uppercase; letter-spacing:2px; margin-bottom:10px;">Flutter Developer</p>
-                <h1>Building <span>Apps</span> That Users Love</h1>
-                <p style="color:var(--text-dim); margin: 15px 0 30px 0; max-width:600px;">Specializing in high-performance mobile applications with clean architecture.</p>
-                <div class="cta-group">
-                    <a href="#portfolio" class="btn-primary">View My Projects</a>
-                    <a href="images/updatedCv.pdf" download class="btn-outline">Download CV</a>
+                <p data-i18n="hero_badge" style="color:var(--primary-color); font-weight:600; text-transform:uppercase; letter-spacing:2px; margin-bottom:10px;">Flutter Developer</p>
+                <h1 data-i18n="hero_title">Building <span>Apps</span> That Users Love</h1>
+                <p data-i18n="hero_desc" style="color:var(--text-dim); margin: 15px 0 30px 0; max-width:600px;">Specializing in high-performance mobile applications with clean architecture.</p>
+                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+                    <a href="#portfolio" class="btn-primary" data-i18n="btn_view_work">View My Projects</a>
+                    <a href="images/updatedCv.pdf" download class="btn-outline" data-i18n="btn_download_cv">Download CV</a>
                 </div>
             </div>
         </div>
@@ -133,8 +225,8 @@
                     <img src="images/finalImg.png" alt="Mohamed" style="width: 100%; border-radius: 32px; box-shadow: var(--card-shadow);">
                 </div>
                 <div style="flex: 1.5; min-width: 300px;">
-                    <h2 class="sub-title">Building the <span style="color: var(--primary-color)">Future</span> of Mobile</h2>
-                    <p style="color:var(--text-dim); font-size:1.1rem;">Enthusiastic Flutter Developer specializing in crafting high-quality mobile applications. Expert in <strong>Dart</strong>, <strong>Bloc</strong>, and <strong>Firebase</strong>.</p>
+                    <h2 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 20px; font-weight: 800;" data-i18n="about_title">Building the <span style="color: var(--primary-color)">Future</span> of Mobile</h2>
+                    <p data-i18n="about_desc" style="color:var(--text-dim); font-size:1.1rem;">Enthusiastic Flutter Developer specializing in crafting high-quality mobile applications. Expert in <strong>Dart</strong>, <strong>Bloc</strong>, and <strong>Firebase</strong>.</p>
                 </div>
             </div>
         </div>
@@ -142,7 +234,7 @@
 
     <section id="portfolio">
         <div class="container">
-            <h2 class="sub-title">Featured <span style="color: var(--primary-color)">Work</span></h2>
+            <h2 style="font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 3rem; font-weight: 800;" data-i18n="projects_title">Featured <span style="color: var(--primary-color)">Work</span></h2>
             <div class="work-list" id="firestoreProjects">
                 <div class="spinner"></div>
             </div>
@@ -153,19 +245,17 @@
         <div class="container">
             <div class="contact-wrapper">
                 <div class="contact-info-side">
-                    <h2>Let's Build Something <span style="color: var(--primary-color)">Great</span>.</h2>
-                    <p style="color:var(--text-dim); margin-bottom: 30px;">Available for freelance projects and full-time roles.</p>
+                    <h2 style="font-size: clamp(1.8rem, 5vw, 3rem); line-height: 1.2; margin-bottom: 20px;" data-i18n="contact_title">Let's Build Something <span style="color: var(--primary-color)">Great</span>.</h2>
+                    <p data-i18n="contact_desc" style="color:var(--text-dim); margin-bottom: 30px;">Available for freelance projects and full-time roles.</p>
                     <div class="contact-details">
                         <a href="mailto:mohamedsolaiman707@gmail.com" class="contact-item">
-                            <i class="fas fa-envelope"></i>
-                            <span>mohamedsolaiman707@gmail.com</span>
+                            <i class="fas fa-envelope"></i><span>mohamedsolaiman707@gmail.com</span>
                         </a>
                         <a href="tel:+201014250577" class="contact-item">
-                            <i class="fas fa-phone"></i>
-                            <span>+20 101 425 0577</span>
+                            <i class="fas fa-phone"></i><span>+20 101 425 0577</span>
                         </a>
                     </div>
-                    <div class="social-links">
+                    <div style="display: flex; gap: 12px; margin-top: 20px;" class="social-links">
                         <a href="https://github.com/mohamedSolaiman11/" target="_blank" class="social-btn"><i class="fab fa-github"></i></a>
                         <a href="https://www.linkedin.com/in/mohamed-solaiman-a2b9921b4" target="_blank" class="social-btn"><i class="fab fa-linkedin"></i></a>
                         <a href="https://wa.me/201014250577" target="_blank" class="social-btn"><i class="fab fa-whatsapp"></i></a>
@@ -173,18 +263,18 @@
                 </div>
                 <div class="contact-form-side">
                     <form action="https://formspree.io/f/xnqkrjyg" method="POST" class="contact-form">
-                        <input type="text" name="name" placeholder="Full Name" required class="form-input">
-                        <input type="email" name="email" placeholder="Email Address" required class="form-input">
-                        <textarea name="message" placeholder="Tell me about your project..." rows="5" required class="form-input"></textarea>
-                        <button type="submit" class="btn-primary" style="width: 100%; cursor: pointer;">Send Message</button>
+                        <input type="text" name="name" placeholder="Full Name" required class="form-input" data-i18n-placeholder="form_name">
+                        <input type="email" name="email" placeholder="Email Address" required class="form-input" data-i18n-placeholder="form_email">
+                        <textarea name="message" placeholder="Tell me about your project..." rows="5" required class="form-input" data-i18n-placeholder="form_message"></textarea>
+                        <button type="submit" class="btn-primary" style="width: 100%;" data-i18n="btn_send">Send Message</button>
                     </form>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer style="padding: 40px 0; text-align: center; border-top: 1px solid rgba(255,255,255,0.05);">
-        <p style="color: var(--text-dim); font-size: 0.8rem;">&copy; 2024 Mohamed Solaiman. All Rights Reserved.</p>
+    <footer style="padding: 40px 0; text-align: center; border-top: 1px solid var(--border-color);">
+        <p style="color: var(--text-dim); font-size: 0.8rem;" data-i18n="footer_copy">&copy; 2024 Mohamed Solaiman. All Rights Reserved.</p>
     </footer>
 
     <script type="module">
@@ -203,39 +293,97 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
+        const translations = {
+            en: {
+                logo_last: "Solaiman", nav_home: "Home", nav_about: "About", nav_projects: "Projects", nav_contact: "Contact", nav_admin: "Admin",
+                hero_badge: "Flutter Developer", hero_title: "Building <span>Apps</span> That Users Love", hero_desc: "Specializing in high-performance mobile applications with clean architecture.",
+                btn_view_work: "View My Projects", btn_download_cv: "Download CV",
+                about_title: "Building the <span style='color: var(--primary-color)'>Future</span> of Mobile",
+                about_desc: "Enthusiastic Flutter Developer specializing in crafting high-quality mobile applications. Expert in <strong>Dart</strong>, <strong>Bloc</strong>, and <strong>Firebase</strong>.",
+                projects_title: "Featured <span style='color: var(--primary-color)'>Work</span>",
+                contact_title: "Let's Build Something <span style='color: var(--primary-color)'>Great</span>.", contact_desc: "Available for freelance projects and full-time roles.",
+                form_name: "Full Name", form_email: "Email Address", form_message: "Tell me about your project...", btn_send: "Send Message",
+                footer_copy: "&copy; 2024 Mohamed Solaiman. All Rights Reserved.", view_case: "View Case Study →"
+            },
+            ar: {
+                logo_last: "سليمان", nav_home: "الرئيسية", nav_about: "عني", nav_projects: "أعمالي", nav_contact: "تواصل معي", nav_admin: "المدير",
+                hero_badge: "مطور تطبيقات فلاتر", hero_title: "بناء <span>تطبيقات</span> يحبها المستخدمون", hero_desc: "متخصص في تطبيقات الهاتف المحمول عالية الأداء ذات الهندسة البرمجية النظيفة.",
+                btn_view_work: "مشاهدة أعمالي", btn_download_cv: "تحميل السيرة الذاتية",
+                about_title: "بناء <span style='color: var(--primary-color)'>مستقبل</span> تطبيقات الهاتف",
+                about_desc: "مطور فلاتر متحمس متخصص في صياغة تطبيقات هاتف عالية الجودة. خبير في <strong>Dart</strong> و <strong>Bloc</strong> و <strong>Firebase</strong>.",
+                projects_title: "أبرز <span style='color: var(--primary-color)'>أعمالي</span>",
+                contact_title: "لنقم ببناء شيء <span style='color: var(--primary-color)'>عظيم</span>.", contact_desc: "متاح للمشاريع الحرة والوظائف بدوام كامل.",
+                form_name: "الاسم الكامل", form_email: "البريد الإلكتروني", form_message: "حدثني عن مشروعك...", btn_send: "إرسال الرسالة",
+                footer_copy: "&copy; 2024 محمد سليمان. جميع الحقوق محفوظة.", view_case: "عرض دراسة الحالة ←"
+            }
+        };
+
+        let currentLang = localStorage.getItem('lang') || 'en';
+        let currentTheme = localStorage.getItem('theme') || 'dark';
+
+        function updateUI() {
+            document.documentElement.setAttribute('data-theme', currentTheme);
+            document.querySelectorAll('.theme-toggle i').forEach(icon => icon.className = currentTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon');
+            document.documentElement.setAttribute('lang', currentLang);
+            document.documentElement.setAttribute('dir', currentLang === 'ar' ? 'rtl' : 'ltr');
+            document.querySelectorAll('.lang-switch').forEach(btn => btn.innerText = currentLang === 'en' ? 'AR' : 'EN');
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang][key]) el.innerHTML = translations[currentLang][key];
+            });
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (translations[currentLang][key]) el.placeholder = translations[currentLang][key];
+            });
+            loadProjects();
+        }
+
+        window.toggleLanguage = () => { currentLang = currentLang === 'en' ? 'ar' : 'en'; localStorage.setItem('lang', currentLang); updateUI(); };
+        document.querySelectorAll('.theme-toggle').forEach(btn => {
+            btn.onclick = () => { currentTheme = currentTheme === 'dark' ? 'light' : 'dark'; localStorage.setItem('theme', currentTheme); updateUI(); };
+        });
+
         async function loadProjects() {
             const container = document.getElementById("firestoreProjects");
             try {
                 const querySnapshot = await getDocs(collection(db, "projects"));
                 container.innerHTML = "";
-                if (querySnapshot.empty) {
-                    container.innerHTML = "<p>No projects found. Add them via Admin.</p>";
-                    return;
-                }
+                if (querySnapshot.empty) { container.innerHTML = `<p>${currentLang === 'ar' ? 'لا توجد مشاريع مضافة.' : 'No projects found.'}</p>`; return; }
                 querySnapshot.forEach((docSnap) => {
                     const p = docSnap.data();
-                    const id = docSnap.id;
+                    const appName = currentLang === 'ar' && p.appName_ar ? p.appName_ar : (p.appName || p.name || 'Untitled');
                     const tags = p.techStack ? p.techStack.split(',').slice(0, 3).map(tag => `<span class="tag">${tag.trim()}</span>`).join('') : '';
-                    container.innerHTML += `
-                        <div class="work">
-                            <img src="${p.coverImage || p.imageUrl || 'https://via.placeholder.com/400x250'}" alt="Project">
-                            <div class="work-info">
-                                <h3>${p.appName || p.name || 'Untitled'}</h3>
-                                <div style="margin: 10px 0;">${tags}</div>
-                                <a href="project-details.html?id=${id}" style="color:var(--primary-color); font-weight:700; text-decoration:none; font-size:0.9rem;">View Case Study →</a>
-                            </div>
-                        </div>`;
+                    container.innerHTML += `<div class="work">
+                        <img src="${p.coverImage || p.imageUrl || 'https://via.placeholder.com/400x250'}" alt="Project">
+                        <div class="work-info">
+                            <h3>${appName}</h3><div style="margin: 10px 0;">${tags}</div>
+                            <a href="project-details.html?id=${docSnap.id}" style="color:var(--primary-color); font-weight:700; text-decoration:none; font-size:0.9rem;">${translations[currentLang].view_case}</a>
+                        </div></div>`;
                 });
-            } catch (err) { container.innerHTML = "<p>Error loading projects.</p>"; }
+            } catch (err) { container.innerHTML = `<p>Error loading projects.</p>`; }
         }
 
-        loadProjects();
+        updateUI();
 
+        // --- Mobile Menu Logic ---
         const menuToggle = document.getElementById('mobile-menu');
         const navLinks = document.getElementById('nav-links');
-        menuToggle.onclick = () => {
+        const navOverlay = document.getElementById('nav-overlay');
+        const toggleIcon = menuToggle.querySelector('i');
+
+        function toggleMenu() {
             navLinks.classList.toggle('active');
-        };
+            navOverlay.classList.toggle('active');
+            toggleIcon.className = navLinks.classList.contains('active') ? 'fas fa-times' : 'fas fa-bars';
+            document.body.style.overflow = navLinks.classList.contains('active') ? 'hidden' : '';
+        }
+
+        menuToggle.onclick = toggleMenu;
+        navOverlay.onclick = toggleMenu;
+
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.onclick = () => { if(navLinks.classList.contains('active')) toggleMenu(); };
+        });
     </script>
 </body>
 </html>
