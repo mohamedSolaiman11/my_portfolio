@@ -9,6 +9,54 @@ html {
     scroll-behavior: smooth;
 }
 
+body.admin-only-mode > *:not(#dashboard) {
+      display: none;
+    }
+#dashboard {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 450px;
+  background: #ffffff;
+  border: 1px solid #ccc;
+  padding: 30px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  display: none;
+  border-radius: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+#dashboard h2 {
+  margin-top: 0;
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+}
+
+#dashboard input,
+#dashboard button {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#dashboard button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#dashboard button:hover {
+  background-color: #45a049;
+}
+
+
 body {
     background-color: black;
     color: #fff;
@@ -17,7 +65,7 @@ body {
 
 #header {
     width: 100%;
-    height: 90vh;
+    height: 100vh;
     background-size: cover;
     background-position: center;
 }
@@ -119,9 +167,9 @@ nav ul li {
     overflow: hidden;
     border-radius: 50%;
     background: linear-gradient(to right bottom, #212428, #16181c);
-    margin-top: 170px;
+    margin-top: 190px;
     position: absolute;
-    right: 150px;
+    right: 100px;
     animation: slideInFromRight 3s ease-out forwards, floatUpDown 3s ease-in-out infinite 3s; /* حركة من اليمين مع حركة لأعلى وأسفل */
 }
 
@@ -133,11 +181,11 @@ nav ul li {
 
 @keyframes slideInFromRight {
     0% {
-        transform: translateX(200%); /* تبدأ الصورة من خارج الشاشة */
+        transform: translateX(450px); /* تبدأ الصورة من خارج الشاشة */
     }
 
     100% {
-        transform: translateX(0); /* تصل الصورة إلى مكانها الطبيعي */
+        transform: translateX(0px); /* تصل الصورة إلى مكانها الطبيعي */
     }
 }
 
@@ -198,7 +246,7 @@ nav ul li {
     color:white;
     display: flex;
     margin: 20px 160px;
-    
+
 }
 
 .tab-links {
@@ -248,7 +296,7 @@ nav ul li {
 
 /* -------------------------services---------------- */
 #services {
-    padding: 150px 0;
+    padding: 160px 0;
 }
 
 .services-list {
@@ -260,7 +308,7 @@ nav ul li {
 
     .services-list div {
         background: #262626;
-        padding: 40px;
+        padding: 70px;
         font-size: 13px;
         font-weight: 300;
         border-radius: 50px;
@@ -507,6 +555,84 @@ form .btn2 {
         transform: translateY(-20px); /* التحرك لأعلى */
     }
 }
+
+/*-------------------------------DASHBOARD-------------------------*/
+#dashboard {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px; /* Maximum width for desktop */
+    margin: 20px auto; /* Center the section */
+}
+
+    /* Heading style */
+    #dashboard h2 {
+        text-align: center;
+        color: #333;
+    }
+
+/* Form labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+    color: #666;
+}
+
+/* Input styles */
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+    /* Focus effect */
+    input[type="text"]:focus, textarea:focus {
+        border-color: #007bff; /* Change border color on focus */
+        outline: none; /* Remove default outline */
+    }
+
+/* Button styles */
+button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+    /* Button hover effect */
+    button:hover {
+        background-color: #0056b3; /* Darken button on hover */
+    }
+
+
+
+/* ------------------- تصميم للأجهزة اللوحية ------------------- */
+@media only screen and (max-width: 1024px) {
+    .header-text {
+        font-size: 26px;
+    }
+
+    .header-text h1 {
+        font-size: 50px;
+    }
+
+    .imgpro {
+        right: 50px;
+        width: 250px;
+        height: 250px;
+    }
+}
+
+
 /* ---------------------------------------css for small screen----- */
 nav .fas {
     display: none;
@@ -525,8 +651,74 @@ nav .fas {
     }
     #header {
         height: 65vh; /* تقليل ارتفاع الـ header على الشاشات الصغيرة */
-        width: 100vw;
     }
+
+    /*----------------------menu icon------------*/
+    /* تعديل الشريط الجانبي */
+    #sidemenu {
+        position:fixed;
+        right: -200px;
+        top: 0;
+        width: 50%;
+        height: 100%;
+        background-color: #ffffff;
+        transition: right 3s ease;
+        z-index: 1000;
+        padding: 50px 0px 0px 5px;
+        border-radius: 10px;         /* زوايا مستديرة للقائمة */
+
+    }
+
+    #sidemenu ul {
+        list-style-type: none;
+        padding: 0;
+
+    }
+
+    #sidemenu li {
+        margin: 5px 0px 0px 0px;
+
+    }
+
+    #sidemenu a {
+        margin-left:7px;
+        color: #ff004f;
+        font-size: 18px;
+        display: flex;              /* استخدام Flexbox */
+        align-items: center;        /* محاذاة العناصر عموديًا */
+        justify-content: flex-start; /* وضع الأيقونة على اليسار */
+        padding: 10px 0;            /* تباعد رأسي بين الروابط */
+        font-size: 18px;            /* حجم النص */
+        text-decoration: none;      /* إزالة التسطير من الروابط */
+        transition: color 0.3s;     /* تأثير انتقال على لون النص */
+    }
+    #sidemenu a i {
+         margin-right: 10px;
+        font-size: 16px;
+        color: #ff0066;
+    }
+    #sidemenu a span {
+        color: #333333;             /* لون النص */
+    }
+    #sidemenu a:hover {
+        color: #ff6699;             /* لون مختلف عند التمرير */
+    }
+    /* تغيير لون النص والأيقونة عند التمرير */
+    #sidemenu a:hover i {
+        color: #ff6699;             /* لون مختلف للأيقونة عند التمرير */
+    }
+    #sidemenu a:hover span {
+        color: #555555;             /* لون مختلف للنص عند التمرير */
+    }
+    #sidemenu i.fa-xmark {
+        top: 10px;
+        items-align: right;
+        cursor: pointer;
+        color: #000000;
+    }
+
+
+    /* -----------------------------------------------*/
     .container {
         padding: 10px 25px 0px 25px; /* تقليل المسافة من الجوانب */
         max-width: 768px; /* وضع حد أقصى لعرض الحاوية */
@@ -546,41 +738,42 @@ nav .fas {
 
 
 
-    .imgpro {
-        width: 130px;
-        height: 130px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        overflow: hidden;
-        border-radius: 50%;
-        background: linear-gradient(to right bottom, #212428, #16181c);
-        margin-top:120px;
-        position: absolute;
-        right: 110px;
-        animation: slideInFromRight 3s ease-out forwards, floatUpDown 3s ease-in-out infinite 3s; /* حركة من اليمين مع حركة لأعلى وأسفل */
-    }
+/*        .imgpro {
+            position: relative;
+            left:2px;
+            margin-top: 150px;
+            width: 150px;
+            height: 150px;
+            margin-left: auto;
+            margin-right: auto;
+
+        }*/
+            .imgpro {
+                width:160px;
+                height:160px;
+                position: absolute;
+                top: 5px;
+                margin-right:40px;
+            }
 
         .imgpro img {
+
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
 
     .header-text {
-        font-size: 20px; /* تقليل حجم الخط على الشاشات الصغيرة */
-        margin-top: 100%;
-
-        text-align:center
-    }
-        .header-text p {
             font-size: 20px;
+            margin-top: 140%;
         }
 
         .header-text h1 {
-            font-size: 22px;
-            margin-bottom:0;
+            font-size: 20px;
         }
+                .header-text p {
+                    font-size: 22px;
+                }
 
     nav .fas {
         display: block;
@@ -626,39 +819,44 @@ nav .fas {
 
 
     #about {
+       margin-top:280px;
        text-align:center
-        color: #ababab;
+       color: #ababab;
+       display: flex; /* استخدام flexbox */
+       justify-content: center; /* محاذاة أفقية للوسط */
+       align-items: center; /* محاذاة عمودية للوسط */
+       flex-direction: column; /* ترتيب العناصر عموديًا */
+       height: 100vh; /* ملء الشاشة كاملة */
+
     }
 
-    .about-col-1,
-    .about-col-2 {
-        flex-basis:60%;
-        font-size: 14px;
-    }
 
     .about-col-1 {
         display: flex;
+        align-items:center;
         justify-content: center; /* محاذاة أفقيًا في الوسط */
         flex-direction: column; /* ترتيب العناصر عموديًا */
-        height: calc(50vh - 0px); /* تخصيص ارتفاع مع الأخذ في الاعتبار المسافات العليا والسفلى */
-        margin: 0px 0; /* المسافة فوق الصورة */
+   /*     height: calc(50vh - 0px); /* تخصيص ارتفاع مع الأخذ في الاعتبار المسافات العليا والسفلى */
+   /*     margin: 0px 0px 30px 0px; /* المسافة فوق الصورة */
 
         margin-top:60px;
+        margin-left: auto;
+        margin-right: auto;
     }
         .about-col-1 img {
-            width: 200px%; /* تعيين العرض التلقائي لضبط الصورة بشكل مناسب */
-            height: 300px; /* تعيين الارتفاع التلقائي لضبط الصورة بشكل مناسب */
-            max-width: 70%; /* تأكد من أن الصورة لا تتجاوز عرض العمود */
-            max-height: 80%; /* تأكد من أن الصورة لا تتجاوز ارتفاع العمود */
+            max-width:150%;
+            width: 200px; /* تعيين العرض التلقائي لضبط الصورة بشكل مناسب */
+            height: auto; /* تعيين الارتفاع التلقائي لضبط الصورة بشكل مناسب */
             border-radius: 15px; /* تعيين شكل الزوايا إذا لزم الأمر */
             object-fit: cover;
-            margin-left:85px;
-            
+
 
         }
-    .about-col-2 h1{
-        text-align:center;
-    }
+     .about-col-2{
+             margin-left: auto;
+             margin-right: auto;
+     }
+
 
     .about-col-2 {
         font-size: 14px;
@@ -685,9 +883,6 @@ nav .fas {
     }
 
 
-    #services{
-        padding: 0 0;
-    }
     .container{
         text-align:center;
     }
@@ -696,7 +891,7 @@ nav .fas {
     /* -------------------------services---------------- */
     #services {
         padding:0px 5px 0px 0px;
-        margin:0px 20px;
+        margin:130px 10px 10px 10px;
     }
 
     .services-list {
@@ -722,8 +917,8 @@ nav .fas {
             }
 
             .services-list div h2 {
-                font-size: 30px;
-                font-weight: 500;
+                font-size: 20px;
+                font-weight: 300;
                 margin-bottom: 15px;
             }
 
@@ -746,7 +941,7 @@ nav .fas {
 
 
     #portofolio {
-        padding: 50px 0;
+        padding: 50px 0 10px 0;
         align-items:center
     }
     .work-list {
@@ -838,7 +1033,7 @@ nav .fas {
             background: #ff004f;
             border-color: white;
         }
-   
+
 
     /*------------------------------------------*/
     .contact-left,
@@ -856,9 +1051,9 @@ nav .fas {
 
     .scroll-to-top {
         position: fixed;
-        width: 30px;
-        height: 30px;
-        bottom: 0px;
+        width: 40px;
+        height: 40px;
+        bottom:55px;
         right: 20px;
         padding: 0 0 0px 0;
         border: none;
@@ -1038,6 +1233,19 @@ form .btn2 {
     .copyright i {
         color: #ff004f;
     }
+    /*------------------------DASHBOARD------------------*/
+    #dashboard {
+        padding: 15px; /* Adjust padding for mobile */
+    }
+
+    input[type="text"], textarea, button {
+        font-size: 14px; /* Smaller font size for mobile */
+    }
+
+    button {
+        padding: 10px; /* Adjust button padding for mobile */
+    }
+
 
 
 }

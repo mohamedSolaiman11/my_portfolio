@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Portfolio Manager</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="portfolio/style.css">
+    <style>
+        body { background: #f8fafc; color: #1e293b; }
+        .admin-nav { background: white; padding: 1rem 0; border-bottom: 1px solid #e2e8f0; margin-bottom: 40px; }
+        .dashboard-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
+        .auth-card { max-width: 400px; margin: 100px auto; background: white; padding: 40px; border-radius: 24px; box-shadow: var(--card-shadow); text-align: center; }
+        .auth-card input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #e2e8f0; }
+
+        .project-form-card { background: white; padding: 40px; border-radius: 24px; box-shadow: var(--card-shadow); margin-bottom: 50px; display: none; }
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .full-row { grid-column: 1 / -1; }
+        
+        input, textarea, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; margin-top: 5px; font-size: 0.95rem; }
+        label { font-weight: 600; font-size: 0.85rem; color: #64748b; }
+
+        .project-manager-list { display: grid; gap: 15px; margin-top: 40px; display: none; }
+        .admin-p-item { background: white; padding: 15px 25px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #e2e8f0; }
+        .admin-p-item img { width: 50px; height: 50px; border-radius: 8px; object-fit: cover; }
+        
+        .status-pill { padding: 4px 10px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; }
+        .status-active { background: #dcfce7; color: #166534; }
+    </style>
+</head>
+<body>
+
+    <!-- Auth View -->
+    <div id="auth-view" class="auth-card">
+        <h2 style="margin-bottom: 20px;">Admin Login</h2>
+        <input type="email" id="login-email" placeholder="Email">
+        <input type="password" id="login-password" placeholder="Password">
+        <button id="btn-login" class="btn-primary" style="width: 100%;">Sign In</button>
+    </div>
+
+    <!-- Dashboard View (Hidden by default) -->
+    <div id="dashboard-view" style="display: none;">
+        <div class="admin-nav">
+            <div class="dashboard-container" style="display: flex; justify-content: space-between; align-items: center;">
+                <h2 style="color: var(--primary-color);">Portfolio <span style="color: #1e293b;">Manager</span></h2>
+                <div>
+                    <span id="user-email" style="margin-right: 20px; font-size: 0.9rem; color: #64748b;"></span>
+                    <button id="btn-logout" class="btn-outline" style="padding: 8px 20px; font-size: 0.8rem;">Logout</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-container">
+            <div class="project-form-card" id="form-card" style="display: block;">
+                <h3 style="margin-bottom: 30px;" id="form-title">Add New Project</h3>
+                <form id="project-form">
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Project Name *</label>
+                            <input type="text" id="p-name" required placeholder="e.g. Health Track App">
+                        </div>
+                        <div class="form-group">
+                            <label>Short Tagline</label>
+                            <input type="text" id="p-tagline" placeholder="e.g. Personal Fitness Assistant">
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <select id="p-category">
+                                <option value="Commercial">Commercial</option>
+                                <option value="Personal">Personal</option>
+                                <option value="Freelance">Freelance</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Status</label>
+                            <select id="p-status">
+                                <option value="Completed">Completed</option>
+                                <option value="In Progress">In Progress</option>
+                                <option value="Beta">Beta</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Cover Image URL *</label>
+                            <input type="text" id="p-cover" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Demo Video Link</label>
+                            <input type="text" id="p-video" placeholder="YouTube/Drive URL">
+                        </div>
+                        <div class="form-group">
+                            <label>GitHub URL</label>
+                            <input type="text" id="p-github">
+                        </div>
+                        <div class="form-group">
+                            <label>Tech Stack (Comma separated)</label>
+                            <input type="text" id="p-tech" placeholder="Flutter, Bloc, Firebase">
+                        </div>
+                        <div class="form-group full-row">
+                            <label>The Problem</label>
+                            <textarea id="p-problem" rows="3"></textarea>
+                        </div>
+                        <div class="form-group full-row">
+                            <label>The Solution</label>
+                            <textarea id="p-solution" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Platforms</label>
+                            <input type="text" id="p-platforms" placeholder="Android / iOS / Web">
+                        </div>
+                        <div class="form-group">
+                            <label>Featured Project?</label>
+                            <select id="p-featured">
+                                <option value="false">No</option>
+                                <option value="true">Yes</option>
+                            </select>
+                        </div>
+                    </div>
+                    <input type="hidden" id="edit-id">
+                    <button type="submit" class="btn-primary" style="margin-top: 30px; width: 100%;">Save Project</button>
+                    <button type="button" id="btn-cancel" class="btn-outline" style="margin-top: 10px; width: 100%; display: none;">Cancel Edit</button>
+                </form>
+            </div>
+
+            <div class="project-manager-list" id="admin-list" style="display: grid;">
+                <!-- List will be populated here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script type="module">
+        import { db, collection, getDocs, addDoc, deleteDoc, doc, updateDoc, query, orderBy } from './js/firebase.js';
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-auth.js";
+
+        const auth = getAuth();
+
+        // 1. Auth Logic
+        document.getElementById('btn-login').onclick = () => {
+            const email = document.getElementById('login-email').value;
+            const pass = document.getElementById('login-password').value;
+            signInWithEmailAndPassword(auth, email, pass).catch(err => alert(err.message));
+        };
+
+        document.getElementById('btn-logout').onclick = () => signOut(auth);
+
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                document.getElementById('auth-view').style.display = 'none';
+                document.getElementById('dashboard-view').style.display = 'block';
+                document.getElementById('user-email').innerText = user.email;
+                loadAdminProjects();
+            } else {
+                document.getElementById('auth-view').style.display = 'block';
+                document.getElementById('dashboard-view').style.display = 'none';
+            }
+        });
+
+        // 2. Project CRUD Logic
+        const form = document.getElementById('project-form');
+        form.onsubmit = async (e) => {
+            e.preventDefault();
+            const editId = document.getElementById('edit-id').value;
+            const data = {
+                appName: document.getElementById('p-name').value,
+                tagline: document.getElementById('p-tagline').value,
+                category: document.getElementById('p-category').value,
+                status: document.getElementById('p-status').value,
+                coverImage: document.getElementById('p-cover').value,
+                videoLink: document.getElementById('p-video').value,
+                githubLink: document.getElementById('p-github').value,
+                techStack: document.getElementById('p-tech').value,
+                problem: document.getElementById('p-problem').value,
+                solution: document.getElementById('p-solution').value,
+                platforms: document.getElementById('p-platforms').value,
+                featured: document.getElementById('p-featured').value === 'true',
+                updatedAt: new Date().toISOString()
+            };
+
+            try {
+                if (editId) {
+                    await updateDoc(doc(db, "projects", editId), data);
+                    alert("Project Updated!");
+                } else {
+                    data.createdAt = new Date().toISOString();
+                    await addDoc(collection(db, "projects"), data);
+                    alert("Project Added!");
+                }
+                resetForm();
+                loadAdminProjects();
+            } catch (err) { alert(err.message); }
+        };
+
+        async function loadAdminProjects() {
+            const list = document.getElementById('admin-list');
+            list.innerHTML = "<h3>Current Projects</h3>";
+            const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
+            const snap = await getDocs(q);
+            
+            snap.forEach(docSnap => {
+                const p = docSnap.data();
+                const item = document.createElement('div');
+                item.className = 'admin-p-item';
+                item.innerHTML = `
+                    <div style="display:flex; align-items:center; gap:20px;">
+                        <img src="${p.coverImage}" alt="">
+                        <div>
+                            <strong>${p.appName}</strong><br>
+                            <span class="status-pill status-active">${p.category}</span>
+                        </div>
+                    </div>
+                    <div>
+                        <button class="btn-edit-action" style="background:none; border:none; color:var(--primary-color); cursor:pointer; margin-right:15px;"><i class="fas fa-edit"></i> Edit</button>
+                        <button class="btn-delete-action" style="background:none; border:none; color:#ef4444; cursor:pointer;"><i class="fas fa-trash"></i> Delete</button>
+                    </div>
+                `;
+                
+                item.querySelector('.btn-edit-action').onclick = () => fillEditForm(docSnap.id, p);
+                item.querySelector('.btn-delete-action').onclick = async () => {
+                    if(confirm("Delete this project?")) {
+                        await deleteDoc(doc(db, "projects", docSnap.id));
+                        loadAdminProjects();
+                    }
+                };
+                list.appendChild(item);
+            });
+        }
+
+        function fillEditForm(id, p) {
+            document.getElementById('edit-id').value = id;
+            document.getElementById('p-name').value = p.appName || '';
+            document.getElementById('p-tagline').value = p.tagline || '';
+            document.getElementById('p-category').value = p.category || 'Commercial';
+            document.getElementById('p-status').value = p.status || 'Completed';
+            document.getElementById('p-cover').value = p.coverImage || '';
+            document.getElementById('p-video').value = p.videoLink || '';
+            document.getElementById('p-github').value = p.githubLink || '';
+            document.getElementById('p-tech').value = p.techStack || '';
+            document.getElementById('p-problem').value = p.problem || '';
+            document.getElementById('p-solution').value = p.solution || '';
+            document.getElementById('p-platforms').value = p.platforms || '';
+            document.getElementById('p-featured').value = p.featured ? 'true' : 'false';
+            
+            document.getElementById('form-title').innerText = "Edit Project";
+            document.getElementById('btn-cancel').style.display = 'block';
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function resetForm() {
+            form.reset();
+            document.getElementById('edit-id').value = '';
+            document.getElementById('form-title').innerText = "Add New Project";
+            document.getElementById('btn-cancel').style.display = 'none';
+        }
+
+        document.getElementById('btn-cancel').onclick = resetForm;
+
+    </script>
+</body>
+</html>

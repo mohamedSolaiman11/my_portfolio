@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My portofilio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="see-more.html">
+    <script src="https://kit.fontawesome.com/115d442487.js" crossorigin="anonymous"></script>
+
+    <style>
+    body.admin-only-mode > *:not(#dashboard) {
+      display: none;
+    }
+#dashboard {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%; /* نسبة مئوية بدلًا من قيمة ثابتة */
+  max-width: 450px; /* أقصى عرض لعدم التمدد الزائد على الشاشات الكبيرة */
+  background: #ffffff;
+  border: 1px solid #ccc;
+  padding: 30px 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  z-index: 9999;
+  display: none;
+  border-radius: 15px;
+  transition: all 0.3s ease-in-out;
+}
+
+#dashboard h2 {
+  margin-top: 0;
+  text-align: center;
+  font-size: 24px;
+  color: #333;
+}
+
+#dashboard input,
+#dashboard button {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
+
+#dashboard button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+#dashboard button:hover {
+  background-color: #45a049;
+}
+@media (max-width: 480px) {
+  #dashboard {
+    padding: 20px 15px;
+  }
+
+  #dashboard h2 {
+    font-size: 20px;
+  }
+
+  #dashboard input,
+  #dashboard button {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+
+  </style>
+
+    <!-- Firebase SDK -->
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getFirestore, collection, addDoc, getDocs, deleteDoc, doc, updateDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFGihdfZEWJM7iJYh45wRWYCYphVG4-G0",
+      authDomain: "portfolio-9fd63.firebaseapp.com",
+      projectId: "portfolio-9fd63",
+      storageBucket: "portfolio-9fd63.appspot.com",
+      messagingSenderId: "562837517190",
+      appId: "1:562837517190:web:173b5edb9f4ebdafdf7207",
+      measurementId: "G-HSTB4ZL63S"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const isOwner = window.location.search.includes("admin=true");
+
+    window.addProjectToFirestore = async function (description, image, nameApp, video) {
+      try {
+        await addDoc(collection(db, "projects"), {
+          desc: description,
+          imageUrl: image,
+          name: nameApp,
+          videoUrl: video
+        });
+        console.log("Project successfully added!");
+      } catch (error) {
+        console.error("Error adding project: ", error);
+      }
+    };
+
+    window.deleteProject = async function (id) {
+      try {
+        await deleteDoc(doc(db, "projects", id));
+        fetchAndDisplayProjects();
+      } catch (error) {
+        console.error("Error deleting project: ", error);
+      }
+    };
+
+    window.editProject = function (id, data) {
+      document.getElementById("projectName").value = data.name;
+      document.getElementById("projectImage").value = data.imageUrl;
+      document.getElementById("projectDescription").value = data.desc;
+      document.getElementById("projectVideo").value = data.videoUrl;
+      document.getElementById("projectForm").dataset.editingId = id;
+    };
+
+    window.fetchAndDisplayProjects = async function () {
+      const workList = document.getElementById("firestoreProjects");
+      if (!workList) return;
+      workList.innerHTML = "";
+      try {
+        const querySnapshot = await getDocs(collection(db, "projects"));
+        const projects = [];
+        querySnapshot.forEach((docSnap) => {
+          projects.push({ id: docSnap.id, ...docSnap.data() });
+        });
+
+        // عرض فقط أول 4 مشاريع
+        projects.slice(0, 4).forEach((project) => {
+          const projectHTML = `
+            <div class="work">
+              <img src="${project.imageUrl}" alt="${project.name}" />
+              <div class="layer">
+                <h3>${project.name}</h3>
+                <p>${project.desc}</p>
+                <a href="${project.videoUrl}" target="_blank"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                ${isOwner ? `<button onclick='editProject("${project.id}", ${JSON.stringify(project)})'>Edit</button><button onclick='deleteProject("${project.id}")'>Delete</button>` : ""}
+              </div>
+            </div>`;
+          workList.innerHTML += projectHTML;
+        });
+      } catch (error) {
+        console.error("Error fetching projects: ", error);
+      }
+    };
+
+    window.submitProjectForm = async function (e) {
+      e.preventDefault();
+      const form = e.target;
+      const name = document.getElementById("projectName").value;
+      const image = document.getElementById("projectImage").value;
+      const description = document.getElementById("projectDescription").value;
+      const video = document.getElementById("projectVideo").value;
+      const editingId = form.dataset.editingId;
+
+      try {
+        if (editingId) {
+          await updateDoc(doc(db, "projects", editingId), {
+            name,
+            imageUrl: image,
+            desc: description,
+            videoUrl: video
+          });
+          form.removeAttribute("data-editing-id");
+        } else {
+          await addDoc(collection(db, "projects"), {
+            name,
+            imageUrl: image,
+            desc: description,
+            videoUrl: video
+          });
+        }
+        form.reset();
+      } catch (err) {
+        console.error("Error submitting project: ", err);
+      }
+    }
+  </script>
+</head>
+
+<body>
+        <script>
+           const urlParams = new URLSearchParams(window.location.search);
+           const isOwner = urlParams.get("admin") === "true";
+
+          window.addEventListener("DOMContentLoaded", () => {
+            if (!isOwner) {
+              const dashboardSection = document.getElementById("dashboard");
+              if (dashboardSection) dashboardSection.remove();
+
+              const dashboardLink = document.querySelector('a[href="#dashboard"]');
+              if (dashboardLink) dashboardLink.remove();
+
+              // إزالة أزرار التعديل والحذف
+              const observer = new MutationObserver(() => {
+                document.querySelectorAll(".layer button").forEach(btn => btn.remove());
+              });
+              observer.observe(document.getElementById("firestoreProjects"), { childList: true, subtree: true });
+            }
+          });
+        </script>
+
+    <div id="header">
+        <div class="container">
+            <nav>
+                <h1 class="name">
+                    Mohamed <span class="suliman">Suliman</span>
+                </h1>
+                <ul id="sidemenu">
+                    <li><a href="#header"><i class="fa fa-home"></i> <span>Home</span></a></li>
+                    <li><a href="#about"><i class="fa fa-user"></i> <span>About</span></a></li>
+                    <li><a href="#services"><i class="fa fa-briefcase"></i> <span>Services</span></a></li>
+                    <li><a href="#portfolio"><i class="fa fa-image"></i> <span>Portfolio</span></a></li>
+                    <li><a href="#contact"><i class="fa fa-envelope"></i> <span>Contact</span></a></li>
+                    <li><a href="#dashboard"><i class="fa fa-tachometer"></i> <span>Dashboard</span></a></li>
+                    <i class="fas fa-solid fa-xmark" onclick="closemenu()"></i>
+                </ul>
+                <i class="fas fa-solid fa-bars" onclick="openmenu()"></i>
+            </nav>
+
+
+
+            <div class="imgpro" id="profile-picture">
+                <img src="images/main2.jpg" alt="" width="400px" height="400px">
+            </div>
+
+            <div class="header-text">
+                <p>Mobile App Developer🤳</p>
+                <h1>Hi, I'm <span>Mohamed</span><br> Suliman From Egypt</h1>
+            </div>
+        </div>
+    </div>
+    <!-- -----------------------about------------------- -->
+    <div id="about">
+        <div class="container">
+            <div class="row">
+                <div class="about-col-1">
+                    <img src="images/img55.jpg" alt="Mohamed Suliman">
+                </div>
+                <div class="about-col-2">
+                    <h1 class="sub-title">About Me</h1>
+                    <h5 class="about-description">
+                        I am an enthusiastic Flutter Developer specializing in crafting high-quality mobile applications for Android and iOS platforms. With a solid foundation in Dart programming and hands-on experience with Flutter and Firebase, I have a proven track record of designing, developing, and deploying innovative solutions. My expertise includes building interactive user interfaces, managing state effectively with Bloc, and optimizing app performance. I am eager to contribute my skills to a dynamic team and grow in a collaborative environment. I am committed to continuous learning and achieving excellence in mobile app development.
+                    </h5>
+
+                    <div class="tab-titles">
+                        <p class="tab-links active-link" onclick="opentab('skills')">Skills</p>
+                        <p class="tab-links" onclick="opentab('experience')">Experience</p>
+                        <p class="tab-links" onclick="opentab('education')">Education</p>
+                    </div>
+                    <div class="tab-contents active-tap"
+                         id="skills">
+                        <ul>
+                            <li><span>Flutter</span> | Dart</li>
+                            <li>SQLite | <span>Firebase</span></li>
+                            <li><span>Restful API</span> | Bloc State Management </li>
+                            <li>Git | <span>GitHub</span></li>
+                            <li><span>Restful API</span> | Design Patterns</li>
+                            <li>MVVM | <span>Clean Code</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-contents" id="experience">
+                        <ul>
+                            <li><span>Mobile Application Development Training</span><br> at Digital Egypt Pioneers Initiative</li>
+                            <li><span>News App Development</span><br>Created a news application with article bookmarking, category filtering, and push notifications for breaking news.</li>
+                            <li><span>Graduation Project: Smart Safe</span><br>Developed a smart safe with secure access features and real-time monitoring capabilities.</li>
+                            <li><span>News App</span><br>Developed a news application that aggregates and displays news articles from various sources in real-time.</li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-contents" id="education">
+                        <ul>
+                            <li><h3>Graduated From Delta Technological University (2020 - 2024)</h3></li>
+                            <li>Major: Software Engineering</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ---------------------------------------services--------------- -->
+    <div id="services">
+        <div class="container">
+            <h1 class="sub-title">My Services</h1>
+            <div class="services-list">
+                <div>
+                    <i class="fa-brands fa-android fa-beat-fade"></i>
+                    <h2>Mobile Apps</h2>
+                    <p>Crafting sleek, responsive, and scalable mobile apps tailored for Android and iOS using Flutter & Firebase.</p>
+                    <a href="">Learn more</a>
+                </div>
+                <div>
+                    <i class="fa-brands fa-app-store fa-beat-fade"></i>
+                    <h2>UI/UX Design</h2>
+                    <p>Designing modern, user-friendly interfaces with a focus on usability, accessibility, and performance.</p>
+
+                    <a href="">Learn more</a>
+                </div>
+                <div>
+                    <i class="fa-solid fa-code fa-beat-fade"></i>
+                    <h2>Web Design</h2>
+                    <p>Building clean, responsive websites with smooth interactions, optimized performance, and secure deployment.</p>
+
+                    <a href="">Learn more</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- ------------------------portofolio----------------- -->
+    <div id="portfolio">
+        <div class="container">
+            <h1 class="sub-title">My Work</h1>
+            <div class="work-list" id="firestoreProjects">
+               <div class="work">
+                    <img src="images/ninja22.jpg">
+                    <div class="layer">
+                        <h3>Ninja Box App</h3>
+                        <p>Developed a smart safe with secure access features and real-time monitoring capabilities.</p>
+                        <a href="images/ninjaBoxApp.pdf"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                        <a href="https://drive.google.com/drive/folders/1OrI5no9hHMbLg60IYxuOomIDzXxypFz1"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="images/notes.png">
+                    <div class="layer">
+                        <h3>News App</h3>
+                        <p>
+                            Stay informed and connected with the latest news from around the globe.
+                            Our app delivers personalized content, breaking news alerts, and in-depth analysis.
+
+                        </p>
+                        <a href="images/ninjaBoxApp.pdf"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="images/notes.png">
+                    <div class="layer">
+                        <h3>Notes App</h3>
+                        <p>
+                            Organize and access your notes easily anytime, anywhere.
+                            Perfect for students, professionals, and anyone in need of efficient note-taking.
+                        </p>
+                        <a href="images/ninjaBoxApp.pdf"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+                <div class="work">
+                    <img src="images/rothabit2x.png">
+                    <div class="layer">
+                        <h3>News App</h3>
+                        <p>
+                            Stay informed and connected with the latest news from around the globe.
+                            Our app delivers personalized content, breaking news alerts, and in-depth analysis.
+
+                        </p>
+                        <a href="images/ninjaBoxApp.pdf"><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+                    </div>
+                </div>
+
+
+            </div>
+            <a href="see-more.html" class="btn">See More</a>
+        </div>
+    </div>
+
+    <!-- --------------------------------contact--------------- -->
+    <div id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="contact-left">
+                    <h1 class="sub-title">Contact Me</h1>
+                    <p><i class="fa-solid fa-paper-plane"></i>mohamedsolaiman707@gmail.com</p>
+                    <p><i class="fa-solid fa-phone"></i> +201014250577</p>
+                    <div class="social-icons">
+                        <a href="https://www.linkedin.com/in/mohamed-solaiman-a2b9921b4">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=61556941828639">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+                        <a href="https://x.com/MoSuliman110?t=YcWZ2nae-d89e5ll5mZu8g&s=09"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="https://github.com/mohamedSolaiman11/"><i class="fa-brands fa-github"></i></a>
+                        <a href="https://wa.me/qr/BFLIOWSSP63AH1"><i class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                    <a href="images/updatedCv.pdf" download class="btn btn2">Download CV</a>
+                </div>
+
+                <div class="contact-right">
+                    <form action="https://formspree.io/f/xnqkrjyg" method="POST">
+
+                        <input type="text" name="Name" placeholder="Your name" required>
+                        <input type="email" name="Email" placeholder="Your email" required>
+                        <textarea name="Message" id="" rows="6" placeholder="Your message"></textarea>
+                        <button type="submit" class="btn btn2">Submit</button>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>Copy Right 2023 <i class="fa-regular fa-copyright"></i> Made By Mohamed Solaiman.All Right Reserved.</p>
+        </div>
+    </div>
+
+
+    <!-- --------------------------------dashboard--------------- -->
+
+        <section id="dashboard">
+            <h2>Add Project</h2>
+            <form id="projectForm">
+                <input type="text" id="projectName" placeholder="Project Name" required />
+                <input type="text" id="projectImage" placeholder="Image URL" required />
+                <input type="text" id="projectDescription" placeholder="Description" required />
+                <input type="text" id="projectVideo" placeholder="Video URL" required />
+                <button type="submit">Save Project</button>
+            </form>
+            <button id="exitAdminBtn" style="margin-top: 10px; background-color: #f44336; color: white; border: none; padding: 10px; border-radius: 5px;">
+                Exit
+            </button>
+
+        </section>
+        <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+  import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAFGihdfZEWJM7iJYh45wRWYCYphVG4-G0",
+    authDomain: "portfolio-9fd63.firebaseapp.com",
+    projectId: "portfolio-9fd63",
+    storageBucket: "portfolio-9fd63.appspot.com",
+    messagingSenderId: "562837517190",
+    appId: "1:562837517190:web:173b5edb9f4ebdafdf7207"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  const listContainer = document.getElementById("projectList");
+
+  async function loadProjects() {
+    const snapshot = await getDocs(collection(db, "projects"));
+    snapshot.forEach(docSnap => {
+      const data = docSnap.data();
+      const html = `
+        <div class="work">
+          <img src="${data.imageUrl}" alt="${data.name}" />
+          <div class="layer">
+            <h3>${data.name}</h3>
+            <p>${data.desc}</p>
+            <a href="edit.html?id=${docSnap.id}" title="Edit">
+              <i class="fa-solid fa-pen-to-square"></i>
+            </a>
+          </div>
+        </div>`;
+      listContainer.innerHTML += html;
+    });
+  }
+
+  loadProjects();
+</script>
+
+        <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const isAdmin = window.location.search.includes("admin=true");
+      if (isAdmin) {
+        document.body.classList.add("admin-only-mode");
+        document.getElementById("dashboard").style.display = "block";
+      }else {
+    document.getElementById("dashboard")?.remove();
+  }
+
+      document.getElementById("projectForm")?.addEventListener("submit", submitProjectForm);
+      if (isAdmin) {
+  loadProjects(); // تحميل المشاريع في قسم Current Projects
+}
+
+    });
+  </script>
+
+  <!--  <section id="dashboard" style="display:none;">
+        <h2>Add Project</h2>
+        <form id="projectForm">
+            <input type="text" id="projectName" placeholder="Project Name" required>
+            <input type="text" id="projectImage" placeholder="Image URL" required>
+            <input type="text" id="projectDescription" placeholder="Description" required>
+            <input type="text" id="projectVideo" placeholder="Video URL" required>
+            <button type="submit">Add Project</button>
+        </form>
+    </section>
+
+-->
+
+    <!------------------------------------------- Back to Top Button ------------------------------>
+    <button class="scroll-to-top" id="scrollToTopBtn" style="display: none;">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+
+
+
+
+    <script>
+
+        var tablinks = document.getElementsByClassName("tab-links");
+        var tabcontents = document.getElementsByClassName("tab-contents");
+        function opentab(tabname) {
+            for (tablink of tablinks) {
+                tablink.classList.remove("active-link");
+            }
+            for (tabcontent of tabcontents) {
+                tabcontent.classList.remove("active-tap");
+            }
+            event.currentTarget.classList.add("active-link");
+            document.getElementById(tabname).classList.add("active-tap");
+
+        }
+    </script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // الحصول على عناصر الشريط الجانبي والأيقونة
+            const sidemenu = document.getElementById('sidemenu');
+            const profilePicture = document.getElementById('profile-picture');
+            const openMenuIcon = document.querySelector('.fa-bars');
+            const closeMenuIcon = document.querySelector('.fa-xmark');
+            const sidemenuLinks = sidemenu.querySelectorAll('a');
+
+            function openmenu() {
+                sidemenu.style.right = '0';
+                profilePicture.style.left = '0px'; // تحريك الصورة لليسار عند فتح القائمة
+            }
+
+            function closemenu() {
+                sidemenu.style.right = '-200px';
+                    // خليه بس لما تكون الشاشة صغيرة مثلاً
+    if (window.innerWidth < 768) {
+        profilePicture.style.left = '115px';
+    }
+            }
+
+            openMenuIcon.addEventListener('click', openmenu);
+            closeMenuIcon.addEventListener('click', closemenu);
+
+            // إغلاق الشريط الجانبي عند الضغط على أي رابط
+            sidemenuLinks.forEach(link => {
+                link.addEventListener('click', function (e) {
+                    closemenu();
+
+                    // انتظار انتهاء حركة الإغلاق قبل السكروول
+                    setTimeout(() => {
+                        // الحصول على الهدف من الرابط
+                        const targetId = link.getAttribute('href');
+                        const targetElement = document.querySelector(targetId);
+
+                        // التمرير السلس إلى الهدف
+                        if (targetElement) {
+                            targetElement.scrollIntoView({ behavior: 'smooth' });
+                        }
+                    }, 300); // زمن الانتقال يعادل زمن الـ CSS transition
+                });
+            });
+        });
+    </script>
+
+
+
+    <script>
+        // Event listeners
+        document.addEventListener("DOMContentLoaded", function () {
+            // الحصول على الزر
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+
+            // عند التمرير لأسفل، يظهر الزر
+            window.onscroll = function () {
+                if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                    scrollToTopBtn.style.display = "block";
+                } else {
+                    scrollToTopBtn.style.display = "none";
+                }
+            };
+
+            // عند الضغط على الزر، يتنقل إلى أعلى الصفحة
+            scrollToTopBtn.onclick = function () {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            };
+        });
+
+
+    </script>
+   <!-- <script>
+        // إضافة Event Listener لزر الـ Dashboard
+        document.getElementById('sidemenu').addEventListener('click', function (e) {
+            if (e.target.closest('a[href="#dashboard"]')) {
+                document.getElementById('dashboard').style.display = 'block'; // إظهار الـ dashboard
+            }
+        });
+
+        // إغلاق الـ dashboard عند الضغط على أي رابط آخر
+        sidemenuLinks.forEach(link => {
+            link.addEventListener('click', function (e) {
+                if (!link.getAttribute('href').includes('dashboard')) {
+                    document.getElementById('dashboard').style.display = 'none'; // إخفاء الـ dashboard
+                }
+            });
+        });
+    </script>
+ -->
+
+        <script>
+  document.getElementById("exitAdminBtn")?.addEventListener("click", function () {
+    const url = new URL(window.location.href);
+    url.searchParams.delete("admin");
+    window.location.href = url.toString();
+  });
+</script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Details | Mohamed Suliman</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="portfolio/style.css">
+    <style>
+        .details-wrapper { padding: 120px 0; }
+        .project-hero { margin-bottom: 60px; text-align: center; }
+        .project-hero h1 { font-size: 3.5rem; margin-bottom: 20px; }
+        .badge-group { display: flex; justify-content: center; gap: 15px; margin-bottom: 30px; }
+        .badge { background: rgba(2, 125, 253, 0.1); color: var(--primary-color); padding: 5px 15px; border-radius: 50px; font-size: 0.8rem; font-weight: 700; }
+        
+        .main-showcase { width: 100%; border-radius: 32px; overflow: hidden; margin-bottom: 60px; box-shadow: var(--card-shadow); border: 1px solid rgba(255, 255, 255, 0.05); }
+        .main-showcase img { width: 100%; height: auto; display: block; }
+
+        .content-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 60px; }
+        .story-section { margin-bottom: 40px; }
+        .story-section h2 { font-size: 1.8rem; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .story-section h2 i { color: var(--primary-color); font-size: 1.2rem; }
+        .story-section p { color: var(--text-dim); font-size: 1.1rem; }
+
+        .sidebar-card { background: var(--surface-dark); padding: 30px; border-radius: 24px; position: sticky; top: 120px; border: 1px solid rgba(255, 255, 255, 0.05); }
+        .sidebar-card h3 { margin-bottom: 20px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); padding-bottom: 10px; }
+        
+        .spec-item { margin-bottom: 20px; }
+        .spec-item label { display: block; font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 5px; }
+        .spec-item span { font-weight: 600; color: var(--text-main); }
+
+        .video-box { position: relative; padding-bottom: 56.25%; height: 0; border-radius: 20px; overflow: hidden; margin-top: 20px; }
+        .video-box iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+
+        @media (max-width: 992px) {
+            .content-grid { grid-template-columns: 1fr; }
+            .project-hero h1 { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="container" style="display: flex; justify-content: space-between; align-items: center;">
+            <a href="index.html" class="logo">M.<span>Suliman</span></a>
+            <a href="index.html" style="color: var(--text-main); text-decoration: none; font-weight: 600;"><i class="fas fa-arrow-left"></i> Back</a>
+        </div>
+    </nav>
+
+    <div class="container details-wrapper" id="details-content">
+        <!-- Will be populated by JS -->
+        <div style="text-align: center; padding: 100px;">
+            <div class="spinner"></div>
+            <p>Loading case study...</p>
+        </div>
+    </div>
+
+    <script type="module">
+        import { db, doc, getDoc } from './js/firebase.js';
+
+        async function loadProject() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id');
+            const container = document.getElementById('details-content');
+
+            if (!id) {
+                window.location.href = 'index.html';
+                return;
+            }
+
+            try {
+                const docSnap = await getDoc(doc(db, "projects", id));
+                if (!docSnap.exists()) {
+                    container.innerHTML = "<h1>Project not found.</h1>";
+                    return;
+                }
+
+                const p = docSnap.data();
+                const tags = p.techStack ? p.techStack.split(',').map(tag => `<span class="tag">${tag.trim()}</span>`).join('') : '';
+
+                container.innerHTML = `
+                    <div class="project-hero">
+                        <div class="badge-group">
+                            <span class="badge">${p.category || 'Mobile App'}</span>
+                            <span class="badge">${p.status || 'Completed'}</span>
+                        </div>
+                        <h1>${p.appName || p.name}</h1>
+                        <p style="font-size: 1.2rem; color: var(--text-dim); max-width: 700px; margin: 0 auto;">${p.tagline || ''}</p>
+                    </div>
+
+                    <div class="main-showcase">
+                        <img src="${p.coverImage || p.imageUrl}" alt="${p.appName}">
+                    </div>
+
+                    <div class="content-grid">
+                        <div class="main-content">
+                            <div class="story-section">
+                                <h2><i class="fas fa-bullseye"></i> The Problem</h2>
+                                <p>${p.problem || 'Description not provided.'}</p>
+                            </div>
+                            <div class="story-section">
+                                <h2><i class="fas fa-lightbulb"></i> The Solution</h2>
+                                <p>${p.solution || 'Description not provided.'}</p>
+                            </div>
+                            ${p.videoLink ? `
+                            <div class="story-section">
+                                <h2><i class="fas fa-play-circle"></i> Video Demo</h2>
+                                <div class="video-box">
+                                    <iframe src="${formatVideoUrl(p.videoLink)}" allowfullscreen></iframe>
+                                </div>
+                            </div>` : ''}
+                        </div>
+
+                        <div class="sidebar">
+                            <div class="sidebar-card">
+                                <h3>Project Details</h3>
+                                <div class="spec-item">
+                                    <label>Platforms</label>
+                                    <span>${p.platforms || 'Android / iOS'}</span>
+                                </div>
+                                <div class="spec-item">
+                                    <label>Tech Stack</label>
+                                    <div class="tech-stack-tags" style="margin-top:10px;">${tags}</div>
+                                </div>
+                                <div class="spec-item">
+                                    <label>Role</label>
+                                    <span>Lead Flutter Developer</span>
+                                </div>
+                                
+                                <div style="display: grid; gap: 10px; margin-top: 30px;">
+                                    ${p.githubLink ? `<a href="${p.githubLink}" target="_blank" class="btn-primary" style="text-align:center; padding: 12px;"><i class="fab fa-github"></i> View Source</a>` : ''}
+                                    <a href="https://wa.me/201014250577?text=I saw your project: ${p.appName}" target="_blank" class="btn-outline" style="text-align:center; padding: 12px;">Discuss Project</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch (error) {
+                console.error(error);
+                container.innerHTML = "<h1>Error loading project details.</h1>";
+            }
+        }
+
+        function formatVideoUrl(url) {
+            if (url.includes('youtube.com/watch?v=')) {
+                return url.replace('watch?v=', 'embed/');
+            }
+            return url;
+        }
+
+        loadProject();
+    </script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>All Projects</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://kit.fontawesome.com/115d442487.js" crossorigin="anonymous"></script>
+    <style>
+    .projects-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      padding: 30px;
+      justify-content: center;
+    }
+    .work {
+      width: 300px;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .work img {
+      width: 100%;
+      height: auto;
+      min-height: 400px;
+      object-fit: contain;
+    }
+.layer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 50px;
+  height: 50px;
+  background-color: white;
+  color: #007bff;
+  font-size: 18px;
+  border: 2px solid #007bff;
+  border-radius: 50%;
+  text-decoration: none;
+  transition: 0.3s ease-in-out;
+  margin-top: 10px;
+  margin-left: 10px;
+}
+
+.layer a:hover {
+  background-color: #007bff;
+  color: white;
+}
+
+
+
+    .layer h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+    .layer p {
+      font-size: 14px;
+      margin: 10px 0;
+    }
+
+
+
+  </style>
+</head>
+<body>
+<h1 style="text-align:center; margin-top:30px;">All My Projects</h1>
+<div id="allProjects" class="projects-container"></div>
+
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyAFGihdfZEWJM7iJYh45wRWYCYphVG4-G0",
+      authDomain: "portfolio-9fd63.firebaseapp.com",
+      projectId: "portfolio-9fd63",
+      storageBucket: "portfolio-9fd63.appspot.com",
+      messagingSenderId: "562837517190",
+      appId: "1:562837517190:web:173b5edb9f4ebdafdf7207"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    const container = document.getElementById("allProjects");
+
+    async function fetchProjects() {
+      const snapshot = await getDocs(collection(db, "projects"));
+      snapshot.forEach(docSnap => {
+        const data = docSnap.data();
+        const projectHTML = `
+          <div class="work">
+            <img src="${data.imageUrl}" alt="${data.name}" />
+            <div class="layer">
+              <h3>${data.name}</h3>
+              <p>${data.desc}</p>
+<a href="${data.videoUrl}" target="_blank"> <i class="fa-solid fa-arrow-up-right-from-square"></i>
+</a>
+            </div>
+          </div>`;
+        container.innerHTML += projectHTML;
+      });
+    }
+
+    fetchProjects();
+  </script>
+</body>
+</html>
