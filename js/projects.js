@@ -7,7 +7,7 @@ export async function renderProjects() {
     try {
         console.log("Attempting to fetch projects...");
         
-        // جلب البيانات بدون ترتيب معقد أولاً لتجنب مشاكل الـ Index
+    
         const projectsRef = collection(db, "projects");
         const snapshot = await getDocs(projectsRef);
         
@@ -23,13 +23,11 @@ export async function renderProjects() {
             return;
         }
 
-        // تحويل البيانات لمصفوفة وترتيبها برمجياً لتجنب الحاجة لـ Firestore Index حالياً
         const projects = [];
         snapshot.forEach(docSnap => {
             projects.push({ id: docSnap.id, ...docSnap.data() });
         });
 
-        // ترتيب المشاريع يدوياً (الأحدث أولاً)
         projects.sort((a, b) => new Date(b.createdAt || 0) - new Date(a.createdAt || 0));
 
         projects.forEach(p => {
