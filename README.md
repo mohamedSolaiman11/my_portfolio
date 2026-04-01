@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 # 📱 Modern Flutter Developer Portfolio
 
 Welcome to my professional portfolio website. This is a premium, responsive, and high-performance portfolio designed to showcase my expertise as a **Flutter Developer** and my creative projects.
 
----
 
 ## 🚀 Recent Updates: v2.0
 In this version, I've implemented a scalable architecture to support:
@@ -11,7 +9,7 @@ In this version, I've implemented a scalable architecture to support:
 - **🌐 Localization (i18n):** Full support for **English** and **Arabic**, including automatic **RTL (Right-to-Left)** layout adjustments.
 - **🎨 Premium UI/UX:** Enhanced animations, mobile-first design, and a dedicated admin dashboard for project management.
 
----
+
 
 ## ✨ Features
 
@@ -24,7 +22,6 @@ In this version, I've implemented a scalable architecture to support:
 - **Admin Dashboard:** A secure, hidden area to manage projects and site content.
 - **Modern Contact Form:** Fully functional with validation and styling.
 
----
 
 ## 🛠️ Tech Stack
 
@@ -33,7 +30,6 @@ In this version, I've implemented a scalable architecture to support:
 - **Icons:** FontAwesome 6.0.
 - **Animations:** CSS Keyframes & Smooth Transitions.
 
----
 
 ## 📂 Project Architecture
 
@@ -60,10 +56,9 @@ Let's build something amazing together!
 - **LinkedIn:** [Mohamed Solaiman](https://www.linkedin.com/in/mohamed-solaiman-a2b9921b4/)
 - **Email:** mohamedsolaiman707@example.com
 
----
 
 Copyright © 2026 Mohamed Solaiman. Built with ❤️ and precision.
-=======
+
 # 📱 Mohamed Solaiman - Flutter Developer Portfolio
 
 A premium, high-performance personal portfolio designed for Mobile Application Developers. Built with a focus on UX/UI, clean architecture, and dynamic content management.
