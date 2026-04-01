@@ -3,139 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Panel | Portfolio Manager</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <title>Admin Dashboard | Mohamed Solaiman</title>
+    
+    <!-- Icons & Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
     <style>
-        body { background: #f8fafc; color: #1e293b; }
-        .admin-nav { background: white; padding: 1rem 0; border-bottom: 1px solid #e2e8f0; margin-bottom: 40px; }
-        .dashboard-container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
-        
-        .auth-card { max-width: 400px; margin: 100px auto; background: white; padding: 40px; border-radius: 24px; box-shadow: var(--card-shadow); text-align: center; }
-        .auth-card input { width: 100%; padding: 12px; margin-bottom: 15px; border-radius: 10px; border: 1px solid #e2e8f0; }
+        :root {
+            --primary-color: #027dfd;
+            --primary-hover: #015cc4;
+            --bg-dark: #0f172a;
+            --surface-dark: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+            --input-bg: #0f172a;
+            --transition: all 0.3s ease;
+        }
 
-        .project-form-card { background: white; padding: 40px; border-radius: 24px; box-shadow: var(--card-shadow); margin-bottom: 50px; display: none; }
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; }
+
+        /* Auth View */
+        .auth-container { height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+        .auth-card { 
+            background: var(--surface-dark); padding: 40px; border-radius: 24px; 
+            width: 100%; max-width: 400px; border: 1px solid var(--border-color);
+            box-shadow: var(--card-shadow); text-align: center;
+        }
+        .auth-card h2 { margin-bottom: 25px; font-weight: 800; }
+
+        /* Dashboard Layout */
+        .admin-nav { 
+            background: var(--surface-dark); padding: 1rem 0; 
+            border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 100;
+        }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+        
+        .main-container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+
+        /* Project Form Card */
+        .card { 
+            background: var(--surface-dark); padding: 30px; border-radius: 24px; 
+            border: 1px solid var(--border-color); margin-bottom: 40px; 
+            box-shadow: var(--card-shadow);
+        }
+        .card-header { margin-bottom: 30px; display: flex; align-items: center; gap: 15px; }
+        .card-header i { color: var(--primary-color); font-size: 1.5rem; }
+
+        .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
         .full-row { grid-column: 1 / -1; }
-        
-        input, textarea, select { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #e2e8f0; margin-top: 5px; font-size: 0.95rem; }
-        label { font-weight: 600; font-size: 0.85rem; color: #64748b; }
 
-        .project-manager-list { display: grid; gap: 15px; margin-top: 40px; display: none; }
-        .admin-p-item { background: white; padding: 15px 25px; border-radius: 16px; display: flex; justify-content: space-between; align-items: center; border: 1px solid #e2e8f0; }
-        .admin-p-item img { width: 50px; height: 50px; border-radius: 8px; object-fit: cover; }
-        
-        .status-pill { padding: 4px 10px; border-radius: 50px; font-size: 0.7rem; font-weight: 700; }
-        .status-active { background: #dcfce7; color: #166534; }
-        
-        .hint { font-size: 0.75rem; color: #94a3b8; margin-top: 4px; display: block; }
+        label { display: block; margin-bottom: 8px; font-size: 0.85rem; font-weight: 600; color: var(--text-dim); }
+        .form-input { 
+            width: 100%; background: var(--input-bg); border: 1px solid var(--border-color); 
+            border-radius: 12px; padding: 14px; color: #fff; font-size: 0.95rem; transition: var(--transition);
+        }
+        .form-input:focus { outline: none; border-color: var(--primary-color); }
+        textarea.form-input { resize: vertical; }
+
+        .btn { 
+            padding: 14px 25px; border-radius: 12px; font-weight: 700; cursor: pointer; 
+            transition: var(--transition); border: none; font-size: 0.95rem;
+            display: inline-flex; align-items: center; gap: 10px; justify-content: center;
+        }
+        .btn-primary { background: var(--primary-color); color: #fff; width: 100%; }
+        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-2px); }
+        .btn-outline { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); }
+        .btn-outline:hover { background: rgba(255,255,255,0.05); }
+
+        /* Project List Management */
+        .project-list { display: grid; gap: 15px; }
+        .admin-project-item { 
+            background: var(--surface-dark); padding: 15px 25px; border-radius: 18px; 
+            display: flex; justify-content: space-between; align-items: center;
+            border: 1px solid var(--border-color); transition: var(--transition);
+        }
+        .admin-project-item:hover { border-color: var(--primary-color); }
+        .item-info { display: flex; align-items: center; gap: 15px; }
+        .item-info img { width: 50px; height: 50px; border-radius: 10px; object-fit: cover; }
+        .item-actions { display: flex; gap: 10px; }
+        .action-btn { background: none; border: none; color: var(--text-dim); cursor: pointer; font-size: 1.1rem; transition: 0.2s; }
+        .btn-edit:hover { color: var(--primary-color); }
+        .btn-delete:hover { color: #ef4444; }
+
+        /* Mobile Adjustments */
+        @media (max-width: 768px) {
+            .form-grid { grid-template-columns: 1fr; }
+            .admin-project-item { flex-direction: column; gap: 15px; text-align: center; }
+            .item-info { flex-direction: column; }
+            .main-container { margin: 20px auto; }
+        }
     </style>
 </head>
 <body>
 
-    <!-- Auth View -->
-    <div id="auth-view" class="auth-card">
-        <h2 style="margin-bottom: 20px;">Admin Login</h2>
-        <input type="email" id="login-email" placeholder="Email">
-        <input type="password" id="login-password" placeholder="Password">
-        <button id="btn-login" class="btn-primary" style="width: 100%;">Sign In</button>
+    <!-- Auth Section -->
+    <div id="auth-view" class="auth-container">
+        <div class="auth-card">
+            <i class="fas fa-lock" style="font-size: 2rem; color: var(--primary-color); margin-bottom: 15px;"></i>
+            <h2>Admin Login</h2>
+            <div style="text-align: left;">
+                <label>Email Address</label>
+                <input type="email" id="login-email" class="form-input" placeholder="admin@example.com" style="margin-bottom: 15px;">
+                <label>Password</label>
+                <input type="password" id="login-password" class="form-input" placeholder="••••••••" style="margin-bottom: 20px;">
+            </div>
+            <button id="btn-login" class="btn btn-primary">Sign In</button>
+        </div>
     </div>
 
-    <!-- Dashboard View -->
+    <!-- Dashboard Section -->
     <div id="dashboard-view" style="display: none;">
-        <div class="admin-nav">
-            <div class="dashboard-container" style="display: flex; justify-content: space-between; align-items: center;">
-                <h2 style="color: var(--primary-color);">Portfolio <span style="color: #1e293b;">Manager</span></h2>
-                <div>
-                    <span id="user-email" style="margin-right: 20px; font-size: 0.9rem; color: #64748b;"></span>
-                    <button id="btn-logout" class="btn-outline" style="padding: 8px 20px; font-size: 0.8rem;">Logout</button>
+        <nav class="admin-nav">
+            <div class="nav-content">
+                <a href="index.html" class="logo">Admin <span>Panel</span></a>
+                <div style="display: flex; align-items: center; gap: 15px;">
+                    <span id="user-email" style="font-size: 0.8rem; color: var(--text-dim); display: none;"></span>
+                    <button id="btn-logout" class="btn btn-outline" style="padding: 8px 15px; font-size: 0.8rem;">Logout</button>
                 </div>
             </div>
-        </div>
+        </nav>
 
-        <div class="dashboard-container">
-            <div class="project-form-card" id="form-card" style="display: block;">
-                <h3 style="margin-bottom: 30px;" id="form-title">Add New Project</h3>
+        <div class="main-container">
+            <!-- Add/Edit Form -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-plus-circle"></i>
+                    <h3 id="form-title">Add New Project</h3>
+                </div>
                 <form id="project-form">
                     <div class="form-grid">
-                        <div class="form-group">
+                        <div>
                             <label>Project Name *</label>
-                            <input type="text" id="p-name" required placeholder="e.g. Health Track App">
+                            <input type="text" id="p-name" class="form-input" required>
                         </div>
-                        <div class="form-group">
+                        <div>
                             <label>Short Tagline</label>
-                            <input type="text" id="p-tagline" placeholder="e.g. Personal Fitness Assistant">
+                            <input type="text" id="p-tagline" class="form-input">
                         </div>
-                        <div class="form-group">
+                        <div>
                             <label>Category</label>
-                            <select id="p-category">
+                            <select id="p-category" class="form-input">
                                 <option value="Commercial">Commercial</option>
                                 <option value="Personal">Personal</option>
                                 <option value="Freelance">Freelance</option>
                             </select>
                         </div>
-                        <div class="form-group">
+                        <div>
                             <label>Status</label>
-                            <select id="p-status">
+                            <select id="p-status" class="form-input">
                                 <option value="Completed">Completed</option>
                                 <option value="In Progress">In Progress</option>
-                                <option value="Beta">Beta</option>
                             </select>
                         </div>
-                        <div class="form-group">
-                            <label>Main Cover Image URL *</label>
-                            <input type="text" id="p-cover" required placeholder="https://...">
+                        <div>
+                            <label>Cover Image URL *</label>
+                            <input type="text" id="p-cover" class="form-input" required>
                         </div>
-                        <div class="form-group">
+                        <div>
                             <label>Demo Video Link</label>
-                            <input type="text" id="p-video" placeholder="YouTube/Drive URL">
+                            <input type="text" id="p-video" class="form-input">
                         </div>
-                        <div class="form-group">
+                        <div>
                             <label>GitHub URL</label>
-                            <input type="text" id="p-github">
+                            <input type="text" id="p-github" class="form-input">
                         </div>
-                        <div class="form-group">
-                            <label>App Download Link (Google Play/APK)</label>
-                            <input type="text" id="p-download" placeholder="https://play.google.com/store/...">
-                            <span class="hint">Leave empty if not available.</span>
+                        <div>
+                            <label>App Download Link</label>
+                            <input type="text" id="p-download" class="form-input">
                         </div>
-                        <div class="form-group full-row">
-                            <label>Additional Screenshots (Gallery)</label>
-                            <textarea id="p-screenshots" rows="4" placeholder="https://image1.jpg&#10;https://image2.jpg"></textarea>
-                            <span class="hint">Enter one image URL per line.</span>
+                        <div class="full-row">
+                            <label>Additional Screenshots (One per line)</label>
+                            <textarea id="p-screenshots" class="form-input" rows="3"></textarea>
                         </div>
-                        <div class="form-group">
-                            <label>Tech Stack (Comma separated)</label>
-                            <input type="text" id="p-tech" placeholder="Flutter, Bloc, Firebase">
+                        <div class="full-row">
+                            <label>Tech Stack (e.g. Flutter, Firebase)</label>
+                            <input type="text" id="p-tech" class="form-input">
                         </div>
-                        <div class="form-group">
+                        <div class="full-row">
                             <label>Platforms</label>
-                            <input type="text" id="p-platforms" placeholder="Android / iOS / Web">
+                            <input type="text" id="p-platforms" class="form-input" placeholder="Android / iOS">
                         </div>
-                        <div class="form-group full-row">
+                        <div class="full-row">
                             <label>The Problem</label>
-                            <textarea id="p-problem" rows="3"></textarea>
+                            <textarea id="p-problem" class="form-input" rows="3"></textarea>
                         </div>
-                        <div class="form-group full-row">
+                        <div class="full-row">
                             <label>The Solution</label>
-                            <textarea id="p-solution" rows="3"></textarea>
+                            <textarea id="p-solution" class="form-input" rows="3"></textarea>
                         </div>
-                        <div class="form-group">
+                        <div>
                             <label>Featured Project?</label>
-                            <select id="p-featured">
+                            <select id="p-featured" class="form-input">
                                 <option value="false">No</option>
                                 <option value="true">Yes</option>
                             </select>
                         </div>
                     </div>
                     <input type="hidden" id="edit-id">
-                    <button type="submit" class="btn-primary" style="margin-top: 30px; width: 100%;">Save Project</button>
-                    <button type="button" id="btn-cancel" class="btn-outline" style="margin-top: 10px; width: 100%; display: none;">Cancel Edit</button>
+                    <div style="margin-top: 30px; display: flex; gap: 10px;">
+                        <button type="submit" class="btn btn-primary">Save Project</button>
+                        <button type="button" id="btn-cancel" class="btn btn-outline" style="display: none;">Cancel</button>
+                    </div>
                 </form>
             </div>
 
-            <div class="project-manager-list" id="admin-list" style="display: grid;">
-                <!-- List will be populated here -->
+            <!-- List Section -->
+            <div class="card">
+                <div class="card-header">
+                    <i class="fas fa-list"></i>
+                    <h3>Current Projects</h3>
+                </div>
+                <div class="project-list" id="admin-list">
+                    <!-- List items injected here -->
+                </div>
             </div>
         </div>
     </div>
@@ -163,7 +247,7 @@
         document.getElementById('btn-login').onclick = () => {
             const email = document.getElementById('login-email').value;
             const pass = document.getElementById('login-password').value;
-            signInWithEmailAndPassword(auth, email, pass).catch(err => alert("Login Failed: " + err.message));
+            signInWithEmailAndPassword(auth, email, pass).catch(err => alert(err.message));
         };
 
         document.getElementById('btn-logout').onclick = () => signOut(auth);
@@ -172,22 +256,20 @@
             if (user) {
                 document.getElementById('auth-view').style.display = 'none';
                 document.getElementById('dashboard-view').style.display = 'block';
-                document.getElementById('user-email').innerText = user.email;
                 loadAdminProjects();
             } else {
-                document.getElementById('auth-view').style.display = 'block';
+                document.getElementById('auth-view').style.display = 'flex';
                 document.getElementById('dashboard-view').style.display = 'none';
             }
         });
 
-        // Project CRUD Logic
+        // Project Management
         const form = document.getElementById('project-form');
         form.onsubmit = async (e) => {
             e.preventDefault();
             const editId = document.getElementById('edit-id').value;
-            
             const screenshotsText = document.getElementById('p-screenshots').value;
-            const screenshotsArray = screenshotsText.split('\n').map(link => link.trim()).filter(link => link !== "");
+            const screenshotsArray = screenshotsText.split('\n').map(l => l.trim()).filter(l => l !== "");
 
             const data = {
                 appName: document.getElementById('p-name').value,
@@ -197,7 +279,7 @@
                 coverImage: document.getElementById('p-cover').value,
                 videoLink: document.getElementById('p-video').value,
                 githubLink: document.getElementById('p-github').value,
-                downloadLink: document.getElementById('p-download').value, // Added New Field
+                downloadLink: document.getElementById('p-download').value,
                 techStack: document.getElementById('p-tech').value,
                 problem: document.getElementById('p-problem').value,
                 solution: document.getElementById('p-solution').value,
@@ -210,52 +292,49 @@
             try {
                 if (editId) {
                     await updateDoc(doc(db, "projects", editId), data);
-                    alert("Project Updated!");
+                    alert("Updated!");
                 } else {
                     data.createdAt = new Date().toISOString();
                     await addDoc(collection(db, "projects"), data);
-                    alert("New Project Added!");
+                    alert("Added!");
                 }
                 resetForm();
                 loadAdminProjects();
-            } catch (err) { alert("Error saving: " + err.message); }
+            } catch (err) { alert(err.message); }
         };
 
         async function loadAdminProjects() {
             const list = document.getElementById('admin-list');
-            list.innerHTML = "<h3>Current Projects</h3>";
-            try {
-                const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
-                const snap = await getDocs(q);
-                
-                snap.forEach(docSnap => {
-                    const p = docSnap.data();
-                    const item = document.createElement('div');
-                    item.className = 'admin-p-item';
-                    item.innerHTML = `
-                        <div style="display:flex; align-items:center; gap:20px;">
-                            <img src="${p.coverImage}" alt="">
-                            <div>
-                                <strong>${p.appName}</strong><br>
-                                <span class="status-pill status-active">${p.category}</span>
-                            </div>
-                        </div>
+            list.innerHTML = "";
+            const q = query(collection(db, "projects"), orderBy("createdAt", "desc"));
+            const snap = await getDocs(q);
+            
+            snap.forEach(docSnap => {
+                const p = docSnap.data();
+                const item = document.createElement('div');
+                item.className = 'admin-project-item';
+                item.innerHTML = `
+                    <div class="item-info">
+                        <img src="${p.coverImage}" alt="">
                         <div>
-                            <button class="btn-edit-action" style="background:none; border:none; color:var(--primary-color); cursor:pointer; margin-right:15px;"><i class="fas fa-edit"></i> Edit</button>
-                            <button class="btn-delete-action" style="background:none; border:none; color:#ef4444; cursor:pointer;"><i class="fas fa-trash"></i> Delete</button>
+                            <strong>${p.appName}</strong><br>
+                            <span style="font-size:0.7rem; color:var(--text-dim)">${p.category}</span>
                         </div>
-                    `;
-                    
-                    item.querySelector('.btn-edit-action').onclick = () => fillEditForm(docSnap.id, p);
-                    item.querySelector('.btn-delete-action').onclick = async () => {
-                        if(confirm("Are you sure?")) {
-                            await deleteDoc(doc(db, "projects", docSnap.id));
-                            loadAdminProjects();
-                        }
-                    };
-                    list.appendChild(item);
-                });
-            } catch (err) { console.error("Error loading: ", err); }
+                    </div>
+                    <div class="item-actions">
+                        <button class="action-btn btn-edit"><i class="fas fa-edit"></i></button>
+                        <button class="action-btn btn-delete"><i class="fas fa-trash"></i></button>
+                    </div>
+                `;
+                item.querySelector('.btn-edit').onclick = () => fillEditForm(docSnap.id, p);
+                item.querySelector('.btn-delete').onclick = async () => {
+                    if(confirm("Delete?")) {
+                        await deleteDoc(doc(db, "projects", docSnap.id));
+                        loadAdminProjects();
+                    }
+                };
+                list.appendChild(item);
+            });
         }
 
         function fillEditForm(id, p) {
@@ -267,18 +346,13 @@
             document.getElementById('p-cover').value = p.coverImage || '';
             document.getElementById('p-video').value = p.videoLink || '';
             document.getElementById('p-github').value = p.githubLink || '';
-            document.getElementById('p-download').value = p.downloadLink || ''; // Fill New Field
+            document.getElementById('p-download').value = p.downloadLink || '';
             document.getElementById('p-tech').value = p.techStack || '';
             document.getElementById('p-problem').value = p.problem || '';
             document.getElementById('p-solution').value = p.solution || '';
             document.getElementById('p-platforms').value = p.platforms || '';
             document.getElementById('p-featured').value = p.featured ? 'true' : 'false';
-            
-            if (p.screenshots && Array.isArray(p.screenshots)) {
-                document.getElementById('p-screenshots').value = p.screenshots.join('\n');
-            } else {
-                document.getElementById('p-screenshots').value = '';
-            }
+            document.getElementById('p-screenshots').value = (p.screenshots || []).join('\n');
             
             document.getElementById('form-title').innerText = "Edit Project";
             document.getElementById('btn-cancel').style.display = 'block';
@@ -291,9 +365,7 @@
             document.getElementById('form-title').innerText = "Add New Project";
             document.getElementById('btn-cancel').style.display = 'none';
         }
-
         document.getElementById('btn-cancel').onclick = resetForm;
-
     </script>
 </body>
 </html>

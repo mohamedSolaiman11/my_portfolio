@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Mohamed Solaiman | Flutter Developer Portfolio</title>
 
     <!-- Icons & Fonts -->
@@ -12,60 +12,56 @@
     <style>
         /* --- Dynamic Premium Theme System --- */
         :root {
-            /* Professional Tech Palette - DARK (Default) */
             --primary-color: #027dfd;
             --primary-hover: #015cc4;
             --primary-soft: rgba(2, 125, 253, 0.15);
-            --bg-dark: #0f172a; /* Slate 900 */
-            --surface-dark: #1e293b; /* Slate 800 */
-            --text-main: #f8fafc; /* Slate 50 */
-            --text-dim: #94a3b8; /* Slate 400 */
-            --border-color: rgba(255, 255, 255, 0.06);
+            --bg-dark: #0f172a;
+            --surface-dark: #1e293b;
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --border-color: rgba(255, 255, 255, 0.08);
             --card-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.4);
             --input-bg: #0f172a;
             --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         [data-theme="light"] {
-            /* Professional Clean Palette - LIGHT */
-            --bg-dark: #f8fafc; /* Very Light Slate */
-            --surface-dark: #ffffff; /* Pure White */
-            --text-main: #0f172a; /* Slate 900 */
-            --text-dim: #475569; /* Slate 600 */
+            --bg-dark: #f8fafc;
+            --surface-dark: #ffffff;
+            --text-main: #0f172a;
+            --text-dim: #475569;
             --border-color: rgba(0, 0, 0, 0.08);
             --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
-            --input-bg: #f1f5f9; /* Light Slate */
+            --input-bg: #f1f5f9;
             --primary-soft: rgba(2, 125, 253, 0.08);
         }
 
-        /* Global Reset & Typography */
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; transition: background 0.3s ease, color 0.3s ease; }
         
         [lang="ar"] body, [lang="ar"] h1, [lang="ar"] h2, [lang="ar"] h3, [lang="ar"] h4, [lang="ar"] p, [lang="ar"] a, [lang="ar"] span:not(.fa, .fab, .fas, .fa-solid, .fa-brands), [lang="ar"] button, [lang="ar"] input, [lang="ar"] textarea { 
             font-family: 'Cairo', sans-serif; 
         }
         
-        /* Protection for FontAwesome Icons */
         .fa-solid, .fas { font-family: "Font Awesome 6 Free" !important; font-weight: 900 !important; }
         .fa-brands, .fab { font-family: "Font Awesome 6 Brands" !important; font-weight: 400 !important; }
 
         html { scroll-behavior: smooth; }
-        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; overflow-x: hidden; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+        body { background-color: var(--bg-dark); color: var(--text-main); line-height: 1.6; overflow-x: hidden; width: 100%; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 1.2rem; width: 100%; }
 
-        /* Navigation Upgrade */
+        /* Navigation */
         nav {
             position: fixed; top: 0; width: 100%; padding: 1rem 0;
             background: var(--surface-dark); opacity: 0.98; backdrop-filter: blur(12px);
-            z-index: 1000; border-bottom: 1px solid var(--border-color);
+            z-index: 2000; border-bottom: 1px solid var(--border-color);
         }
         nav .container { display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.4rem; font-weight: 900; color: var(--text-main); text-decoration: none; }
+        .logo { font-size: 1.4rem; font-weight: 900; color: var(--text-main); text-decoration: none; z-index: 2001; }
         .logo span { color: var(--primary-color); }
         
-        .nav-controls { display: flex; align-items: center; gap: 15px; }
-        nav ul { display: flex; gap: 1.8rem; list-style: none; }
-        nav ul a { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: var(--transition); }
+        .nav-controls { display: flex; align-items: center; gap: 12px; }
+        nav ul { display: flex; gap: 1.5rem; list-style: none; align-items: center; }
+        nav ul a { color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.9rem; }
         nav ul a:hover { color: var(--primary-color); }
 
         .icon-btn { 
@@ -73,68 +69,66 @@
             width: 38px; height: 38px; border-radius: 12px; cursor: pointer;
             display: flex; align-items: center; justify-content: center; font-size: 1rem;
         }
-        .icon-btn:hover { background: var(--primary-color); color: #fff; transform: translateY(-2px); }
 
-        /* Hero Styling */
+        /* Hero */
         #header { min-height: 100vh; display: flex; align-items: center; padding-top: 80px; }
-        .header-text h1 { font-size: clamp(2.5rem, 8vw, 4.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; }
+        .header-text h1 { font-size: clamp(2.2rem, 8vw, 4.2rem); font-weight: 900; line-height: 1.1; margin-bottom: 1.5rem; }
         .header-text h1 span { color: var(--primary-color); }
-        .cta-group { display: flex; gap: 1.2rem; margin-top: 2.5rem; flex-wrap: wrap; }
+        .cta-group { display: flex; gap: 1rem; margin-top: 2rem; flex-wrap: wrap; }
 
-        /* Sections & Subtitles */
-        section { padding: 100px 0; }
-        .sub-title { font-size: clamp(2rem, 5vw, 2.8rem); margin-bottom: 3rem; font-weight: 800; border-left: 5px solid var(--primary-color); padding-left: 20px; }
-        [dir="rtl"] .sub-title { border-left: none; border-right: 5px solid var(--primary-color); padding-left: 0; padding-right: 20px; }
+        /* Sections */
+        section { padding: clamp(60px, 10vh, 100px) 0; }
+        .sub-title { font-size: clamp(1.8rem, 5vw, 2.8rem); margin-bottom: 3rem; font-weight: 800; border-left: 5px solid var(--primary-color); padding-left: 20px; }
+        [dir="rtl"] .sub-title { border-left: none; border-right: 5px solid var(--primary-color); padding-right: 20px; }
 
-        /* Modern Cards */
-        .skill-card, .service-item { 
-            background: var(--surface-dark); padding: 35px; border-radius: 28px; 
-            border: 1px solid var(--border-color); transition: var(--transition);
-            box-shadow: var(--card-shadow);
-        }
-        .skill-card:hover, .service-item:hover { transform: translateY(-8px); border-color: var(--primary-color); }
-
-        /* Work Cards Improvements */
-        .work-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 2.5rem; }
-        .work { background: var(--surface-dark); border-radius: 32px; overflow: hidden; border: 1px solid var(--border-color); transition: var(--transition); box-shadow: var(--card-shadow); }
-        .work:hover { transform: translateY(-12px); border-color: var(--primary-color); }
-        .work img { width: 100%; aspect-ratio: 16/9; object-fit: contain; background: #000; border-bottom: 1px solid var(--border-color); }
-        .work-info { padding: 2rem; }
+        /* Portfolio Cards */
+        .work-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: 2rem; }
+        .work { background: var(--surface-dark); border-radius: 28px; overflow: hidden; border: 1px solid var(--border-color); transition: var(--transition); box-shadow: var(--card-shadow); }
+        .work img { width: 100%; aspect-ratio: 16/9; object-fit: contain; background: #000; }
+        .work-info { padding: 1.5rem; }
         
         .download-btn {
-            display: inline-flex; align-items: center; gap: 10px;
+            display: inline-flex; align-items: center; gap: 8px;
             background: var(--primary-soft); color: var(--primary-color);
-            padding: 10px 20px; border-radius: 50px; text-decoration: none;
+            padding: 8px 16px; border-radius: 50px; text-decoration: none;
             font-size: 0.85rem; font-weight: 800; margin-bottom: 15px;
         }
-        .download-btn:hover { background: var(--primary-color); color: #fff; }
-        .tag { font-size: 0.75rem; color: var(--primary-color); background: var(--primary-soft); padding: 0.4rem 1rem; border-radius: 50px; font-weight: 700; margin-right: 8px; }
+        .tag { font-size: 0.75rem; color: var(--primary-color); background: var(--primary-soft); padding: 0.3rem 0.8rem; border-radius: 50px; font-weight: 700; margin: 0 4px 8px 0; display: inline-block; }
 
-        /* Enhanced Contact Section */
-        .contact-wrapper { background: var(--surface-dark); border-radius: 40px; padding: clamp(30px, 5vw, 70px); display: grid; grid-template-columns: 1fr 1.2fr; gap: 60px; border: 1px solid var(--border-color); box-shadow: var(--card-shadow); }
-        .contact-item { display: flex; align-items: center; gap: 15px; text-decoration: none; color: var(--text-main); background: var(--input-bg); padding: 15px 20px; border-radius: 16px; margin-bottom: 15px; border: 1px solid var(--border-color); }
-        .contact-item i { color: var(--primary-color); width: 30px; text-align: center; font-size: 1.3rem; }
-        [lang="ar"] .contact-item span { direction: ltr; display: inline-block; }
+        /* Contact Wrapper Fix */
+        .contact-wrapper { 
+            background: var(--surface-dark); border-radius: 32px; padding: clamp(20px, 5vw, 60px); 
+            display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; border: 1px solid var(--border-color); 
+        }
+        .contact-item { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); background: var(--input-bg); padding: 12px 16px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--border-color); }
+        .contact-item i { color: var(--primary-color); width: 25px; text-align: center; flex-shrink: 0; }
+        .contact-item span { font-size: 0.9rem; word-break: break-all; }
+        
+        .social-links { display: flex; gap: 12px; margin-top: 10px; }
+        .social-btn { width: 48px; height: 48px; background: var(--input-bg); color: var(--text-main); display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 1.3rem; text-decoration: none; border: 1px solid var(--border-color); }
 
-        .form-input { width: 100%; background: var(--input-bg); border: 2px solid var(--border-color); border-radius: 16px; padding: 18px; color: var(--text-main); font-size: 1rem; margin-bottom: 18px; }
-        .form-input:focus { outline: none; border-color: var(--primary-color); background: var(--surface-dark); }
+        .form-input { width: 100%; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; color: var(--text-main); font-size: 1rem; margin-bottom: 15px; }
 
-        /* Interactive Buttons */
-        .btn-primary { background: var(--primary-color); color: #fff !important; padding: 1rem 2.5rem; border-radius: 16px; text-decoration: none; font-weight: 800; display: inline-block; border: none; cursor: pointer; text-align: center; box-shadow: 0 10px 20px -10px var(--primary-color); }
-        .btn-primary:hover { background: var(--primary-hover); transform: translateY(-3px); }
-        .btn-outline { border: 2px solid var(--primary-color); color: var(--primary-color); padding: 1rem 2.5rem; border-radius: 16px; text-decoration: none; font-weight: 800; display: inline-block; text-align: center; }
-        .btn-outline:hover { background: var(--primary-soft); transform: translateY(-3px); }
+        /* Buttons */
+        .btn-primary { background: var(--primary-color); color: #fff !important; padding: 0.9rem 2.2rem; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block; border: none; cursor: pointer; text-align: center; }
+        .btn-outline { border: 2px solid var(--primary-color); color: var(--primary-color); padding: 0.9rem 2.2rem; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block; text-align: center; }
 
-        /* Responsive */
-        .menu-toggle { font-size: 1.6rem; cursor: pointer; color: var(--text-main); display: none; }
+        /* Mobile Menu */
+        .menu-toggle { font-size: 1.5rem; cursor: pointer; color: var(--text-main); display: none; z-index: 2001; }
         @media (max-width: 992px) {
-            nav ul { position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; background: var(--surface-dark); flex-direction: column; justify-content: center; align-items: center; transition: 0.4s; z-index: 1000; gap: 2.5rem; }
+            nav ul { 
+                position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; 
+                background: var(--surface-dark); flex-direction: column; justify-content: center; 
+                align-items: center; transition: 0.4s; z-index: 2000; box-shadow: -10px 0 30px rgba(0,0,0,0.2);
+            }
             nav ul.active { right: 0; }
-            .menu-toggle { display: block; z-index: 1001; }
-            .contact-wrapper { grid-template-columns: 1fr; padding: 40px 25px; }
+            .menu-toggle { display: block; }
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .contact-info-side { text-align: center; align-items: center; display: flex; flex-direction: column; }
+            .contact-item, .social-links { justify-content: center; }
         }
 
-        .spinner { width: 50px; height: 50px; border: 5px solid var(--primary-soft); border-left-color: var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 30px auto; }
+        .spinner { width: 40px; height: 40px; border: 4px solid var(--primary-soft); border-left-color: var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
         @keyframes spin { to { transform: rotate(360deg); } }
     </style>
 </head>
@@ -162,9 +156,9 @@
 <header id="header">
     <div class="container">
         <div class="header-text">
-            <p style="color:var(--primary-color); font-weight:800; text-transform:uppercase; letter-spacing:3px; margin-bottom: 15px;" data-i18n="hero_badge">Flutter Developer</p>
+            <p style="color:var(--primary-color); font-weight:800; text-transform:uppercase; letter-spacing:2px; margin-bottom: 10px;" data-i18n="hero_badge">Flutter Developer</p>
             <h1 data-i18n="hero_title">Building <span>Apps</span> That Users Love</h1>
-            <p style="color:var(--text-dim); margin: 20px 0 35px 0; max-width:650px; font-size: 1.1rem;" data-i18n="hero_desc">Specializing in high-performance mobile applications with clean architecture.</p>
+            <p style="color:var(--text-dim); margin: 15px 0 30px 0; max-width:600px; font-size: 1.1rem;" data-i18n="hero_desc">Specializing in high-performance mobile applications with clean architecture.</p>
             <div class="cta-group">
                 <a href="#portfolio" class="btn-primary" data-i18n="btn_projects">View My Projects</a>
                 <a href="images/updatedCv.pdf" download class="btn-outline" data-i18n="btn_cv">Download CV</a>
@@ -175,31 +169,31 @@
 
 <section id="about">
     <div class="container">
-        <div style="display: flex; gap: 60px; align-items: center; flex-wrap: wrap;">
-            <div style="flex: 1; min-width: 300px;">
-                <img src="images/finalImg.png" alt="Mohamed" style="width: 100%; border-radius: 40px; box-shadow: var(--card-shadow); border: 1px solid var(--border-color);">
+        <div style="display: flex; gap: 40px; align-items: center; flex-wrap: wrap;">
+            <div style="flex: 1; min-width: min(100%, 300px);">
+                <img src="images/finalImg.png" alt="Mohamed" style="width: 100%; border-radius: 32px; box-shadow: var(--card-shadow); border: 1px solid var(--border-color);">
             </div>
-            <div style="flex: 1.5; min-width: 300px;">
+            <div style="flex: 1.5; min-width: min(100%, 300px);">
                 <h2 class="sub-title" data-i18n="about_title">Building the Future of Mobile</h2>
-                <p style="color:var(--text-dim); font-size:1.2rem;" data-i18n="about_desc">Enthusiastic Flutter Developer specializing in crafting high-quality mobile applications. Expert in Dart, Bloc, and Firebase.</p>
+                <p style="color:var(--text-dim); font-size:1.1rem;" data-i18n="about_desc">Enthusiastic Flutter Developer specializing in crafting high-quality mobile applications. Expert in Dart, Bloc, and Firebase.</p>
             </div>
         </div>
     </div>
 </section>
 
-<section id="services" style="background: var(--primary-soft);">
+<section id="services" style="background: rgba(255,255,255,0.01);">
     <div class="container">
         <h2 class="sub-title" data-i18n="services_title">My Services</h2>
-        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 35px;">
+        <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 30px;">
             <div class="service-item">
-                <i class="fa-solid fa-mobile-screen-button" style="font-size: 2.8rem; color: var(--primary-color); margin-bottom: 25px;"></i>
-                <h3 style="margin-bottom: 15px;" data-i18n="ser_1_title">App Development</h3>
-                <p style="color: var(--text-dim);" data-i18n="ser_1_desc">Native-quality Android and iOS apps from a single codebase.</p>
+                <i class="fa-solid fa-mobile-screen-button" style="font-size: 2.5rem; color: var(--primary-color); margin-bottom: 20px;"></i>
+                <h3 data-i18n="ser_1_title">App Development</h3>
+                <p style="color: var(--text-dim); margin-top: 15px;" data-i18n="ser_1_desc">Native-quality Android and iOS apps from a single codebase.</p>
             </div>
             <div class="service-item">
-                <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 2.8rem; color: #38bdf8; margin-bottom: 25px;"></i>
-                <h3 style="margin-bottom: 15px;" data-i18n="ser_2_title">UI Implementation</h3>
-                <p style="color: var(--text-dim);" data-i18n="ser_2_desc">Converting complex designs into smooth, interactive Flutter UIs.</p>
+                <i class="fa-solid fa-wand-magic-sparkles" style="font-size: 2.5rem; color: #38bdf8; margin-bottom: 20px;"></i>
+                <h3 data-i18n="ser_2_title">UI Implementation</h3>
+                <p style="color: var(--text-dim); margin-top: 15px;" data-i18n="ser_2_desc">Converting complex designs into smooth, interactive Flutter UIs.</p>
             </div>
         </div>
     </div>
@@ -219,8 +213,8 @@
         <div class="contact-wrapper">
             <div class="contact-info-side">
                 <h2 data-i18n="contact_title">Let's Build Something Great.</h2>
-                <p style="color:var(--text-dim); margin-bottom: 35px; font-size: 1.1rem;" data-i18n="contact_sub">Available for freelance projects and full-time roles.</p>
-                <div class="contact-details" style="margin-bottom: 30px;">
+                <p style="color:var(--text-dim); margin-bottom: 30px;" data-i18n="contact_sub">Available for freelance projects and full-time roles.</p>
+                <div class="contact-details">
                     <a href="mailto:mohamedsolaiman707@gmail.com" class="contact-item">
                         <i class="fa-solid fa-envelope"></i>
                         <span>mohamedsolaiman707@gmail.com</span>
@@ -230,25 +224,22 @@
                         <span>+20 101 425 0577</span>
                     </a>
                 </div>
-                <div class="social-links" style="display:flex; gap:20px;">
-                    <a href="https://github.com/mohamedSolaiman11/" target="_blank" style="color:var(--primary-color); font-size:1.8rem;"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/mohamed-solaiman-a2b9921b4" target="_blank" style="color:var(--primary-color); font-size:1.8rem;"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="https://wa.me/201014250577" target="_blank" style="color:var(--primary-color); font-size:1.8rem;"><i class="fa-brands fa-whatsapp"></i></a>
+                <div class="social-links">
+                    <a href="https://github.com/mohamedSolaiman11/" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i></a>
+                    <a href="https://www.linkedin.com/in/mohamed-solaiman-a2b9921b4" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin"></i></a>
+                    <a href="https://wa.me/201014250577" target="_blank" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
                 </div>
             </div>
             <form action="https://formspree.io/f/xnqkrjyg" method="POST" class="contact-form">
                 <input type="text" name="name" id="f-name" required class="form-input">
                 <input type="email" name="email" id="f-email" required class="form-input">
                 <textarea name="message" id="f-msg" rows="5" required class="form-input"></textarea>
-                <button type="submit" class="btn-primary" id="f-btn" style="width: 100%; font-size: 1.1rem;" data-i18n="f_btn">Send Message</button>
+                <button type="submit" class="btn-primary" id="f-btn" style="width: 100%;" data-i18n="f_btn">Send Message</button>
             </form>
         </div>
     </div>
 </section>
 
-    <footer style="padding: 40px 0; text-align: center; border-top: 1px solid var(--border-color);">
-        <p style="color: var(--text-dim); font-size: 0.8rem;" data-i18n="footer_copy">&copy; 2026 Mohamed Solaiman. All Rights Reserved.</p>
-    </footer>
 <footer style="padding: 50px 0; text-align: center; border-top: 1px solid var(--border-color);">
     <p style="color: var(--text-dim); font-size: 0.9rem; font-weight: 600;">&copy; 2024 Mohamed Solaiman. All Rights Reserved.</p>
 </footer>
@@ -344,7 +335,7 @@
                         <img src="${p.coverImage || p.imageUrl || 'https://via.placeholder.com/400x250'}" alt="Project">
                         <div class="work-info">
                             <h3>${p.appName || p.name}</h3>
-                            <div style="margin: 15px 0;">${tags}</div>
+                            <div style="margin: 10px 0;">${tags}</div>
                             ${downloadBtn}
                             <div style="margin-top:10px;">
                                 <a href="project-details.html?id=${docSnap.id}" style="color:var(--primary-color); font-weight:700; text-decoration:none; font-size:0.9rem;">
@@ -359,9 +350,18 @@
 
     updateUI();
 
-    document.getElementById('mobile-menu').onclick = () => {
+    document.getElementById('mobile-menu').onclick = (e) => {
+        e.stopPropagation();
         document.getElementById('nav-links').classList.toggle('active');
     };
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        const navLinks = document.getElementById('nav-links');
+        if (!navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+            navLinks.classList.remove('active');
+        }
+    });
 </script>
 </body>
 </html>
