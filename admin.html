@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel | Portfolio Manager</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="portfolio/style.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         body { background: #f8fafc; color: #1e293b; }
         .admin-nav { background: white; padding: 1rem 0; border-bottom: 1px solid #e2e8f0; margin-bottom: 40px; }
@@ -85,24 +85,32 @@
                         <div class="form-group">
                             <label>Main Cover Image URL *</label>
                             <input type="text" id="p-cover" required placeholder="https://...">
-                            <span class="hint">This is the image shown on the home page card.</span>
                         </div>
                         <div class="form-group">
                             <label>Demo Video Link</label>
                             <input type="text" id="p-video" placeholder="YouTube/Drive URL">
-                        </div>
-                        <div class="form-group full-row">
-                            <label>Additional Screenshots (Gallery)</label>
-                            <textarea id="p-screenshots" rows="4" placeholder="https://image1.jpg&#10;https://image2.jpg"></textarea>
-                            <span class="hint">Enter one image URL per line. These will appear in the project gallery.</span>
                         </div>
                         <div class="form-group">
                             <label>GitHub URL</label>
                             <input type="text" id="p-github">
                         </div>
                         <div class="form-group">
+                            <label>App Download Link (Google Play/APK)</label>
+                            <input type="text" id="p-download" placeholder="https://play.google.com/store/...">
+                            <span class="hint">Leave empty if not available.</span>
+                        </div>
+                        <div class="form-group full-row">
+                            <label>Additional Screenshots (Gallery)</label>
+                            <textarea id="p-screenshots" rows="4" placeholder="https://image1.jpg&#10;https://image2.jpg"></textarea>
+                            <span class="hint">Enter one image URL per line.</span>
+                        </div>
+                        <div class="form-group">
                             <label>Tech Stack (Comma separated)</label>
                             <input type="text" id="p-tech" placeholder="Flutter, Bloc, Firebase">
+                        </div>
+                        <div class="form-group">
+                            <label>Platforms</label>
+                            <input type="text" id="p-platforms" placeholder="Android / iOS / Web">
                         </div>
                         <div class="form-group full-row">
                             <label>The Problem</label>
@@ -111,10 +119,6 @@
                         <div class="form-group full-row">
                             <label>The Solution</label>
                             <textarea id="p-solution" rows="3"></textarea>
-                        </div>
-                        <div class="form-group">
-                            <label>Platforms</label>
-                            <input type="text" id="p-platforms" placeholder="Android / iOS / Web">
                         </div>
                         <div class="form-group">
                             <label>Featured Project?</label>
@@ -182,7 +186,6 @@
             e.preventDefault();
             const editId = document.getElementById('edit-id').value;
             
-            // Convert textarea links to array
             const screenshotsText = document.getElementById('p-screenshots').value;
             const screenshotsArray = screenshotsText.split('\n').map(link => link.trim()).filter(link => link !== "");
 
@@ -194,6 +197,7 @@
                 coverImage: document.getElementById('p-cover').value,
                 videoLink: document.getElementById('p-video').value,
                 githubLink: document.getElementById('p-github').value,
+                downloadLink: document.getElementById('p-download').value, // Added New Field
                 techStack: document.getElementById('p-tech').value,
                 problem: document.getElementById('p-problem').value,
                 solution: document.getElementById('p-solution').value,
@@ -206,7 +210,7 @@
             try {
                 if (editId) {
                     await updateDoc(doc(db, "projects", editId), data);
-                    alert("Project Updated Successfully!");
+                    alert("Project Updated!");
                 } else {
                     data.createdAt = new Date().toISOString();
                     await addDoc(collection(db, "projects"), data);
@@ -214,7 +218,7 @@
                 }
                 resetForm();
                 loadAdminProjects();
-            } catch (err) { alert("Error saving project: " + err.message); }
+            } catch (err) { alert("Error saving: " + err.message); }
         };
 
         async function loadAdminProjects() {
@@ -244,14 +248,14 @@
                     
                     item.querySelector('.btn-edit-action').onclick = () => fillEditForm(docSnap.id, p);
                     item.querySelector('.btn-delete-action').onclick = async () => {
-                        if(confirm("Are you sure you want to delete this project?")) {
+                        if(confirm("Are you sure?")) {
                             await deleteDoc(doc(db, "projects", docSnap.id));
                             loadAdminProjects();
                         }
                     };
                     list.appendChild(item);
                 });
-            } catch (err) { console.error("Error loading projects: ", err); }
+            } catch (err) { console.error("Error loading: ", err); }
         }
 
         function fillEditForm(id, p) {
@@ -263,13 +267,13 @@
             document.getElementById('p-cover').value = p.coverImage || '';
             document.getElementById('p-video').value = p.videoLink || '';
             document.getElementById('p-github').value = p.githubLink || '';
+            document.getElementById('p-download').value = p.downloadLink || ''; // Fill New Field
             document.getElementById('p-tech').value = p.techStack || '';
             document.getElementById('p-problem').value = p.problem || '';
             document.getElementById('p-solution').value = p.solution || '';
             document.getElementById('p-platforms').value = p.platforms || '';
             document.getElementById('p-featured').value = p.featured ? 'true' : 'false';
             
-            // Convert screenshots array back to newline-separated text
             if (p.screenshots && Array.isArray(p.screenshots)) {
                 document.getElementById('p-screenshots').value = p.screenshots.join('\n');
             } else {
