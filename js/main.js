@@ -1,4 +1,6 @@
 // Global Interactions
+document.getElementById("year").textContent =
+new Date().getFullYear();
 document.addEventListener('DOMContentLoaded', () => {
     const menuToggle = document.getElementById('mobile-menu');
     const navLinks = document.getElementById('nav-links');
