@@ -413,6 +413,153 @@
         [dir="rtl"] .nav-controls {
             flex-direction: row-reverse;
         }
+
+        /* ========================================
+           Smart Demo Section — Phone Mockup & Video
+        ======================================== */
+        .demo-section-wrapper {
+            margin-top: 10px;
+        }
+
+        /* Video embed */
+        .video-embed-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            border-radius: 20px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .video-embed-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Phone mockup for website links */
+        .app-preview-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            padding: 10px 0;
+        }
+
+        .app-preview-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(2, 132, 199, 0.12);
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            padding: 6px 18px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #38bdf8;
+            letter-spacing: 0.03em;
+        }
+
+        .phone-demo-frame {
+            position: relative;
+            width: 310px;
+            height: 630px;
+            background: #090e17;
+            border-radius: 46px;
+            border: 11px solid #1a2234;
+            outline: 2px solid rgba(255, 255, 255, 0.14);
+            box-shadow:
+                0 30px 80px -15px rgba(0, 0, 0, 0.85),
+                0 0 40px rgba(2, 132, 199, 0.2),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .phone-demo-island {
+            position: absolute;
+            top: 11px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 84px;
+            height: 22px;
+            background: #000;
+            border-radius: 20px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
+        }
+
+        .phone-demo-lens {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #1e1b4b;
+            box-shadow: inset 0 0 3px #38bdf8;
+        }
+
+        .phone-demo-reflection {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(125deg, rgba(255, 255, 255, 0.08) 0%, transparent 50%);
+            pointer-events: none;
+            z-index: 5;
+            border-radius: 36px;
+        }
+
+        .phone-demo-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            border-radius: 36px;
+        }
+
+        .phone-demo-bar {
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.4);
+            border-radius: 10px;
+            z-index: 10;
+        }
+
+        .open-site-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-color);
+            color: #fff !important;
+            padding: 11px 24px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+
+        .open-site-btn:hover {
+            opacity: 0.85;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(2, 132, 199, 0.4);
+        }
+
+        /* Light theme phone border */
+        :root[data-theme="light"] .phone-demo-frame {
+            border-color: #cbd5e1;
+            outline-color: rgba(0, 0, 0, 0.08);
+        }
     </style>
 </head>
 
@@ -477,7 +624,10 @@
                 btn_contact: "Contact Me",
                 problem_title: "The Problem",
                 solution_title: "The Solution",
-                video_title: "Video Demo"
+                video_title: "Video Demo",
+                app_preview_title: "Live App Preview",
+                live_app_preview: "Live Mobile Preview",
+                open_full_site: "Open Full Site ↗"
             },
             ar: {
                 back_to_projects: "العودة للمشاريع",
@@ -593,9 +743,39 @@
                             </div>
                             ${p.videoLink ? `
                             <div class="story-section">
-                                <h2><i class="fas fa-play-circle"></i> ${translations[currentLang].video_title}</h2>
-                                <div style="position: relative; padding-bottom: 56.25%; height: 0; border-radius: 20px; overflow: hidden; background: #000;">
-                                    <iframe src="${formatVideoUrl(p.videoLink)}" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
+                                <h2>
+                                    <i class="fas fa-${isVideoLink(p.videoLink) ? 'play-circle' : 'mobile-screen-button'}"></i>
+                                    ${isVideoLink(p.videoLink) ? translations[currentLang].video_title : translations[currentLang].app_preview_title}
+                                </h2>
+                                <div class="demo-section-wrapper">
+                                    ${isVideoLink(p.videoLink) ? `
+                                        <div class="video-embed-container">
+                                            <iframe src="${formatVideoUrl(p.videoLink)}" allowfullscreen></iframe>
+                                        </div>
+                                    ` : `
+                                        <div class="app-preview-wrapper">
+                                            <div class="app-preview-label">
+                                                <i class="fa-solid fa-mobile-screen"></i>
+                                                ${translations[currentLang].live_app_preview}
+                                            </div>
+                                            <div class="phone-demo-frame">
+                                                <div class="phone-demo-island"><div class="phone-demo-lens"></div></div>
+                                                <div class="phone-demo-reflection"></div>
+                                                <iframe
+                                                    src="${p.videoLink}"
+                                                    class="phone-demo-iframe"
+                                                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                                                    loading="lazy"
+                                                    title="Live App Preview">
+                                                </iframe>
+                                                <div class="phone-demo-bar"></div>
+                                            </div>
+                                            <a href="${p.videoLink}" target="_blank" class="open-site-btn">
+                                                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                                                ${translations[currentLang].open_full_site}
+                                            </a>
+                                        </div>
+                                    `}
                                 </div>
                             </div>` : ''}
                         </div>
@@ -642,6 +822,14 @@
             if (url.includes('youtube.com/watch?v=')) return url.replace('watch?v=', 'embed/');
             if (url.includes('youtu.be/')) return url.replace('youtu.be/', 'youtube.com/embed/');
             return url;
+        }
+
+        function isVideoLink(url) {
+            if (!url) return false;
+            return url.includes('youtube.com') ||
+                url.includes('youtu.be') ||
+                url.includes('vimeo.com') ||
+                /\.(mp4|webm|mov|avi)(\?|$)/i.test(url);
         }
 
         updateUI();
