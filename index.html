@@ -939,6 +939,8 @@
     </div>
 </div>
 
+
+
 <section id="about">
     <div class="container">
         <div class="about-grid">
@@ -1337,7 +1339,7 @@
             projects_title: "Featured Work & Case Studies",
             projects_desc: "Real-world Flutter apps engineered for high performance, intuitive UX, and clean scalable architecture.",
             filter_all: "All Projects", filter_commercial: "Commercial", filter_personal: "Personal", filter_freelance: "Freelance",
-            btn_download: "Get App", btn_github: "Source Code", btn_video: "Watch Demo",
+            btn_download: "Get App", btn_github: "Source Code", btn_video: "Watch Demo", btn_live_preview: "Live App Demo",
             btn_case: "Case Study Details →",
             no_projects: "No projects found under this category.",
             contact_title: "Let's Build Something Great.", contact_sub: "Available for freelance projects and full-time roles.",
@@ -1412,7 +1414,7 @@
             projects_title: "أبرز الأعمال وتفاصيل المشاريع",
             projects_desc: "تطبيقات فلاتر حقيقية تم بناؤها بمعايير أداء فائقة، معمارية نظيفة وتجربة مستخدم متميزة.",
             filter_all: "جميع المشاريع", filter_commercial: "تطبيقات تجارية", filter_personal: "مشاريع شخصية", filter_freelance: "مشاريع حرة",
-            btn_download: "تحميل التطبيق", btn_github: "كود المشروع", btn_video: "معاينة بالفيديو",
+            btn_download: "تحميل التطبيق", btn_github: "كود المشروع", btn_video: "معاينة بالفيديو", btn_live_preview: "معاينة حية للتطبيق",
             btn_case: "عرض دراسة الحالة والتفاصيل ←",
             no_projects: "لا توجد مشاريع مضافة في هذا التصنيف حالياً.",
             contact_title: "لنقم ببناء شيء رائع.", contact_sub: "متاح للمشاريع الحرة والوظائف بدوام كامل.",
@@ -1550,9 +1552,10 @@
                 <i class="fa-brands fa-github"></i>
             </a>` : '';
 
+        const isVideo = isVideoLink(p.videoLink);
         const videoBtn = p.videoLink ? `
-            <button onclick="window.openQuickModal('video', '${p.videoLink}', '${appName}')" class="btn-action-icon" style="cursor:pointer;" title="${translations[currentLang].btn_video}">
-                <i class="fa-solid fa-play"></i>
+            <button onclick="window.openQuickModal('${isVideo ? 'video' : 'web'}', '${p.videoLink}', '${appName}')" class="btn-action-icon" style="cursor:pointer;" title="${isVideo ? translations[currentLang].btn_video : translations[currentLang].btn_live_preview}">
+                <i class="fa-solid fa-${isVideo ? 'play' : 'mobile-screen'}"></i>
             </button>` : '';
 
         return `
@@ -1609,6 +1612,15 @@
         `;
     }
 
+    function isVideoLink(url) {
+        if (!url) return false;
+        const clean = url.trim().toLowerCase();
+        return clean.includes('youtube.com') ||
+               clean.includes('youtu.be') ||
+               clean.includes('vimeo.com') ||
+               /\.(mp4|webm|mov|avi)(\?|$)/i.test(clean);
+    }
+
     // Modal Interaction
     window.openQuickModal = (type, content, title) => {
         const modal = document.getElementById('quickModal');
@@ -1625,6 +1637,20 @@
                 videoSrc = content.replace('youtu.be/', 'youtube.com/embed/');
             }
             modalBody.innerHTML = `<iframe src="${videoSrc}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+        } else if (type === 'web') {
+            modalBody.innerHTML = `
+                <div style="display:flex; flex-direction:column; align-items:center; gap:16px; padding:10px 0;">
+                    <div class="phone-mockup-frame" style="width:310px; height:620px; margin:0 auto; cursor:default;">
+                        <div class="phone-island"><div class="island-lens"></div></div>
+                        <div class="phone-reflection"></div>
+                        <iframe src="${content}" style="width:100%; height:100%; border:none; border-radius:36px;" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" title="Live Preview"></iframe>
+                        <div class="phone-home-bar"></div>
+                    </div>
+                    <a href="${content}" target="_blank" class="btn-cta-primary" style="display:inline-flex; align-items:center; gap:8px; padding:10px 22px; font-size:0.9rem; text-decoration:none;">
+                        <i class="fa-solid fa-arrow-up-right-from-square"></i> ${currentLang === 'ar' ? 'فتح الموقع بالكامل' : 'Open Full Site'}
+                    </a>
+                </div>
+            `;
         } else {
             modalBody.innerHTML = `<img src="${content}" alt="App Screen">`;
         }

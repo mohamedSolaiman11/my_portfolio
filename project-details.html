@@ -639,7 +639,10 @@
                 btn_contact: "تواصل معي",
                 problem_title: "المشكلة",
                 solution_title: "الحل",
-                video_title: "عرض فيديو"
+                video_title: "عرض فيديو",
+                app_preview_title: "معاينة حية للمشروع",
+                live_app_preview: "معاينة التطبيق على الموبايل",
+                open_full_site: "فتح الموقع بالكامل ↗"
             }
         };
 
@@ -826,10 +829,11 @@
 
         function isVideoLink(url) {
             if (!url) return false;
-            return url.includes('youtube.com') ||
-                url.includes('youtu.be') ||
-                url.includes('vimeo.com') ||
-                /\.(mp4|webm|mov|avi)(\?|$)/i.test(url);
+            const clean = url.trim().toLowerCase();
+            return clean.includes('youtube.com') ||
+                   clean.includes('youtu.be') ||
+                   clean.includes('vimeo.com') ||
+                   /\.(mp4|webm|mov|avi)(\?|$)/i.test(clean);
         }
 
         updateUI();
