@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -9,7 +10,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Cairo:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=Cairo:wght@400;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap"
+        rel="stylesheet">
 
     <style>
         /* --- Dynamic Agency-Grade Theme System --- */
@@ -22,7 +25,7 @@
             --accent-cyan: #06b6d4;
             --accent-indigo: #6366f1;
             --accent-emerald: #10b981;
-            
+
             --bg-dark: #070b13;
             --surface-dark: #0d1527;
             --surface-card: rgba(13, 21, 39, 0.78);
@@ -56,22 +59,50 @@
             --nav-bg: rgba(248, 250, 252, 0.85);
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
-        
-        [lang="ar"] body, [lang="ar"] h1, [lang="ar"] h2, [lang="ar"] h3, [lang="ar"] h4, [lang="ar"] p, [lang="ar"] a, [lang="ar"] span:not(.fa, .fab, .fas, .fa-solid, .fa-brands), [lang="ar"] button, [lang="ar"] input, [lang="ar"] textarea { 
-            font-family: 'Cairo', sans-serif; 
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
         }
-        
-        .fa-solid, .fas { font-family: "Font Awesome 6 Free" !important; font-weight: 900 !important; }
-        .fa-brands, .fab { font-family: "Font Awesome 6 Brands" !important; font-weight: 400 !important; }
 
-        html { scroll-behavior: smooth; }
-        body { 
-            background-color: var(--bg-dark); 
-            color: var(--text-main); 
-            line-height: 1.6; 
-            overflow-x: hidden; 
-            width: 100%; 
+        [lang="ar"] body,
+        [lang="ar"] h1,
+        [lang="ar"] h2,
+        [lang="ar"] h3,
+        [lang="ar"] h4,
+        [lang="ar"] p,
+        [lang="ar"] a,
+        [lang="ar"] span:not(.fa, .fab, .fas, .fa-solid, .fa-brands),
+        [lang="ar"] button,
+        [lang="ar"] input,
+        [lang="ar"] textarea {
+            font-family: 'Cairo', sans-serif;
+        }
+
+        .fa-solid,
+        .fas {
+            font-family: "Font Awesome 6 Free" !important;
+            font-weight: 900 !important;
+        }
+
+        .fa-brands,
+        .fab {
+            font-family: "Font Awesome 6 Brands" !important;
+            font-weight: 400 !important;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+            width: 100%;
             position: relative;
         }
 
@@ -87,6 +118,7 @@
             pointer-events: none;
             z-index: 0;
         }
+
         .ambient-glow-2 {
             position: absolute;
             top: 600px;
@@ -99,381 +131,844 @@
             z-index: 0;
         }
 
-        .container { max-width: 1240px; margin: 0 auto; padding: 0 1.5rem; width: 100%; position: relative; z-index: 1; }
+        .container {
+            max-width: 1240px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            width: 100%;
+            position: relative;
+            z-index: 1;
+        }
 
         /* Navigation */
         nav {
-            position: fixed; top: 0; width: 100%; padding: 0.9rem 0;
-            background: var(--nav-bg); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-            z-index: 2000; border-bottom: 1px solid var(--border-color);
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 0.9rem 0;
+            background: var(--nav-bg);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            z-index: 2000;
+            border-bottom: 1px solid var(--border-color);
             transition: var(--transition);
         }
-        nav .container { display: flex; justify-content: space-between; align-items: center; }
-        
-        .logo { 
-            font-size: 1.35rem; font-weight: 800; color: var(--text-main); text-decoration: none; z-index: 2001; 
-            display: flex; align-items: center; gap: 8px; letter-spacing: -0.5px;
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
+
+        .logo {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-main);
+            text-decoration: none;
+            z-index: 2001;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            letter-spacing: -0.5px;
+        }
+
         .logo .logo-icon {
-            width: 32px; height: 32px; background: var(--primary-gradient); border-radius: 9px;
-            display: flex; align-items: center; justify-content: center; color: #fff; font-size: 0.95rem;
+            width: 32px;
+            height: 32px;
+            background: var(--primary-gradient);
+            border-radius: 9px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-size: 0.95rem;
             box-shadow: 0 4px 12px rgba(2, 132, 199, 0.35);
         }
+
         .gradient-text {
             background: var(--primary-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-        
-        .nav-controls { display: flex; align-items: center; gap: 12px; }
-        nav ul { display: flex; gap: 1.6rem; list-style: none; align-items: center; }
-        nav ul a { 
-            color: var(--text-dim); text-decoration: none; font-weight: 600; font-size: 0.92rem; 
-            transition: var(--transition); position: relative; padding: 6px 0;
+
+        .nav-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
-        nav ul a:hover { color: var(--text-main); }
+
+        nav ul {
+            display: flex;
+            gap: 1.6rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        nav ul a {
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.92rem;
+            transition: var(--transition);
+            position: relative;
+            padding: 6px 0;
+        }
+
+        nav ul a:hover {
+            color: var(--text-main);
+        }
+
         nav ul a::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 0%; height: 2px;
-            background: var(--primary-gradient); transition: width 0.3s ease; border-radius: 2px;
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0%;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
+            border-radius: 2px;
         }
-        nav ul a:hover::after { width: 100%; }
+
+        nav ul a:hover::after {
+            width: 100%;
+        }
 
         /* Live Status Pill in Nav */
         .nav-status-pill {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.25);
-            padding: 5px 12px; border-radius: 50px; font-size: 0.78rem; font-weight: 700; color: #10b981;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            padding: 5px 12px;
+            border-radius: 50px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #10b981;
         }
+
         .status-pulse-dot {
-            width: 7px; height: 7px; background: #10b981; border-radius: 50%;
+            width: 7px;
+            height: 7px;
+            background: #10b981;
+            border-radius: 50%;
             box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
             animation: pulse-green 2s infinite;
         }
+
         @keyframes pulse-green {
-            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+            0% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+            }
+
+            70% {
+                transform: scale(1);
+                box-shadow: 0 0 0 6px rgba(16, 185, 129, 0);
+            }
+
+            100% {
+                transform: scale(0.95);
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0);
+            }
         }
 
-        .icon-btn { 
-            background: var(--surface-card); border: 1px solid var(--border-color); color: var(--text-main);
-            width: 40px; height: 40px; border-radius: 12px; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; font-size: 0.95rem;
-            transition: var(--transition); backdrop-filter: blur(8px);
+        .icon-btn {
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-main);
+            width: 40px;
+            height: 40px;
+            border-radius: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            backdrop-filter: blur(8px);
         }
+
         .icon-btn:hover {
-            border-color: var(--primary-light); color: var(--primary-light);
-            transform: translateY(-2px); box-shadow: var(--glow-shadow);
+            border-color: var(--primary-light);
+            color: var(--primary-light);
+            transform: translateY(-2px);
+            box-shadow: var(--glow-shadow);
         }
 
         /* Hero Section */
-        #header { 
-            min-height: 90vh; display: flex; align-items: center; 
-            padding: 120px 0 60px 0; position: relative;
+        #header {
+            min-height: 90vh;
+            display: flex;
+            align-items: center;
+            padding: 120px 0 60px 0;
+            position: relative;
         }
+
         .hero-grid {
-            display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center;
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 40px;
+            align-items: center;
         }
-        
+
         .hero-badge {
-            display: inline-flex; align-items: center; gap: 10px;
-            background: var(--primary-soft); border: 1px solid var(--border-glow);
-            padding: 6px 16px; border-radius: 50px; font-size: 0.82rem; font-weight: 700;
-            color: var(--primary-light); margin-bottom: 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary-soft);
+            border: 1px solid var(--border-glow);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin-bottom: 20px;
             box-shadow: 0 4px 15px rgba(2, 132, 199, 0.12);
         }
-        .hero-badge i { font-size: 0.85rem; }
 
-        .hero-title { 
-            font-size: clamp(2.3rem, 5vw, 4.1rem); font-weight: 900; line-height: 1.15; 
-            margin-bottom: 1.4rem; letter-spacing: -1.5px;
-        }
-        
-        .hero-desc { 
-            color: var(--text-dim); font-size: clamp(1rem, 1.8vw, 1.18rem); line-height: 1.7; 
-            max-width: 580px; margin-bottom: 2rem; 
+        .hero-badge i {
+            font-size: 0.85rem;
         }
 
-        .cta-group { display: flex; gap: 14px; flex-wrap: wrap; align-items: center; }
-        
+        .hero-title {
+            font-size: clamp(2.3rem, 5vw, 4.1rem);
+            font-weight: 900;
+            line-height: 1.15;
+            margin-bottom: 1.4rem;
+            letter-spacing: -1.5px;
+        }
+
+        .hero-desc {
+            color: var(--text-dim);
+            font-size: clamp(1rem, 1.8vw, 1.18rem);
+            line-height: 1.7;
+            max-width: 580px;
+            margin-bottom: 2rem;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
         /* Modern Glowing Buttons */
         .btn-glow-primary {
-            display: inline-flex; align-items: center; gap: 10px;
-            background: var(--primary-gradient); color: #fff !important;
-            padding: 0.95rem 2.2rem; border-radius: 14px; text-decoration: none;
-            font-weight: 700; font-size: 0.96rem; border: none; cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary-gradient);
+            color: #fff !important;
+            padding: 0.95rem 2.2rem;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.96rem;
+            border: none;
+            cursor: pointer;
             box-shadow: 0 10px 25px -5px rgba(2, 132, 199, 0.45);
             transition: var(--transition);
         }
+
         .btn-glow-primary:hover {
             transform: translateY(-3px);
             box-shadow: 0 16px 32px -5px rgba(2, 132, 199, 0.6);
         }
 
         .btn-glass-secondary {
-            display: inline-flex; align-items: center; gap: 10px;
-            background: var(--surface-card); color: var(--text-main) !important;
-            padding: 0.95rem 2rem; border-radius: 14px; text-decoration: none;
-            font-weight: 700; font-size: 0.96rem; border: 1px solid var(--border-color);
-            transition: var(--transition); backdrop-filter: blur(10px);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--surface-card);
+            color: var(--text-main) !important;
+            padding: 0.95rem 2rem;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.96rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
         }
+
         .btn-glass-secondary:hover {
-            border-color: var(--primary-light); color: var(--primary-light) !important;
-            transform: translateY(-3px); background: var(--surface-card-hover);
+            border-color: var(--primary-light);
+            color: var(--primary-light) !important;
+            transform: translateY(-3px);
+            background: var(--surface-card-hover);
         }
 
         /* Hero Key Stats Strip */
         .hero-stats {
-            display: flex; gap: 32px; margin-top: 40px; padding-top: 25px;
+            display: flex;
+            gap: 32px;
+            margin-top: 40px;
+            padding-top: 25px;
             border-top: 1px solid var(--border-color);
         }
+
         .stat-item h3 {
-            font-size: 1.8rem; font-weight: 900; color: var(--text-main);
-            letter-spacing: -0.5px; line-height: 1;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: var(--text-main);
+            letter-spacing: -0.5px;
+            line-height: 1;
         }
-        .stat-item h3 span { color: var(--primary-light); }
+
+        .stat-item h3 span {
+            color: var(--primary-light);
+        }
+
         .stat-item p {
-            color: var(--text-dim); font-size: 0.8rem; font-weight: 600;
-            margin-top: 6px; text-transform: uppercase; letter-spacing: 0.5px;
+            color: var(--text-dim);
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-top: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         /* Hero Visual / Agency Console Card */
         .hero-visual {
-            position: relative; display: flex; justify-content: center; align-items: center;
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
+
         .console-card {
-            background: var(--surface-card); border: 1px solid var(--border-color);
-            border-radius: 24px; padding: 24px; width: 100%; max-width: 440px;
-            box-shadow: var(--card-shadow); backdrop-filter: blur(20px);
-            position: relative; z-index: 2; transition: var(--transition);
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 24px;
+            width: 100%;
+            max-width: 440px;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(20px);
+            position: relative;
+            z-index: 2;
+            transition: var(--transition);
         }
+
         .console-card:hover {
-            border-color: var(--border-glow); transform: translateY(-4px);
+            border-color: var(--border-glow);
+            transform: translateY(-4px);
             box-shadow: var(--glow-shadow);
         }
+
         .console-header {
-            display: flex; align-items: center; justify-content: space-between;
-            padding-bottom: 15px; margin-bottom: 18px; border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 15px;
+            margin-bottom: 18px;
+            border-bottom: 1px solid var(--border-color);
         }
-        .window-dots { display: flex; gap: 7px; }
-        .dot { width: 11px; height: 11px; border-radius: 50%; }
-        .dot.red { background: #ef4444; }
-        .dot.yellow { background: #f59e0b; }
-        .dot.green { background: #10b981; }
-        .console-title { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-dim); }
+
+        .window-dots {
+            display: flex;
+            gap: 7px;
+        }
+
+        .dot {
+            width: 11px;
+            height: 11px;
+            border-radius: 50%;
+        }
+
+        .dot.red {
+            background: #ef4444;
+        }
+
+        .dot.yellow {
+            background: #f59e0b;
+        }
+
+        .dot.green {
+            background: #10b981;
+        }
+
+        .console-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-dim);
+        }
 
         .code-block {
-            font-family: 'JetBrains Mono', monospace; font-size: 0.82rem; line-height: 1.7;
-            color: #cbd5e1; direction: ltr; text-align: left;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            line-height: 1.7;
+            color: #cbd5e1;
+            direction: ltr;
+            text-align: left;
         }
-        .code-keyword { color: #38bdf8; font-weight: 600; }
-        .code-class { color: #f472b6; }
-        .code-prop { color: #a78bfa; }
-        .code-string { color: #34d399; }
-        .code-val { color: #fbbf24; }
+
+        .code-keyword {
+            color: #38bdf8;
+            font-weight: 600;
+        }
+
+        .code-class {
+            color: #f472b6;
+        }
+
+        .code-prop {
+            color: #a78bfa;
+        }
+
+        .code-string {
+            color: #34d399;
+        }
+
+        .code-val {
+            color: #fbbf24;
+        }
 
         .console-specs {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-top: 20px;
-            padding-top: 18px; border-top: 1px solid var(--border-color);
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid var(--border-color);
         }
+
         .spec-pill {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color);
-            border-radius: 12px; padding: 10px; display: flex; align-items: center; gap: 10px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .spec-pill i { font-size: 1.1rem; color: var(--primary-light); }
-        .spec-pill .spec-info { font-size: 0.72rem; }
-        .spec-pill .spec-info strong { display: block; font-size: 0.82rem; color: var(--text-main); }
+
+        .spec-pill i {
+            font-size: 1.1rem;
+            color: var(--primary-light);
+        }
+
+        .spec-pill .spec-info {
+            font-size: 0.72rem;
+        }
+
+        .spec-pill .spec-info strong {
+            display: block;
+            font-size: 0.82rem;
+            color: var(--text-main);
+        }
 
         /* Floating Accent Badges around Console */
         .floating-pill {
-            position: absolute; background: var(--surface-dark); border: 1px solid var(--border-glow);
-            padding: 8px 16px; border-radius: 50px; font-size: 0.8rem; font-weight: 700;
-            display: flex; align-items: center; gap: 8px; box-shadow: var(--card-shadow);
-            z-index: 3; animation: float-slow 4s ease-in-out infinite;
+            position: absolute;
+            background: var(--surface-dark);
+            border: 1px solid var(--border-glow);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: var(--card-shadow);
+            z-index: 3;
+            animation: float-slow 4s ease-in-out infinite;
         }
-        .pill-1 { top: -15px; left: -15px; animation-delay: 0s; color: var(--primary-light); }
-        .pill-2 { bottom: -18px; right: -15px; animation-delay: 2s; color: #10b981; }
+
+        .pill-1 {
+            top: -15px;
+            left: -15px;
+            animation-delay: 0s;
+            color: var(--primary-light);
+        }
+
+        .pill-2 {
+            bottom: -18px;
+            right: -15px;
+            animation-delay: 2s;
+            color: #10b981;
+        }
 
         @keyframes float-slow {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
         }
 
         /* --- Infinite Tech Marquee Section --- */
         .marquee-container {
-            width: 100%; overflow: hidden; padding: 25px 0;
-            background: rgba(13, 21, 39, 0.4); border-top: 1px solid var(--border-color);
-            border-bottom: 1px solid var(--border-color); backdrop-filter: blur(12px);
-            position: relative; z-index: 10;
+            width: 100%;
+            overflow: hidden;
+            padding: 25px 0;
+            background: rgba(13, 21, 39, 0.4);
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            position: relative;
+            z-index: 10;
         }
+
         .marquee-track {
-            display: flex; width: max-content;
+            display: flex;
+            width: max-content;
             animation: scroll-left 30s linear infinite;
         }
-        .marquee-track:hover { animation-play-state: paused; }
-        
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
         .marquee-group {
-            display: flex; align-items: center; gap: 40px; padding: 0 20px;
+            display: flex;
+            align-items: center;
+            gap: 40px;
+            padding: 0 20px;
         }
+
         .marquee-item {
-            display: flex; align-items: center; gap: 10px; font-size: 0.95rem; font-weight: 700;
-            color: var(--text-dim); white-space: nowrap; transition: var(--transition);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            white-space: nowrap;
+            transition: var(--transition);
         }
-        .marquee-item:hover { color: var(--primary-light); }
-        .marquee-item i { font-size: 1.25rem; color: var(--primary-light); }
+
+        .marquee-item:hover {
+            color: var(--primary-light);
+        }
+
+        .marquee-item i {
+            font-size: 1.25rem;
+            color: var(--primary-light);
+        }
 
         @keyframes scroll-left {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-50%);
+            }
         }
+
         [dir="rtl"] .marquee-track {
             animation: scroll-right 30s linear infinite;
         }
-        [dir="rtl"] .marquee-track:hover { animation-play-state: paused; }
+
+        [dir="rtl"] .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
         @keyframes scroll-right {
-            0% { transform: translateX(-50%); }
-            100% { transform: translateX(0); }
+            0% {
+                transform: translateX(-50%);
+            }
+
+            100% {
+                transform: translateX(0);
+            }
         }
 
         /* Sections */
-        section { padding: clamp(70px, 11vh, 120px) 0; position: relative; }
-        .sub-title { 
-            font-size: clamp(2rem, 5vw, 3rem); margin-bottom: 3rem; font-weight: 900; 
-            border-left: 5px solid var(--primary-color); padding-left: 20px; letter-spacing: -1px;
+        section {
+            padding: clamp(70px, 11vh, 120px) 0;
+            position: relative;
         }
-        [dir="rtl"] .sub-title { border-left: none; border-right: 5px solid var(--primary-color); padding-right: 20px; }
+
+        .sub-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            margin-bottom: 3rem;
+            font-weight: 900;
+            border-left: 5px solid var(--primary-color);
+            padding-left: 20px;
+            letter-spacing: -1px;
+        }
+
+        [dir="rtl"] .sub-title {
+            border-left: none;
+            border-right: 5px solid var(--primary-color);
+            padding-right: 20px;
+        }
 
         /* Section Header Wrap */
-        .section-header-wrap { margin-bottom: 2.5rem; }
-        .section-tag-badge {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: var(--primary-soft); border: 1px solid var(--border-glow);
-            padding: 5px 14px; border-radius: 50px; font-size: 0.8rem; font-weight: 700;
-            color: var(--primary-light); margin-bottom: 12px;
+        .section-header-wrap {
+            margin-bottom: 2.5rem;
         }
+
+        .section-tag-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-soft);
+            border: 1px solid var(--border-glow);
+            padding: 5px 14px;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--primary-light);
+            margin-bottom: 12px;
+        }
+
         .section-sub-desc {
-            color: var(--text-dim); font-size: 1.05rem; max-width: 650px; margin-top: -1.5rem; margin-bottom: 2.5rem;
+            color: var(--text-dim);
+            font-size: 1.05rem;
+            max-width: 650px;
+            margin-top: -1.5rem;
+            margin-bottom: 2.5rem;
         }
 
         /* Portfolio Filter Bar */
         .portfolio-filter-bar {
-            display: flex; gap: 10px; margin-bottom: 40px; flex-wrap: wrap; align-items: center;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+            align-items: center;
         }
+
         .filter-tab {
-            background: var(--surface-card); border: 1px solid var(--border-color); color: var(--text-dim);
-            padding: 9px 22px; border-radius: 50px; font-weight: 700; font-size: 0.88rem; cursor: pointer;
-            transition: var(--transition); backdrop-filter: blur(10px);
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-dim);
+            padding: 9px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            cursor: pointer;
+            transition: var(--transition);
+            backdrop-filter: blur(10px);
         }
+
         .filter-tab:hover {
-            color: var(--text-main); border-color: var(--primary-light);
+            color: var(--text-main);
+            border-color: var(--primary-light);
         }
+
         .filter-tab.active {
-            background: var(--primary-gradient); color: #fff; border-color: transparent;
+            background: var(--primary-gradient);
+            color: #fff;
+            border-color: transparent;
             box-shadow: 0 4px 20px rgba(2, 132, 199, 0.4);
         }
 
         /* Showcase List & Card */
         .showcase-container {
-            display: flex; flex-direction: column; gap: 50px;
+            display: flex;
+            flex-direction: column;
+            gap: 50px;
         }
+
         .showcase-card {
-            background: var(--surface-card); border: 1px solid var(--border-color);
-            border-radius: 36px; padding: clamp(25px, 4vw, 45px);
-            display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center;
-            box-shadow: var(--card-shadow); backdrop-filter: blur(20px);
-            position: relative; overflow: hidden; transition: var(--transition);
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 36px;
+            padding: clamp(25px, 4vw, 45px);
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 40px;
+            align-items: center;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(20px);
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
         }
+
         .showcase-card:hover {
-            border-color: var(--border-glow); transform: translateY(-5px);
+            border-color: var(--border-glow);
+            transform: translateY(-5px);
             box-shadow: 0 30px 60px -15px rgba(2, 132, 199, 0.22);
         }
+
         .showcase-card:nth-child(even) {
             grid-template-columns: 0.85fr 1.15fr;
         }
+
         .showcase-card:nth-child(even) .showcase-phone-side {
             order: 1;
         }
+
         .showcase-card:nth-child(even) .showcase-content-side {
             order: 2;
         }
 
         /* Content Side */
         .showcase-meta-row {
-            display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 16px;
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
         }
+
         .meta-pill {
-            font-size: 0.76rem; font-weight: 800; padding: 4px 12px; border-radius: 50px;
-            text-transform: uppercase; letter-spacing: 0.5px;
+            font-size: 0.76rem;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
-        .pill-category { background: var(--primary-soft); color: var(--primary-light); border: 1px solid var(--border-glow); }
-        .pill-status { background: rgba(16, 185, 129, 0.1); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.25); }
-        .pill-platform { background: rgba(255, 255, 255, 0.05); color: var(--text-dim); border: 1px solid var(--border-color); }
+
+        .pill-category {
+            background: var(--primary-soft);
+            color: var(--primary-light);
+            border: 1px solid var(--border-glow);
+        }
+
+        .pill-status {
+            background: rgba(16, 185, 129, 0.1);
+            color: #10b981;
+            border: 1px solid rgba(16, 185, 129, 0.25);
+        }
+
+        .pill-platform {
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-dim);
+            border: 1px solid var(--border-color);
+        }
 
         .showcase-title {
-            font-size: clamp(1.6rem, 3vw, 2.3rem); font-weight: 900; line-height: 1.2;
-            color: var(--text-main); margin-bottom: 12px; letter-spacing: -0.5px;
+            font-size: clamp(1.6rem, 3vw, 2.3rem);
+            font-weight: 900;
+            line-height: 1.2;
+            color: var(--text-main);
+            margin-bottom: 12px;
+            letter-spacing: -0.5px;
         }
+
         .showcase-tagline {
-            font-size: 1.05rem; color: var(--text-dim); line-height: 1.6; margin-bottom: 20px;
+            font-size: 1.05rem;
+            color: var(--text-dim);
+            line-height: 1.6;
+            margin-bottom: 20px;
         }
-        
+
         .showcase-summary-box {
-            background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color);
-            border-radius: 16px; padding: 14px 18px; margin-bottom: 22px; font-size: 0.9rem;
-            color: var(--text-dim); line-height: 1.6;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 14px 18px;
+            margin-bottom: 22px;
+            font-size: 0.9rem;
+            color: var(--text-dim);
+            line-height: 1.6;
         }
-        .showcase-summary-box strong { color: var(--text-main); }
+
+        .showcase-summary-box strong {
+            color: var(--text-main);
+        }
 
         .showcase-tech-tags {
-            display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px;
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 22px;
         }
+
         .tech-capsule {
-            background: rgba(2, 132, 199, 0.08); border: 1px solid rgba(56, 189, 248, 0.2);
-            color: var(--primary-light); font-size: 0.78rem; font-weight: 700;
-            padding: 5px 12px; border-radius: 8px;
+            background: rgba(2, 132, 199, 0.08);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            color: var(--primary-light);
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 5px 12px;
+            border-radius: 8px;
         }
 
         .showcase-metrics {
-            display: flex; gap: 14px; flex-wrap: wrap; margin-bottom: 26px;
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 26px;
         }
+
         .metric-badge {
-            display: inline-flex; align-items: center; gap: 7px;
-            font-size: 0.78rem; font-weight: 700; color: var(--text-dim);
-            background: var(--surface-dark); border: 1px solid var(--border-color);
-            padding: 6px 12px; border-radius: 10px;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: var(--text-dim);
+            background: var(--surface-dark);
+            border: 1px solid var(--border-color);
+            padding: 6px 12px;
+            border-radius: 10px;
         }
-        .metric-badge i { color: var(--accent-emerald); }
+
+        .metric-badge i {
+            color: var(--accent-emerald);
+        }
 
         .showcase-actions {
-            display: flex; gap: 12px; align-items: center; flex-wrap: wrap;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
         }
+
         .btn-case-study {
-            display: inline-flex; align-items: center; gap: 8px;
-            background: var(--primary-gradient); color: #fff !important;
-            padding: 10px 22px; border-radius: 12px; font-weight: 700; font-size: 0.9rem;
-            text-decoration: none; box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--primary-gradient);
+            color: #fff !important;
+            padding: 10px 22px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.35);
             transition: var(--transition);
         }
+
         .btn-case-study:hover {
-            transform: translateY(-2px); box-shadow: 0 8px 24px rgba(2, 132, 199, 0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(2, 132, 199, 0.5);
         }
+
         .btn-action-icon {
-            width: 42px; height: 42px; border-radius: 12px;
-            background: var(--surface-dark); border: 1px solid var(--border-color);
-            display: flex; align-items: center; justify-content: center;
-            color: var(--text-main); text-decoration: none; font-size: 1.05rem;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: var(--surface-dark);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 1.05rem;
             transition: var(--transition);
         }
+
         .btn-action-icon:hover {
-            border-color: var(--primary-light); color: var(--primary-light);
+            border-color: var(--primary-light);
+            color: var(--primary-light);
             transform: translateY(-2px);
         }
 
         /* --- Realistic Phone Mockup --- */
         .showcase-phone-side {
-            display: flex; justify-content: center; align-items: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             position: relative;
         }
+
         .phone-mockup-frame {
             position: relative;
             width: 270px;
@@ -482,1083 +977,1758 @@
             border-radius: 46px;
             border: 11px solid #1a2234;
             outline: 2px solid rgba(255, 255, 255, 0.14);
-            box-shadow: 
+            box-shadow:
                 0 30px 60px -15px rgba(0, 0, 0, 0.8),
                 0 0 35px rgba(2, 132, 199, 0.18),
                 inset 0 0 10px rgba(0, 0, 0, 0.8);
             overflow: hidden;
             transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
         }
+
         .showcase-card:hover .phone-mockup-frame {
             transform: scale(1.02) rotate(1deg);
-            box-shadow: 
+            box-shadow:
                 0 35px 70px -15px rgba(0, 0, 0, 0.9),
                 0 0 45px rgba(2, 132, 199, 0.3);
         }
 
         .phone-island {
-            position: absolute; top: 11px; left: 50%; transform: translateX(-50%);
-            width: 84px; height: 22px; background: #000; border-radius: 20px;
-            z-index: 10; display: flex; align-items: center; justify-content: flex-end; padding-right: 12px;
+            position: absolute;
+            top: 11px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 84px;
+            height: 22px;
+            background: #000;
+            border-radius: 20px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 12px;
         }
+
         .island-lens {
-            width: 8px; height: 8px; border-radius: 50%; background: #1e1b4b;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #1e1b4b;
             box-shadow: inset 0 0 2px #38bdf8;
         }
 
         .phone-reflection {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background: linear-gradient(125deg, rgba(255, 255, 255, 0.12) 0%, rgba(255, 255, 255, 0.02) 40%, transparent 60%);
-            pointer-events: none; z-index: 5;
+            pointer-events: none;
+            z-index: 5;
         }
 
         .phone-screen-img {
-            width: 100%; height: 100%; object-fit: cover; object-position: top;
-            background: #090e17; display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: top;
+            background: #090e17;
+            display: block;
         }
 
         .phone-home-bar {
-            position: absolute; bottom: 8px; left: 50%; transform: translateX(-50%);
-            width: 100px; height: 4px; background: rgba(255, 255, 255, 0.45);
-            border-radius: 10px; z-index: 10;
+            position: absolute;
+            bottom: 8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.45);
+            border-radius: 10px;
+            z-index: 10;
         }
 
         .phone-glow-ambient {
-            position: absolute; width: 220px; height: 350px;
+            position: absolute;
+            width: 220px;
+            height: 350px;
             background: radial-gradient(circle, rgba(14, 165, 233, 0.22) 0%, transparent 70%);
-            filter: blur(50px); pointer-events: none; z-index: 0;
+            filter: blur(50px);
+            pointer-events: none;
+            z-index: 0;
         }
 
         @media (max-width: 992px) {
-            .showcase-card, .showcase-card:nth-child(even) {
+
+            .showcase-card,
+            .showcase-card:nth-child(even) {
                 grid-template-columns: 1fr;
                 gap: 35px;
                 text-align: center;
             }
+
             .showcase-card:nth-child(even) .showcase-phone-side {
                 order: 2;
             }
+
             .showcase-card:nth-child(even) .showcase-content-side {
                 order: 1;
             }
-            .showcase-meta-row, .showcase-tech-tags, .showcase-metrics, .showcase-actions {
+
+            .showcase-meta-row,
+            .showcase-tech-tags,
+            .showcase-metrics,
+            .showcase-actions {
                 justify-content: center;
             }
         }
 
         /* Contact Wrapper Fix */
-        .contact-wrapper { 
-            background: var(--surface-dark); border-radius: 32px; padding: clamp(20px, 5vw, 60px); 
-            display: grid; grid-template-columns: 1fr 1.2fr; gap: 40px; border: 1px solid var(--border-color); 
+        .contact-wrapper {
+            background: var(--surface-dark);
+            border-radius: 32px;
+            padding: clamp(20px, 5vw, 60px);
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 40px;
+            border: 1px solid var(--border-color);
         }
-        .contact-item { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--text-main); background: var(--input-bg); padding: 12px 16px; border-radius: 12px; margin-bottom: 12px; border: 1px solid var(--border-color); }
-        .contact-item i { color: var(--primary-color); width: 25px; text-align: center; flex-shrink: 0; }
-        .contact-item span { font-size: 0.9rem; word-break: break-all; }
-        
-        .social-links { display: flex; gap: 12px; margin-top: 10px; }
-        .social-btn { width: 48px; height: 48px; background: var(--input-bg); color: var(--text-main); display: flex; align-items: center; justify-content: center; border-radius: 12px; font-size: 1.3rem; text-decoration: none; border: 1px solid var(--border-color); }
-        .social-btn:hover { border-color: var(--primary-light); color: var(--primary-light); transform: translateY(-3px); }
 
-        .form-input { width: 100%; background: var(--input-bg); border: 1px solid var(--border-color); border-radius: 12px; padding: 16px; color: var(--text-main); font-size: 1rem; margin-bottom: 15px; }
-        .form-input:focus { outline: none; border-color: var(--primary-light); }
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-decoration: none;
+            color: var(--text-main);
+            background: var(--input-bg);
+            padding: 12px 16px;
+            border-radius: 12px;
+            margin-bottom: 12px;
+            border: 1px solid var(--border-color);
+        }
+
+        .contact-item i {
+            color: var(--primary-color);
+            width: 25px;
+            text-align: center;
+            flex-shrink: 0;
+        }
+
+        .contact-item span {
+            font-size: 0.9rem;
+            word-break: break-all;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .social-btn {
+            width: 48px;
+            height: 48px;
+            background: var(--input-bg);
+            color: var(--text-main);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 12px;
+            font-size: 1.3rem;
+            text-decoration: none;
+            border: 1px solid var(--border-color);
+        }
+
+        .social-btn:hover {
+            border-color: var(--primary-light);
+            color: var(--primary-light);
+            transform: translateY(-3px);
+        }
+
+        .form-input {
+            width: 100%;
+            background: var(--input-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 16px;
+            color: var(--text-main);
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary-light);
+        }
 
         /* Buttons */
-        .btn-primary { background: var(--primary-color); color: #fff !important; padding: 0.9rem 2.2rem; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block; border: none; cursor: pointer; text-align: center; }
-        .btn-outline { border: 2px solid var(--primary-color); color: var(--primary-color); padding: 0.9rem 2.2rem; border-radius: 12px; text-decoration: none; font-weight: 700; display: inline-block; text-align: center; }
+        .btn-primary {
+            background: var(--primary-color);
+            color: #fff !important;
+            padding: 0.9rem 2.2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+            text-align: center;
+        }
+
+        .btn-outline {
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 0.9rem 2.2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 700;
+            display: inline-block;
+            text-align: center;
+        }
 
         /* Mobile Menu */
-        .menu-toggle { font-size: 1.5rem; cursor: pointer; color: var(--text-main); display: none; z-index: 2001; }
+        .menu-toggle {
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--text-main);
+            display: none;
+            z-index: 2001;
+        }
+
         @media (max-width: 992px) {
-            .hero-grid { grid-template-columns: 1fr; gap: 40px; text-align: center; }
-            .hero-desc { margin: 0 auto 2rem auto; }
-            .cta-group { justify-content: center; }
-            .hero-stats { justify-content: center; }
-            .nav-status-pill { display: none; }
-            nav ul { 
-                position: fixed; top: 0; right: -100%; width: 80%; height: 100vh; 
-                background: var(--surface-dark); flex-direction: column; justify-content: center; 
-                align-items: center; transition: 0.4s; z-index: 2000; box-shadow: -10px 0 30px rgba(0,0,0,0.4);
+            .hero-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+                text-align: center;
             }
-            nav ul.active { right: 0; }
-            .menu-toggle { display: block; }
-            .contact-wrapper { grid-template-columns: 1fr; }
-            .contact-info-side { text-align: center; align-items: center; display: flex; flex-direction: column; }
-            .contact-item, .social-links { justify-content: center; }
+
+            .hero-desc {
+                margin: 0 auto 2rem auto;
+            }
+
+            .cta-group {
+                justify-content: center;
+            }
+
+            .hero-stats {
+                justify-content: center;
+            }
+
+            .nav-status-pill {
+                display: none;
+            }
+
+            nav .container {
+                padding: 0 16px;
+            }
+
+            .nav-controls {
+                gap: 8px;
+                flex-shrink: 0;
+            }
+
+            .icon-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 0.85rem;
+                flex-shrink: 0;
+                border-radius: 10px;
+            }
+
+            .menu-toggle {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 36px;
+                height: 36px;
+                font-size: 1.25rem;
+                flex-shrink: 0;
+                cursor: pointer;
+            }
+
+            .logo {
+                font-size: 1.15rem;
+                gap: 6px;
+                min-width: 0;
+                flex-shrink: 1;
+            }
+
+            .logo .logo-icon {
+                width: 28px;
+                height: 28px;
+                font-size: 0.8rem;
+                flex-shrink: 0;
+            }
+
+            nav ul {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 80%;
+                max-width: 320px;
+                height: 100vh;
+                background: var(--surface-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+                z-index: 2000;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+                border-left: 1px solid var(--border-color);
+            }
+
+            [dir="rtl"] nav ul {
+                right: auto;
+                left: -100%;
+                border-left: none;
+                border-right: 1px solid var(--border-color);
+                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
+            }
+
+            nav ul.active {
+                right: 0;
+            }
+
+            [dir="rtl"] nav ul.active {
+                left: 0;
+            }
+
+            .contact-wrapper {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-info-side {
+                text-align: center;
+                align-items: center;
+                display: flex;
+                flex-direction: column;
+            }
+
+            .contact-item,
+            .social-links {
+                justify-content: center;
+            }
         }
 
         /* --- About Section Elevated --- */
         .about-grid {
-            display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 50px; align-items: center;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 50px;
+            align-items: center;
         }
+
         .about-image-wrapper {
-            position: relative; max-width: 420px; margin: 0 auto;
+            position: relative;
+            max-width: 420px;
+            margin: 0 auto;
         }
+
         .about-avatar-img {
-            width: 100%; border-radius: 32px; box-shadow: var(--card-shadow);
-            border: 1px solid var(--border-color); display: block; position: relative; z-index: 2;
+            width: 100%;
+            border-radius: 32px;
+            box-shadow: var(--card-shadow);
+            border: 1px solid var(--border-color);
+            display: block;
+            position: relative;
+            z-index: 2;
         }
+
         .about-experience-badge {
-            position: absolute; bottom: -20px; right: -15px;
-            background: var(--surface-card); border: 1px solid var(--border-glow);
-            padding: 14px 20px; border-radius: 20px; box-shadow: var(--card-shadow);
-            backdrop-filter: blur(16px); z-index: 3; display: flex; align-items: center; gap: 14px;
+            position: absolute;
+            bottom: -20px;
+            right: -15px;
+            background: var(--surface-card);
+            border: 1px solid var(--border-glow);
+            padding: 14px 20px;
+            border-radius: 20px;
+            box-shadow: var(--card-shadow);
+            backdrop-filter: blur(16px);
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            gap: 14px;
         }
-        .about-experience-badge i { font-size: 1.8rem; color: var(--primary-light); }
-        .about-experience-badge strong { display: block; font-size: 1.1rem; color: var(--text-main); }
-        .about-experience-badge span { font-size: 0.78rem; color: var(--text-dim); }
+
+        .about-experience-badge i {
+            font-size: 1.8rem;
+            color: var(--primary-light);
+        }
+
+        .about-experience-badge strong {
+            display: block;
+            font-size: 1.1rem;
+            color: var(--text-main);
+        }
+
+        .about-experience-badge span {
+            font-size: 0.78rem;
+            color: var(--text-dim);
+        }
 
         .about-bullets {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-top: 25px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+            margin-top: 25px;
         }
+
         .about-bullet-item {
-            display: flex; align-items: center; gap: 10px; font-size: 0.92rem; font-weight: 600; color: var(--text-main);
-            background: var(--surface-card); border: 1px solid var(--border-color); padding: 12px 16px; border-radius: 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            color: var(--text-main);
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            padding: 12px 16px;
+            border-radius: 14px;
         }
-        .about-bullet-item i { color: var(--primary-light); font-size: 1rem; }
+
+        .about-bullet-item i {
+            color: var(--primary-light);
+            font-size: 1rem;
+        }
 
         /* --- Agency Services Modern --- */
         .services-grid-modern {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
         }
+
         .service-card-modern {
-            background: var(--surface-card); border: 1px solid var(--border-color);
-            border-radius: 28px; padding: 35px 28px; transition: var(--transition);
-            backdrop-filter: blur(16px); position: relative; overflow: hidden;
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            padding: 35px 28px;
+            transition: var(--transition);
+            backdrop-filter: blur(16px);
+            position: relative;
+            overflow: hidden;
         }
+
         .service-card-modern:hover {
-            border-color: var(--border-glow); transform: translateY(-6px);
+            border-color: var(--border-glow);
+            transform: translateY(-6px);
             box-shadow: 0 20px 40px -10px rgba(2, 132, 199, 0.2);
         }
+
         .service-icon-box {
-            width: 60px; height: 60px; border-radius: 18px;
-            background: var(--primary-soft); border: 1px solid var(--border-glow);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.6rem; color: var(--primary-light); margin-bottom: 22px;
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            background: var(--primary-soft);
+            border: 1px solid var(--border-glow);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            color: var(--primary-light);
+            margin-bottom: 22px;
             box-shadow: 0 8px 20px rgba(2, 132, 199, 0.15);
         }
+
         .service-card-modern h3 {
-            font-size: 1.3rem; font-weight: 800; margin-bottom: 12px; color: var(--text-main);
+            font-size: 1.3rem;
+            font-weight: 800;
+            margin-bottom: 12px;
+            color: var(--text-main);
         }
+
         .service-card-modern p {
-            color: var(--text-dim); font-size: 0.94rem; line-height: 1.7; margin-bottom: 20px;
+            color: var(--text-dim);
+            font-size: 0.94rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
         }
+
         .service-features-list {
-            list-style: none; display: flex; flex-direction: column; gap: 8px;
-            border-top: 1px solid var(--border-color); padding-top: 16px;
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 16px;
         }
+
         .service-features-list li {
-            font-size: 0.82rem; color: var(--text-dim); display: flex; align-items: center; gap: 8px;
+            font-size: 0.82rem;
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .service-features-list li i { color: var(--accent-emerald); font-size: 0.75rem; }
+
+        .service-features-list li i {
+            color: var(--accent-emerald);
+            font-size: 0.75rem;
+        }
 
         /* --- Development Process Section --- */
         .process-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
         }
+
         .process-card {
-            background: var(--surface-card); border: 1px solid var(--border-color);
-            border-radius: 24px; padding: 28px 22px; transition: var(--transition);
-            backdrop-filter: blur(14px); position: relative;
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 28px 22px;
+            transition: var(--transition);
+            backdrop-filter: blur(14px);
+            position: relative;
         }
+
         .process-card:hover {
-            border-color: var(--primary-light); transform: translateY(-5px);
+            border-color: var(--primary-light);
+            transform: translateY(-5px);
             box-shadow: var(--glow-shadow);
         }
+
         .step-number {
-            font-family: 'JetBrains Mono', monospace; font-size: 2.2rem; font-weight: 900;
-            background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            line-height: 1; margin-bottom: 16px; display: block;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.2rem;
+            font-weight: 900;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1;
+            margin-bottom: 16px;
+            display: block;
         }
+
         .process-card h3 {
-            font-size: 1.15rem; font-weight: 800; margin-bottom: 10px; color: var(--text-main);
+            font-size: 1.15rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-main);
         }
+
         .process-card p {
-            font-size: 0.88rem; color: var(--text-dim); line-height: 1.6;
+            font-size: 0.88rem;
+            color: var(--text-dim);
+            line-height: 1.6;
         }
 
         /* --- Tech Stack Matrix Section --- */
         .tech-matrix-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+            gap: 25px;
         }
+
         .matrix-domain-card {
-            background: var(--surface-card); border: 1px solid var(--border-color);
-            border-radius: 28px; padding: 30px 25px; backdrop-filter: blur(16px);
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            border-radius: 28px;
+            padding: 30px 25px;
+            backdrop-filter: blur(16px);
             transition: var(--transition);
         }
+
         .matrix-domain-card:hover {
-            border-color: var(--border-glow); transform: translateY(-4px);
+            border-color: var(--border-glow);
+            transform: translateY(-4px);
         }
+
         .domain-header {
-            display: flex; align-items: center; gap: 12px; margin-bottom: 22px;
-            padding-bottom: 15px; border-bottom: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid var(--border-color);
         }
-        .domain-header i { font-size: 1.4rem; color: var(--primary-light); }
-        .domain-header h3 { font-size: 1.18rem; font-weight: 800; color: var(--text-main); }
-        
+
+        .domain-header i {
+            font-size: 1.4rem;
+            color: var(--primary-light);
+        }
+
+        .domain-header h3 {
+            font-size: 1.18rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
         .skills-pills-wrap {
-            display: flex; flex-wrap: wrap; gap: 9px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
         }
+
         .skill-pill-tag {
-            display: inline-flex; align-items: center; gap: 7px;
-            background: var(--surface-dark); border: 1px solid var(--border-color);
-            padding: 8px 14px; border-radius: 12px; font-size: 0.84rem; font-weight: 700;
-            color: var(--text-main); transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--surface-dark);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-size: 0.84rem;
+            font-weight: 700;
+            color: var(--text-main);
+            transition: var(--transition);
         }
+
         .skill-pill-tag:hover {
-            border-color: var(--primary-light); color: var(--primary-light);
-            background: var(--primary-soft); transform: translateY(-2px);
+            border-color: var(--primary-light);
+            color: var(--primary-light);
+            background: var(--primary-soft);
+            transform: translateY(-2px);
         }
-        .skill-pill-tag i { color: var(--primary-light); font-size: 0.95rem; }
+
+        .skill-pill-tag i {
+            color: var(--primary-light);
+            font-size: 0.95rem;
+        }
 
         /* --- Impact Stats Banner --- */
         .impact-stats-card {
-            background: var(--surface-card); border: 1px solid var(--border-glow);
-            border-radius: 32px; padding: 45px 30px; box-shadow: var(--card-shadow);
-            margin-bottom: 80px; backdrop-filter: blur(20px);
+            background: var(--surface-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 32px;
+            padding: 45px 30px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 80px;
+            backdrop-filter: blur(20px);
         }
+
         .impact-stats-grid {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px; text-align: center;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            text-align: center;
         }
+
         .impact-stat-item h3 {
-            font-size: 2.8rem; font-weight: 900; line-height: 1; letter-spacing: -1px; margin-bottom: 8px;
-            background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            font-size: 2.8rem;
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -1px;
+            margin-bottom: 8px;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
+
         .impact-stat-item p {
-            color: var(--text-dim); font-size: 0.92rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            color: var(--text-dim);
+            font-size: 0.92rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         @media (max-width: 992px) {
-            .about-grid { grid-template-columns: 1fr; text-align: center; }
-            .about-bullets { grid-template-columns: 1fr; }
-            .about-experience-badge { right: 50%; transform: translateX(50%); }
+            .about-grid {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .about-bullets {
+                grid-template-columns: 1fr;
+            }
+
+            .about-experience-badge {
+                right: 50%;
+                transform: translateX(50%);
+            }
+        }
+
+        /* Mobile Spacing & Compact Flow */
+        @media (max-width: 768px) {
+            section {
+                padding: 42px 0;
+            }
+
+            .section-header-wrap {
+                margin-bottom: 1.5rem;
+            }
+
+            .sub-title {
+                margin-bottom: 0.85rem;
+                font-size: clamp(1.6rem, 6.5vw, 2.1rem);
+                padding-left: 14px;
+            }
+
+            [dir="rtl"] .sub-title {
+                padding-right: 14px;
+            }
+
+            .section-sub-desc {
+                margin-top: 0;
+                margin-bottom: 1.6rem;
+                font-size: 0.95rem;
+                line-height: 1.65;
+            }
+
+            .section-tag-badge {
+                margin-bottom: 8px;
+                font-size: 0.75rem;
+                padding: 4px 12px;
+            }
+
+            .about-bullets {
+                gap: 10px;
+                margin-top: 18px;
+            }
+
+            .about-bullet-item {
+                font-size: 0.92rem;
+                padding: 10px 14px;
+            }
+
+            .services-grid-modern {
+                gap: 16px;
+            }
+
+            .service-card-modern {
+                padding: 24px 20px;
+                border-radius: 22px;
+            }
+
+            .process-grid {
+                gap: 14px;
+            }
+
+            .process-card {
+                padding: 20px 18px;
+                border-radius: 20px;
+            }
+
+            .tech-matrix-grid {
+                gap: 16px;
+            }
+
+            .matrix-domain-card {
+                padding: 22px 18px;
+            }
+
+            .impact-stats-card {
+                padding: 30px 20px;
+                border-radius: 24px;
+            }
+
+            .stats-grid-row {
+                gap: 20px;
+            }
+
+            .stat-number {
+                font-size: 2.2rem;
+            }
+
+            #hero {
+                padding: 100px 0 35px 0;
+                min-height: auto;
+            }
+        }
+
+        /* Ultra Compact Phones (≤ 480px & ≤ 360px) */
+        @media (max-width: 480px) {
+            nav {
+                padding: 0.65rem 0;
+            }
+
+            nav .container {
+                padding: 0 12px;
+            }
+
+            .nav-controls {
+                gap: 6px;
+            }
+
+            .icon-btn {
+                width: 33px;
+                height: 33px;
+                font-size: 0.8rem;
+                border-radius: 9px;
+            }
+
+            .menu-toggle {
+                width: 33px;
+                height: 33px;
+                font-size: 1.15rem;
+            }
+
+            .logo {
+                font-size: 1.05rem;
+            }
+
+            .logo .logo-icon {
+                width: 26px;
+                height: 26px;
+                font-size: 0.75rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            nav .container {
+                padding: 0 8px;
+            }
+
+            .nav-controls {
+                gap: 4px;
+            }
+
+            .icon-btn {
+                width: 30px;
+                height: 30px;
+                font-size: 0.75rem;
+            }
+
+            .menu-toggle {
+                width: 30px;
+                height: 30px;
+                font-size: 1.05rem;
+            }
+
+            .logo {
+                font-size: 0.92rem;
+            }
         }
 
         /* Quick Preview Modal */
         .quick-modal-backdrop {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(4, 7, 13, 0.88); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
-            z-index: 3000; display: none; align-items: center; justify-content: center; padding: 20px;
-            opacity: 0; transition: opacity 0.3s ease;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(4, 7, 13, 0.88);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            z-index: 3000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
-        .quick-modal-backdrop.active { display: flex; opacity: 1; }
+
+        .quick-modal-backdrop.active {
+            display: flex;
+            opacity: 1;
+        }
+
         .quick-modal-box {
-            background: var(--surface-card); border: 1px solid var(--border-glow);
-            border-radius: 28px; width: 100%; max-width: 820px; overflow: hidden;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.8); transform: scale(0.95);
+            background: var(--surface-card);
+            border: 1px solid var(--border-glow);
+            border-radius: 28px;
+            width: 100%;
+            max-width: 820px;
+            overflow: hidden;
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+            transform: scale(0.95);
             transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
-        .quick-modal-backdrop.active .quick-modal-box { transform: scale(1); }
+
+        .quick-modal-backdrop.active .quick-modal-box {
+            transform: scale(1);
+        }
+
         .quick-modal-header {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 18px 24px; border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 18px 24px;
+            border-bottom: 1px solid var(--border-color);
         }
-        .quick-modal-title { font-size: 1.15rem; font-weight: 800; color: var(--text-main); }
+
+        .quick-modal-title {
+            font-size: 1.15rem;
+            font-weight: 800;
+            color: var(--text-main);
+        }
+
         .modal-close-btn {
-            background: none; border: none; font-size: 1.8rem; color: var(--text-dim);
-            cursor: pointer; transition: var(--transition); line-height: 1;
+            background: none;
+            border: none;
+            font-size: 1.8rem;
+            color: var(--text-dim);
+            cursor: pointer;
+            transition: var(--transition);
+            line-height: 1;
         }
-        .modal-close-btn:hover { color: #ef4444; }
+
+        .modal-close-btn:hover {
+            color: #ef4444;
+        }
+
         .quick-modal-body {
-            padding: 20px; max-height: 80vh; overflow-y: auto; text-align: center;
+            padding: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+            text-align: center;
         }
+
         .quick-modal-body img {
-            max-width: 100%; max-height: 70vh; border-radius: 16px; object-fit: contain;
+            max-width: 100%;
+            max-height: 70vh;
+            border-radius: 16px;
+            object-fit: contain;
         }
+
         .quick-modal-body iframe {
-            width: 100%; aspect-ratio: 16/9; border-radius: 16px; border: none;
+            width: 100%;
+            aspect-ratio: 16/9;
+            border-radius: 16px;
+            border: none;
         }
 
         /* Scroll Reveal Utility */
         .reveal-on-scroll {
-            opacity: 0; transform: translateY(28px);
+            opacity: 0;
+            transform: translateY(28px);
             transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
         }
+
         .reveal-on-scroll.is-revealed {
-            opacity: 1; transform: translateY(0);
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .spinner { width: 40px; height: 40px; border: 4px solid var(--primary-soft); border-left-color: var(--primary-color); border-radius: 50%; animation: spin 1s linear infinite; margin: 20px auto; }
-        @keyframes spin { to { transform: rotate(360deg); } }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--primary-soft);
+            border-left-color: var(--primary-color);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
     </style>
 </head>
+
 <body data-theme="dark">
 
-<div class="ambient-glow-1"></div>
-<div class="ambient-glow-2"></div>
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
 
-<nav id="navbar">
-    <div class="container">
-        <a href="#" class="logo">
-            <span class="logo-icon"><i class="fa-solid fa-code"></i></span>
-            Mohamed <span class="gradient-text">Solaiman</span>
-        </a>
+    <nav id="navbar">
+        <div class="container">
+            <a href="#" class="logo">
+                <span class="logo-icon"><i class="fa-solid fa-code"></i></span>
+                Mohamed <span class="gradient-text">Solaiman</span>
+            </a>
 
-        <div class="nav-controls">
-            <div class="nav-status-pill">
-                <span class="status-pulse-dot"></span>
-                <span data-i18n="nav_status">Available for Projects</span>
+            <div class="nav-controls">
+                <div class="nav-status-pill">
+                    <span class="status-pulse-dot"></span>
+                    <span data-i18n="nav_status">Available for Projects</span>
+                </div>
+
+                <ul id="nav-links">
+                    <li><a href="#header" data-i18n="nav_home">Home</a></li>
+                    <li><a href="#about" data-i18n="nav_about">About</a></li>
+                    <li><a href="#services" data-i18n="nav_services">Services</a></li>
+                    <li><a href="#process" data-i18n="nav_process">Process</a></li>
+                    <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
+                    <li><a href="#portfolio" data-i18n="nav_projects">Projects</a></li>
+                    <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
+                    <li><a href="admin.html" data-i18n="nav_admin">Admin</a></li>
+                </ul>
+                <button class="icon-btn" id="theme-toggle" title="Toggle Theme"><i
+                        class="fa-solid fa-moon"></i></button>
+                <button class="icon-btn" id="lang-toggle" style="font-weight: 800;">AR</button>
+                <div class="menu-toggle" id="mobile-menu"><i class="fa-solid fa-bars"></i></div>
             </div>
-            
-            <ul id="nav-links">
-                <li><a href="#header" data-i18n="nav_home">Home</a></li>
-                <li><a href="#about" data-i18n="nav_about">About</a></li>
-                <li><a href="#services" data-i18n="nav_services">Services</a></li>
-                <li><a href="#process" data-i18n="nav_process">Process</a></li>
-                <li><a href="#skills" data-i18n="nav_skills">Skills</a></li>
-                <li><a href="#portfolio" data-i18n="nav_projects">Projects</a></li>
-                <li><a href="#contact" data-i18n="nav_contact">Contact</a></li>
-                <li><a href="admin.html" data-i18n="nav_admin">Admin</a></li>
-            </ul>
-            <button class="icon-btn" id="theme-toggle" title="Toggle Theme"><i class="fa-solid fa-moon"></i></button>
-            <button class="icon-btn" id="lang-toggle" style="font-weight: 800;">AR</button>
-            <div class="menu-toggle" id="mobile-menu"><i class="fa-solid fa-bars"></i></div>
         </div>
-    </div>
-</nav>
+    </nav>
 
-<header id="header">
-    <div class="container">
-        <div class="hero-grid">
-            <div class="hero-content">
-                <div class="hero-badge">
-                    <i class="fa-solid fa-bolt"></i>
-                    <span data-i18n="hero_badge">Senior Flutter & Mobile Application Engineer</span>
-                </div>
-                <h1 class="hero-title" data-i18n="hero_title">Crafting <span class="gradient-text">Scalable Apps</span> That Users Love</h1>
-                <p class="hero-desc" data-i18n="hero_desc">Specializing in high-performance iOS & Android mobile applications built with Clean Architecture, BLoC, and pixel-perfect design.</p>
-                <div class="cta-group">
-                    <a href="#portfolio" class="btn-glow-primary">
-                        <i class="fa-solid fa-layer-group"></i>
-                        <span data-i18n="btn_projects">Explore Featured Work</span>
-                    </a>
-                    <a href="images/updatedCv.pdf" download class="btn-glass-secondary">
-                        <i class="fa-solid fa-file-arrow-down"></i>
-                        <span data-i18n="btn_cv">Download Resume</span>
-                    </a>
-                </div>
-
-                <div class="hero-stats">
-                    <div class="stat-item">
-                        <h3>+3<span>+</span></h3>
-                        <p data-i18n="stat_exp">Years Flutter Exp</p>
+    <header id="header">
+        <div class="container">
+            <div class="hero-grid">
+                <div class="hero-content">
+                    <div class="hero-badge">
+                        <i class="fa-solid fa-bolt"></i>
+                        <span data-i18n="hero_badge">Senior Flutter & Mobile Application Engineer</span>
                     </div>
-                    <div class="stat-item">
-                        <h3>100<span>%</span></h3>
-                        <p data-i18n="stat_clean">Clean Architecture</p>
+                    <h1 class="hero-title" data-i18n="hero_title">Crafting <span class="gradient-text">Scalable
+                            Apps</span> That Users Love</h1>
+                    <p class="hero-desc" data-i18n="hero_desc">Specializing in high-performance iOS & Android mobile
+                        applications built with Clean Architecture, BLoC, and pixel-perfect design.</p>
+                    <div class="cta-group">
+                        <a href="#portfolio" class="btn-glow-primary">
+                            <i class="fa-solid fa-layer-group"></i>
+                            <span data-i18n="btn_projects">Explore Featured Work</span>
+                        </a>
+                        <a href="images/updatedCv.pdf" download class="btn-glass-secondary">
+                            <i class="fa-solid fa-file-arrow-down"></i>
+                            <span data-i18n="btn_cv">Download Resume</span>
+                        </a>
                     </div>
-                    <div class="stat-item">
-                        <h3>60<span>FPS</span></h3>
-                        <p data-i18n="stat_perf">Smooth Performance</p>
-                    </div>
-                </div>
-            </div>
 
-            <div class="hero-visual">
-                <div class="floating-pill pill-1">
-                    <i class="fa-solid fa-cubes"></i>
-                    <span>BLoC State Management</span>
-                </div>
-
-                <div class="console-card">
-                    <div class="console-header">
-                        <div class="window-dots">
-                            <span class="dot red"></span>
-                            <span class="dot yellow"></span>
-                            <span class="dot green"></span>
+                    <div class="hero-stats">
+                        <div class="stat-item">
+                            <h3>+3<span>+</span></h3>
+                            <p data-i18n="stat_exp">Years Flutter Exp</p>
                         </div>
-                        <span class="console-title">flutter_app.dart</span>
+                        <div class="stat-item">
+                            <h3>100<span>%</span></h3>
+                            <p data-i18n="stat_clean">Clean Architecture</p>
+                        </div>
+                        <div class="stat-item">
+                            <h3>60<span>FPS</span></h3>
+                            <p data-i18n="stat_perf">Smooth Performance</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="hero-visual">
+                    <div class="floating-pill pill-1">
+                        <i class="fa-solid fa-cubes"></i>
+                        <span>BLoC State Management</span>
                     </div>
 
-                    <div class="code-block">
-                        <span class="code-keyword">final</span> app = <span class="code-class">MobileApplication</span>(<br>
-                        &nbsp;&nbsp;<span class="code-prop">architect:</span> <span class="code-string">"Clean Architecture"</span>,<br>
-                        &nbsp;&nbsp;<span class="code-prop">state:</span> <span class="code-string">"BLoC / Cubit"</span>,<br>
-                        &nbsp;&nbsp;<span class="code-prop">platforms:</span> [<span class="code-val">Target.iOS</span>, <span class="code-val">Target.android</span>],<br>
-                        &nbsp;&nbsp;<span class="code-prop">frameRate:</span> <span class="code-val">60.fps</span>,<br>
-                        &nbsp;&nbsp;<span class="code-prop">codeQuality:</span> <span class="code-val">Grade.A_Plus</span><br>
-                        );
-                    </div>
+                    <div class="console-card">
+                        <div class="console-header">
+                            <div class="window-dots">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                            <span class="console-title">flutter_app.dart</span>
+                        </div>
 
-                    <div class="console-specs">
-                        <div class="spec-pill">
-                            <i class="fa-brands fa-apple"></i>
-                            <div class="spec-info">
-                                <strong>iOS Ready</strong>
-                                <span>Native Swift/ObjC Bridge</span>
+                        <div class="code-block">
+                            <span class="code-keyword">final</span> app = <span
+                                class="code-class">MobileApplication</span>(<br>
+                            &nbsp;&nbsp;<span class="code-prop">architect:</span> <span class="code-string">"Clean
+                                Architecture"</span>,<br>
+                            &nbsp;&nbsp;<span class="code-prop">state:</span> <span class="code-string">"BLoC /
+                                Cubit"</span>,<br>
+                            &nbsp;&nbsp;<span class="code-prop">platforms:</span> [<span
+                                class="code-val">Target.iOS</span>, <span class="code-val">Target.android</span>],<br>
+                            &nbsp;&nbsp;<span class="code-prop">frameRate:</span> <span
+                                class="code-val">60.fps</span>,<br>
+                            &nbsp;&nbsp;<span class="code-prop">codeQuality:</span> <span
+                                class="code-val">Grade.A_Plus</span><br>
+                            );
+                        </div>
+
+                        <div class="console-specs">
+                            <div class="spec-pill">
+                                <i class="fa-brands fa-apple"></i>
+                                <div class="spec-info">
+                                    <strong>iOS Ready</strong>
+                                    <span>Native Swift/ObjC Bridge</span>
+                                </div>
+                            </div>
+                            <div class="spec-pill">
+                                <i class="fa-brands fa-android"></i>
+                                <div class="spec-info">
+                                    <strong>Android Ready</strong>
+                                    <span>Kotlin / Gradle Optimized</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="spec-pill">
-                            <i class="fa-brands fa-android"></i>
-                            <div class="spec-info">
-                                <strong>Android Ready</strong>
-                                <span>Kotlin / Gradle Optimized</span>
-                            </div>
+                    </div>
+
+                    <div class="floating-pill pill-2">
+                        <i class="fa-solid fa-rocket"></i>
+                        <span>Zero Frame Drops</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Infinite Tech Marquee -->
+    <div class="marquee-container">
+        <div class="marquee-track">
+            <div class="marquee-group">
+                <span class="marquee-item"><i class="fa-solid fa-mobile-screen"></i> Flutter SDK</span>
+                <span class="marquee-item"><i class="fa-solid fa-code"></i> Dart</span>
+                <span class="marquee-item"><i class="fa-solid fa-cubes"></i> BLoC State Management</span>
+                <span class="marquee-item"><i class="fa-solid fa-fire"></i> Firebase Ecosystem</span>
+                <span class="marquee-item"><i class="fa-solid fa-layer-group"></i> Clean Architecture</span>
+                <span class="marquee-item"><i class="fa-brands fa-apple"></i> iOS Development</span>
+                <span class="marquee-item"><i class="fa-brands fa-android"></i> Android Native</span>
+                <span class="marquee-item"><i class="fa-solid fa-network-wired"></i> RESTful APIs</span>
+                <span class="marquee-item"><i class="fa-solid fa-database"></i> SQLite & Hive</span>
+                <span class="marquee-item"><i class="fa-brands fa-github"></i> Git & CI/CD</span>
+                <span class="marquee-item"><i class="fa-brands fa-figma"></i> Pixel-Perfect Figma</span>
+            </div>
+            <!-- Duplicated for infinite loop -->
+            <div class="marquee-group" aria-hidden="true">
+                <span class="marquee-item"><i class="fa-solid fa-mobile-screen"></i> Flutter SDK</span>
+                <span class="marquee-item"><i class="fa-solid fa-code"></i> Dart</span>
+                <span class="marquee-item"><i class="fa-solid fa-cubes"></i> BLoC State Management</span>
+                <span class="marquee-item"><i class="fa-solid fa-fire"></i> Firebase Ecosystem</span>
+                <span class="marquee-item"><i class="fa-solid fa-layer-group"></i> Clean Architecture</span>
+                <span class="marquee-item"><i class="fa-brands fa-apple"></i> iOS Development</span>
+                <span class="marquee-item"><i class="fa-brands fa-android"></i> Android Native</span>
+                <span class="marquee-item"><i class="fa-solid fa-network-wired"></i> RESTful APIs</span>
+                <span class="marquee-item"><i class="fa-solid fa-database"></i> SQLite & Hive</span>
+                <span class="marquee-item"><i class="fa-brands fa-github"></i> Git & CI/CD</span>
+                <span class="marquee-item"><i class="fa-brands fa-figma"></i> Pixel-Perfect Figma</span>
+            </div>
+        </div>
+    </div>
+
+
+
+    <section id="about">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-image-wrapper">
+                    <img src="images/profile_studio_enhanced.png" alt="Mohamed Solaiman" class="about-avatar-img"
+                        onerror="this.src='images/finalImg.png'">
+                    <div class="about-experience-badge">
+                        <i class="fa-solid fa-medal"></i>
+                        <div>
+                            <strong>3+ Years</strong>
+                            <span data-i18n="about_badge_exp">Flutter Specialist</span>
                         </div>
                     </div>
                 </div>
 
-                <div class="floating-pill pill-2">
-                    <i class="fa-solid fa-rocket"></i>
-                    <span>Zero Frame Drops</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</header>
+                <div class="about-content">
+                    <div class="section-tag-badge">
+                        <i class="fa-solid fa-user-astronaut"></i>
+                        <span data-i18n="about_tag">Engineering Philosophy</span>
+                    </div>
+                    <h2 class="sub-title" data-i18n="about_title">Building The Future Of Mobile Applications</h2>
+                    <p style="color:var(--text-dim); font-size:1.08rem; line-height: 1.8; margin-bottom: 20px;"
+                        data-i18n="about_desc">
+                        Passionate Mobile Application Engineer specializing in cross-platform development with Flutter &
+                        Dart. I focus on bridging design and rock-solid architecture: BLoC, SOLID principles,
+                        offline-first caching, and sub-16ms frame rendering.
+                    </p>
 
-<!-- Infinite Tech Marquee -->
-<div class="marquee-container">
-    <div class="marquee-track">
-        <div class="marquee-group">
-            <span class="marquee-item"><i class="fa-solid fa-mobile-screen"></i> Flutter SDK</span>
-            <span class="marquee-item"><i class="fa-solid fa-code"></i> Dart</span>
-            <span class="marquee-item"><i class="fa-solid fa-cubes"></i> BLoC State Management</span>
-            <span class="marquee-item"><i class="fa-solid fa-fire"></i> Firebase Ecosystem</span>
-            <span class="marquee-item"><i class="fa-solid fa-layer-group"></i> Clean Architecture</span>
-            <span class="marquee-item"><i class="fa-brands fa-apple"></i> iOS Development</span>
-            <span class="marquee-item"><i class="fa-brands fa-android"></i> Android Native</span>
-            <span class="marquee-item"><i class="fa-solid fa-network-wired"></i> RESTful APIs</span>
-            <span class="marquee-item"><i class="fa-solid fa-database"></i> SQLite & Hive</span>
-            <span class="marquee-item"><i class="fa-brands fa-github"></i> Git & CI/CD</span>
-            <span class="marquee-item"><i class="fa-brands fa-figma"></i> Pixel-Perfect Figma</span>
-        </div>
-        <!-- Duplicated for infinite loop -->
-        <div class="marquee-group" aria-hidden="true">
-            <span class="marquee-item"><i class="fa-solid fa-mobile-screen"></i> Flutter SDK</span>
-            <span class="marquee-item"><i class="fa-solid fa-code"></i> Dart</span>
-            <span class="marquee-item"><i class="fa-solid fa-cubes"></i> BLoC State Management</span>
-            <span class="marquee-item"><i class="fa-solid fa-fire"></i> Firebase Ecosystem</span>
-            <span class="marquee-item"><i class="fa-solid fa-layer-group"></i> Clean Architecture</span>
-            <span class="marquee-item"><i class="fa-brands fa-apple"></i> iOS Development</span>
-            <span class="marquee-item"><i class="fa-brands fa-android"></i> Android Native</span>
-            <span class="marquee-item"><i class="fa-solid fa-network-wired"></i> RESTful APIs</span>
-            <span class="marquee-item"><i class="fa-solid fa-database"></i> SQLite & Hive</span>
-            <span class="marquee-item"><i class="fa-brands fa-github"></i> Git & CI/CD</span>
-            <span class="marquee-item"><i class="fa-brands fa-figma"></i> Pixel-Perfect Figma</span>
-        </div>
-    </div>
-</div>
-
-
-
-<section id="about">
-    <div class="container">
-        <div class="about-grid">
-            <div class="about-image-wrapper">
-                <img src="images/profile_studio_enhanced.png" alt="Mohamed Solaiman" class="about-avatar-img" onerror="this.src='images/finalImg.png'">
-                <div class="about-experience-badge">
-                    <i class="fa-solid fa-medal"></i>
-                    <div>
-                        <strong>3+ Years</strong>
-                        <span data-i18n="about_badge_exp">Flutter Specialist</span>
+                    <div class="about-bullets">
+                        <div class="about-bullet-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span data-i18n="about_b1">Clean Architecture & BLoC</span>
+                        </div>
+                        <div class="about-bullet-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span data-i18n="about_b2">Pixel-Perfect Responsive UI</span>
+                        </div>
+                        <div class="about-bullet-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span data-i18n="about_b3">Full-Cycle Store Deployment</span>
+                        </div>
+                        <div class="about-bullet-item">
+                            <i class="fa-solid fa-circle-check"></i>
+                            <span data-i18n="about_b4">Firebase & REST Integrations</span>
+                        </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </section>
 
-            <div class="about-content">
+    <section id="services">
+        <div class="container">
+            <div class="section-header-wrap">
                 <div class="section-tag-badge">
-                    <i class="fa-solid fa-user-astronaut"></i>
-                    <span data-i18n="about_tag">Engineering Philosophy</span>
+                    <i class="fa-solid fa-screwdriver-wrench"></i>
+                    <span data-i18n="services_badge">What I Deliver</span>
                 </div>
-                <h2 class="sub-title" data-i18n="about_title">Building The Future Of Mobile Applications</h2>
-                <p style="color:var(--text-dim); font-size:1.08rem; line-height: 1.8; margin-bottom: 20px;" data-i18n="about_desc">
-                    Passionate Mobile Application Engineer specializing in cross-platform development with Flutter & Dart. I focus on bridging design and rock-solid architecture: BLoC, SOLID principles, offline-first caching, and sub-16ms frame rendering.
-                </p>
-                
-                <div class="about-bullets">
-                    <div class="about-bullet-item">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span data-i18n="about_b1">Clean Architecture & BLoC</span>
+                <h2 class="sub-title" data-i18n="services_title">End-to-End Mobile Solutions</h2>
+                <p class="section-sub-desc" data-i18n="services_desc">Delivering production-grade applications that
+                    scale seamlessly from MVP to enterprise.</p>
+            </div>
+
+            <div class="services-grid-modern">
+                <div class="service-card-modern">
+                    <div class="service-icon-box">
+                        <i class="fa-solid fa-mobile-screen"></i>
                     </div>
-                    <div class="about-bullet-item">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span data-i18n="about_b2">Pixel-Perfect Responsive UI</span>
+                    <h3 data-i18n="ser_1_title">Cross-Platform App Development</h3>
+                    <p data-i18n="ser_1_desc">Native iOS and Android apps built with single codebase Flutter, saving 50%
+                        development time without sacrificing performance.</p>
+                    <ul class="service-features-list">
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_1_f1">iOS & Android Native
+                                compilation</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_1_f2">Zero frame-drop 60fps
+                                animations</span></li>
+                    </ul>
+                </div>
+
+                <div class="service-card-modern">
+                    <div class="service-icon-box">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i>
                     </div>
-                    <div class="about-bullet-item">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span data-i18n="about_b3">Full-Cycle Store Deployment</span>
+                    <h3 data-i18n="ser_2_title">Pixel-Perfect UI/UX Implementation</h3>
+                    <p data-i18n="ser_2_desc">Translating Figma, Adobe XD, or Sketch designs into fluid, responsive,
+                        accessible Flutter interactive interfaces.</p>
+                    <ul class="service-features-list">
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_2_f1">Adaptive tablet & mobile
+                                layouts</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_2_f2">Custom animations &
+                                micro-interactions</span></li>
+                    </ul>
+                </div>
+
+                <div class="service-card-modern">
+                    <div class="service-icon-box">
+                        <i class="fa-solid fa-layer-group"></i>
                     </div>
-                    <div class="about-bullet-item">
-                        <i class="fa-solid fa-circle-check"></i>
-                        <span data-i18n="about_b4">Firebase & REST Integrations</span>
+                    <h3 data-i18n="ser_3_title">Clean Architecture & State Management</h3>
+                    <p data-i18n="ser_3_desc">Structuring projects with BLoC/Cubit, separation of concerns, and testable
+                        codebases ready for enterprise scaling.</p>
+                    <ul class="service-features-list">
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_3_f1">BLoC, Cubit, Provider &
+                                GetX</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_3_f2">Modular & test-driven
+                                architecture</span></li>
+                    </ul>
+                </div>
+
+                <div class="service-card-modern">
+                    <div class="service-icon-box">
+                        <i class="fa-solid fa-cloud-bolt"></i>
                     </div>
+                    <h3 data-i18n="ser_4_title">Backend, APIs & Cloud Integration</h3>
+                    <p data-i18n="ser_4_desc">Seamless connectivity with REST APIs, GraphQL, Firebase Auth, Firestore,
+                        Cloud Functions, and offline Hive databases.</p>
+                    <ul class="service-features-list">
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_4_f1">Firebase & Supabase
+                                Ecosystem</span></li>
+                        <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_4_f2">Push Notifications & Local
+                                Caching</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="process">
+        <div class="container">
+            <div class="section-header-wrap">
+                <div class="section-tag-badge">
+                    <i class="fa-solid fa-diagram-project"></i>
+                    <span data-i18n="process_badge">How I Work</span>
+                </div>
+                <h2 class="sub-title" data-i18n="process_title">The Engineering Process</h2>
+                <p class="section-sub-desc" data-i18n="process_desc">A battle-tested 5-step methodology that guarantees
+                    quality, reliability, and on-time delivery.</p>
+            </div>
+
+            <div class="process-grid">
+                <div class="process-card">
+                    <span class="step-number">01</span>
+                    <h3 data-i18n="proc_1_title">Discovery & Scope</h3>
+                    <p data-i18n="proc_1_desc">Analyzing business goals, user personas, required features, and creating
+                        an actionable project timeline.</p>
+                </div>
+                <div class="process-card">
+                    <span class="step-number">02</span>
+                    <h3 data-i18n="proc_2_title">Architecture Design</h3>
+                    <p data-i18n="proc_2_desc">Selecting state management (BLoC), defining data contracts, and setting
+                        up clean code architecture layers.</p>
+                </div>
+                <div class="process-card">
+                    <span class="step-number">03</span>
+                    <h3 data-i18n="proc_3_title">Agile Development</h3>
+                    <p data-i18n="proc_3_desc">Building pixel-perfect UI screens, connecting APIs, and delivering weekly
+                        testable build milestones.</p>
+                </div>
+                <div class="process-card">
+                    <span class="step-number">04</span>
+                    <h3 data-i18n="proc_4_title">QA & Performance</h3>
+                    <p data-i18n="proc_4_desc">Profiling app memory, ensuring 60fps frame rate, and eliminating bugs
+                        across real Android & iOS devices.</p>
+                </div>
+                <div class="process-card">
+                    <span class="step-number">05</span>
+                    <h3 data-i18n="proc_5_title">Store Launch & CI/CD</h3>
+                    <p data-i18n="proc_5_desc">App Store and Google Play deployment, automated CI/CD pipelines, and
+                        post-launch maintenance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="skills">
+        <div class="container">
+            <div class="section-header-wrap">
+                <div class="section-tag-badge">
+                    <i class="fa-solid fa-microchip"></i>
+                    <span data-i18n="skills_badge">Core Capabilities</span>
+                </div>
+                <h2 class="sub-title" data-i18n="skills_title">Technical Expertise Matrix</h2>
+                <p class="section-sub-desc" data-i18n="skills_desc">A comprehensive view of technologies and tools I
+                    leverage to build robust software.</p>
+            </div>
+
+            <div class="tech-matrix-grid">
+                <div class="matrix-domain-card">
+                    <div class="domain-header">
+                        <i class="fa-solid fa-mobile-screen"></i>
+                        <h3 data-i18n="matrix_domain_1">Flutter & Mobile</h3>
+                    </div>
+                    <div class="skills-pills-wrap">
+                        <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Flutter SDK</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Dart (OOP & Async)</span>
+                        <span class="skill-pill-tag"><i class="fa-brands fa-apple"></i> iOS Development</span>
+                        <span class="skill-pill-tag"><i class="fa-brands fa-android"></i> Android Native</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Material 3 & Cupertino</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Custom Painters</span>
+                    </div>
+                </div>
+
+                <div class="matrix-domain-card">
+                    <div class="domain-header">
+                        <i class="fa-solid fa-cubes"></i>
+                        <h3 data-i18n="matrix_domain_2">State & Architecture</h3>
+                    </div>
+                    <div class="skills-pills-wrap">
+                        <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> BLoC / Cubit</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Clean Architecture</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Provider & GetX</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> SOLID Principles</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Dependency Injection</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Reactive Programming</span>
+                    </div>
+                </div>
+
+                <div class="matrix-domain-card">
+                    <div class="domain-header">
+                        <i class="fa-solid fa-database"></i>
+                        <h3 data-i18n="matrix_domain_3">Backend & Cloud</h3>
+                    </div>
+                    <div class="skills-pills-wrap">
+                        <span class="skill-pill-tag"><i class="fa-solid fa-fire"></i> Firebase Firestore</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-fire"></i> Firebase Auth</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-bell"></i> Push Notifications (FCM)</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-network-wired"></i> RESTful APIs / Dio</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-database"></i> SQLite & Hive</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-cloud"></i> Cloud Storage</span>
+                    </div>
+                </div>
+
+                <div class="matrix-domain-card">
+                    <div class="domain-header">
+                        <i class="fa-solid fa-toolbox"></i>
+                        <h3 data-i18n="matrix_domain_4">Tools & Quality</h3>
+                    </div>
+                    <div class="skills-pills-wrap">
+                        <span class="skill-pill-tag"><i class="fa-brands fa-github"></i> Git & GitHub Actions</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-infinity"></i> CI/CD Pipelines</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-vial"></i> Unit & Widget Testing</span>
+                        <span class="skill-pill-tag"><i class="fa-brands fa-figma"></i> Figma to Code</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-bug"></i> Flutter DevTools</span>
+                        <span class="skill-pill-tag"><i class="fa-solid fa-terminal"></i> Postman / API Testing</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Impact Stats Banner -->
+    <div class="container" style="margin-top: 40px;">
+        <div class="impact-stats-card">
+            <div class="impact-stats-grid">
+                <div class="impact-stat-item">
+                    <h3>100%</h3>
+                    <p data-i18n="impact_store">App Store & Play Store Approved</p>
+                </div>
+                <div class="impact-stat-item">
+                    <h3>60 FPS</h3>
+                    <p data-i18n="impact_fps">Guaranteed Fluid Motion</p>
+                </div>
+                <div class="impact-stat-item">
+                    <h3>15+</h3>
+                    <p data-i18n="impact_projects">Shipped Modules & Apps</p>
+                </div>
+                <div class="impact-stat-item">
+                    <h3>100%</h3>
+                    <p data-i18n="impact_client">Client Satisfaction & Support</p>
                 </div>
             </div>
         </div>
     </div>
-</section>
 
-<section id="services">
-    <div class="container">
-        <div class="section-header-wrap">
-            <div class="section-tag-badge">
-                <i class="fa-solid fa-screwdriver-wrench"></i>
-                <span data-i18n="services_badge">What I Deliver</span>
-            </div>
-            <h2 class="sub-title" data-i18n="services_title">End-to-End Mobile Solutions</h2>
-            <p class="section-sub-desc" data-i18n="services_desc">Delivering production-grade applications that scale seamlessly from MVP to enterprise.</p>
-        </div>
-
-        <div class="services-grid-modern">
-            <div class="service-card-modern">
-                <div class="service-icon-box">
+    <section id="portfolio">
+        <div class="container">
+            <div class="section-header-wrap">
+                <div class="section-tag-badge">
                     <i class="fa-solid fa-mobile-screen"></i>
+                    <span data-i18n="projects_badge">Production-Ready Applications</span>
                 </div>
-                <h3 data-i18n="ser_1_title">Cross-Platform App Development</h3>
-                <p data-i18n="ser_1_desc">Native iOS and Android apps built with single codebase Flutter, saving 50% development time without sacrificing performance.</p>
-                <ul class="service-features-list">
-                    <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_1_f1">iOS & Android Native compilation</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_1_f2">Zero frame-drop 60fps animations</span></li>
-                </ul>
+                <h2 class="sub-title" data-i18n="projects_title">Featured Work & Case Studies</h2>
+                <p class="section-sub-desc" data-i18n="projects_desc">Real-world Flutter apps engineered for high
+                    performance, intuitive UX, and clean scalable architecture.</p>
             </div>
 
-            <div class="service-card-modern">
-                <div class="service-icon-box">
-                    <i class="fa-solid fa-wand-magic-sparkles"></i>
-                </div>
-                <h3 data-i18n="ser_2_title">Pixel-Perfect UI/UX Implementation</h3>
-                <p data-i18n="ser_2_desc">Translating Figma, Adobe XD, or Sketch designs into fluid, responsive, accessible Flutter interactive interfaces.</p>
-                <ul class="service-features-list">
-                    <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_2_f1">Adaptive tablet & mobile layouts</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_2_f2">Custom animations & micro-interactions</span></li>
-                </ul>
+            <!-- Filter Tabs -->
+            <div class="portfolio-filter-bar" id="portfolioFilters">
+                <button class="filter-tab active" data-filter="all" data-i18n="filter_all">All Projects</button>
+                <button class="filter-tab" data-filter="commercial" data-i18n="filter_commercial">Commercial</button>
+                <button class="filter-tab" data-filter="personal" data-i18n="filter_personal">Personal</button>
+                <button class="filter-tab" data-filter="freelance" data-i18n="filter_freelance">Freelance</button>
             </div>
 
-            <div class="service-card-modern">
-                <div class="service-icon-box">
-                    <i class="fa-solid fa-layer-group"></i>
-                </div>
-                <h3 data-i18n="ser_3_title">Clean Architecture & State Management</h3>
-                <p data-i18n="ser_3_desc">Structuring projects with BLoC/Cubit, separation of concerns, and testable codebases ready for enterprise scaling.</p>
-                <ul class="service-features-list">
-                    <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_3_f1">BLoC, Cubit, Provider & GetX</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_3_f2">Modular & test-driven architecture</span></li>
-                </ul>
-            </div>
-
-            <div class="service-card-modern">
-                <div class="service-icon-box">
-                    <i class="fa-solid fa-cloud-bolt"></i>
-                </div>
-                <h3 data-i18n="ser_4_title">Backend, APIs & Cloud Integration</h3>
-                <p data-i18n="ser_4_desc">Seamless connectivity with REST APIs, GraphQL, Firebase Auth, Firestore, Cloud Functions, and offline Hive databases.</p>
-                <ul class="service-features-list">
-                    <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_4_f1">Firebase & Supabase Ecosystem</span></li>
-                    <li><i class="fa-solid fa-check"></i> <span data-i18n="ser_4_f2">Push Notifications & Local Caching</span></li>
-                </ul>
+            <!-- Projects Showcase Container -->
+            <div class="showcase-container" id="firestoreProjects">
+                <div class="spinner"></div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section id="process">
-    <div class="container">
-        <div class="section-header-wrap">
-            <div class="section-tag-badge">
-                <i class="fa-solid fa-diagram-project"></i>
-                <span data-i18n="process_badge">How I Work</span>
-            </div>
-            <h2 class="sub-title" data-i18n="process_title">The Engineering Process</h2>
-            <p class="section-sub-desc" data-i18n="process_desc">A battle-tested 5-step methodology that guarantees quality, reliability, and on-time delivery.</p>
-        </div>
-
-        <div class="process-grid">
-            <div class="process-card">
-                <span class="step-number">01</span>
-                <h3 data-i18n="proc_1_title">Discovery & Scope</h3>
-                <p data-i18n="proc_1_desc">Analyzing business goals, user personas, required features, and creating an actionable project timeline.</p>
-            </div>
-            <div class="process-card">
-                <span class="step-number">02</span>
-                <h3 data-i18n="proc_2_title">Architecture Design</h3>
-                <p data-i18n="proc_2_desc">Selecting state management (BLoC), defining data contracts, and setting up clean code architecture layers.</p>
-            </div>
-            <div class="process-card">
-                <span class="step-number">03</span>
-                <h3 data-i18n="proc_3_title">Agile Development</h3>
-                <p data-i18n="proc_3_desc">Building pixel-perfect UI screens, connecting APIs, and delivering weekly testable build milestones.</p>
-            </div>
-            <div class="process-card">
-                <span class="step-number">04</span>
-                <h3 data-i18n="proc_4_title">QA & Performance</h3>
-                <p data-i18n="proc_4_desc">Profiling app memory, ensuring 60fps frame rate, and eliminating bugs across real Android & iOS devices.</p>
-            </div>
-            <div class="process-card">
-                <span class="step-number">05</span>
-                <h3 data-i18n="proc_5_title">Store Launch & CI/CD</h3>
-                <p data-i18n="proc_5_desc">App Store and Google Play deployment, automated CI/CD pipelines, and post-launch maintenance.</p>
+    <section id="contact">
+        <div class="container">
+            <div class="contact-wrapper">
+                <div class="contact-info-side">
+                    <h2 data-i18n="contact_title">Let's Build Something Great.</h2>
+                    <p style="color:var(--text-dim); margin-bottom: 30px;" data-i18n="contact_sub">Available for
+                        freelance projects and full-time roles.</p>
+                    <div class="contact-details">
+                        <a href="mailto:mohamedsolaiman707@gmail.com" class="contact-item">
+                            <i class="fa-solid fa-envelope"></i>
+                            <span>mohamedsolaiman707@gmail.com</span>
+                        </a>
+                        <a href="tel:+201014250577" class="contact-item">
+                            <i class="fa-solid fa-phone"></i>
+                            <span>+20 101 425 0577</span>
+                        </a>
+                    </div>
+                    <div class="social-links">
+                        <a href="https://github.com/mohamedSolaiman11/" target="_blank" class="social-btn"><i
+                                class="fa-brands fa-github"></i></a>
+                        <a href="https://www.linkedin.com/in/mohamed-solaiman-a2b9921b4" target="_blank"
+                            class="social-btn"><i class="fa-brands fa-linkedin"></i></a>
+                        <a href="https://wa.me/201014250577" target="_blank" class="social-btn"><i
+                                class="fa-brands fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <form action="https://formspree.io/f/xnqkrjyg" method="POST" class="contact-form">
+                    <input type="text" name="name" id="f-name" required class="form-input">
+                    <input type="email" name="email" id="f-email" required class="form-input">
+                    <textarea name="message" id="f-msg" rows="5" required class="form-input"></textarea>
+                    <button type="submit" class="btn-primary" id="f-btn" style="width: 100%;" data-i18n="f_btn">Send
+                        Message</button>
+                </form>
             </div>
         </div>
-    </div>
-</section>
+    </section>
 
-<section id="skills">
-    <div class="container">
-        <div class="section-header-wrap">
-            <div class="section-tag-badge">
-                <i class="fa-solid fa-microchip"></i>
-                <span data-i18n="skills_badge">Core Capabilities</span>
-            </div>
-            <h2 class="sub-title" data-i18n="skills_title">Technical Expertise Matrix</h2>
-            <p class="section-sub-desc" data-i18n="skills_desc">A comprehensive view of technologies and tools I leverage to build robust software.</p>
-        </div>
+    <footer style="padding: 50px 0; text-align: center; border-top: 1px solid var(--border-color);">
+        <p style="color: var(--text-dim); font-size: 0.9rem; font-weight: 600;">&copy; 2026 Mohamed Solaiman. All Rights
+            Reserved.</p>
+    </footer>
 
-        <div class="tech-matrix-grid">
-            <div class="matrix-domain-card">
-                <div class="domain-header">
-                    <i class="fa-solid fa-mobile-screen"></i>
-                    <h3 data-i18n="matrix_domain_1">Flutter & Mobile</h3>
-                </div>
-                <div class="skills-pills-wrap">
-                    <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Flutter SDK</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Dart (OOP & Async)</span>
-                    <span class="skill-pill-tag"><i class="fa-brands fa-apple"></i> iOS Development</span>
-                    <span class="skill-pill-tag"><i class="fa-brands fa-android"></i> Android Native</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Material 3 & Cupertino</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Custom Painters</span>
-                </div>
-            </div>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
-            <div class="matrix-domain-card">
-                <div class="domain-header">
-                    <i class="fa-solid fa-cubes"></i>
-                    <h3 data-i18n="matrix_domain_2">State & Architecture</h3>
-                </div>
-                <div class="skills-pills-wrap">
-                    <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> BLoC / Cubit</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Clean Architecture</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Provider & GetX</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> SOLID Principles</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Dependency Injection</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-check"></i> Reactive Programming</span>
-                </div>
-            </div>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAFGihdfZEWJM7iJYh45wRWYCYphVG4-G0",
+            authDomain: "portfolio-9fd63.firebaseapp.com",
+            projectId: "portfolio-9fd63",
+            storageBucket: "portfolio-9fd63.appspot.com",
+            messagingSenderId: "562837517190",
+            appId: "1:562837517190:web:173b5edb9f4ebdafdf7207"
+        };
 
-            <div class="matrix-domain-card">
-                <div class="domain-header">
-                    <i class="fa-solid fa-database"></i>
-                    <h3 data-i18n="matrix_domain_3">Backend & Cloud</h3>
-                </div>
-                <div class="skills-pills-wrap">
-                    <span class="skill-pill-tag"><i class="fa-solid fa-fire"></i> Firebase Firestore</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-fire"></i> Firebase Auth</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-bell"></i> Push Notifications (FCM)</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-network-wired"></i> RESTful APIs / Dio</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-database"></i> SQLite & Hive</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-cloud"></i> Cloud Storage</span>
-                </div>
-            </div>
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-            <div class="matrix-domain-card">
-                <div class="domain-header">
-                    <i class="fa-solid fa-toolbox"></i>
-                    <h3 data-i18n="matrix_domain_4">Tools & Quality</h3>
-                </div>
-                <div class="skills-pills-wrap">
-                    <span class="skill-pill-tag"><i class="fa-brands fa-github"></i> Git & GitHub Actions</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-infinity"></i> CI/CD Pipelines</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-vial"></i> Unit & Widget Testing</span>
-                    <span class="skill-pill-tag"><i class="fa-brands fa-figma"></i> Figma to Code</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-bug"></i> Flutter DevTools</span>
-                    <span class="skill-pill-tag"><i class="fa-solid fa-terminal"></i> Postman / API Testing</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+        const translations = {
+            en: {
+                nav_home: "Home", nav_about: "About", nav_services: "Services", nav_process: "Process", nav_skills: "Skills", nav_projects: "Projects", nav_contact: "Contact", nav_admin: "Admin",
+                nav_status: "Available for Projects",
+                hero_badge: "Senior Flutter & Mobile Application Engineer",
+                hero_title: "Crafting Scalable Apps That Users Love",
+                hero_desc: "Specializing in high-performance iOS & Android mobile applications built with Clean Architecture, BLoC, and pixel-perfect design.",
+                btn_projects: "Explore Featured Work", btn_cv: "Download Resume",
+                stat_exp: "Years Flutter Exp", stat_clean: "Clean Architecture", stat_perf: "Smooth Performance",
 
-<!-- Impact Stats Banner -->
-<div class="container" style="margin-top: 40px;">
-    <div class="impact-stats-card">
-        <div class="impact-stats-grid">
-            <div class="impact-stat-item">
-                <h3>100%</h3>
-                <p data-i18n="impact_store">App Store & Play Store Approved</p>
-            </div>
-            <div class="impact-stat-item">
-                <h3>60 FPS</h3>
-                <p data-i18n="impact_fps">Guaranteed Fluid Motion</p>
-            </div>
-            <div class="impact-stat-item">
-                <h3>15+</h3>
-                <p data-i18n="impact_projects">Shipped Modules & Apps</p>
-            </div>
-            <div class="impact-stat-item">
-                <h3>100%</h3>
-                <p data-i18n="impact_client">Client Satisfaction & Support</p>
-            </div>
-        </div>
-    </div>
-</div>
+                about_badge_exp: "Flutter Specialist",
+                about_tag: "Engineering Philosophy",
+                about_title: "Building The Future Of Mobile Applications",
+                about_desc: "Passionate Mobile Application Engineer specializing in cross-platform development with Flutter & Dart. I focus on bridging design and rock-solid architecture: BLoC, SOLID principles, offline-first caching, and sub-16ms frame rendering.",
+                about_b1: "Clean Architecture & BLoC",
+                about_b2: "Pixel-Perfect Responsive UI",
+                about_b3: "Full-Cycle Store Deployment",
+                about_b4: "Firebase & REST Integrations",
 
-<section id="portfolio">
-    <div class="container">
-        <div class="section-header-wrap">
-            <div class="section-tag-badge">
-                <i class="fa-solid fa-mobile-screen"></i>
-                <span data-i18n="projects_badge">Production-Ready Applications</span>
-            </div>
-            <h2 class="sub-title" data-i18n="projects_title">Featured Work & Case Studies</h2>
-            <p class="section-sub-desc" data-i18n="projects_desc">Real-world Flutter apps engineered for high performance, intuitive UX, and clean scalable architecture.</p>
-        </div>
+                services_badge: "What I Deliver",
+                services_title: "End-to-End Mobile Solutions",
+                services_desc: "Delivering production-grade applications that scale seamlessly from MVP to enterprise.",
+                ser_1_title: "Cross-Platform App Development",
+                ser_1_desc: "Native iOS and Android apps built with single codebase Flutter, saving 50% development time without sacrificing performance.",
+                ser_1_f1: "iOS & Android Native compilation",
+                ser_1_f2: "Zero frame-drop 60fps animations",
+                ser_2_title: "Pixel-Perfect UI/UX Implementation",
+                ser_2_desc: "Translating Figma, Adobe XD, or Sketch designs into fluid, responsive, accessible Flutter interactive interfaces.",
+                ser_2_f1: "Adaptive tablet & mobile layouts",
+                ser_2_f2: "Custom animations & micro-interactions",
+                ser_3_title: "Clean Architecture & State Management",
+                ser_3_desc: "Structuring projects with BLoC/Cubit, separation of concerns, and testable codebases ready for enterprise scaling.",
+                ser_3_f1: "BLoC, Cubit, Provider & GetX",
+                ser_3_f2: "Modular & test-driven architecture",
+                ser_4_title: "Backend, APIs & Cloud Integration",
+                ser_4_desc: "Seamless connectivity with REST APIs, GraphQL, Firebase Auth, Firestore, Cloud Functions, and offline Hive databases.",
+                ser_4_f1: "Firebase & Supabase Ecosystem",
+                ser_4_f2: "Push Notifications & Local Caching",
 
-        <!-- Filter Tabs -->
-        <div class="portfolio-filter-bar" id="portfolioFilters">
-            <button class="filter-tab active" data-filter="all" data-i18n="filter_all">All Projects</button>
-            <button class="filter-tab" data-filter="commercial" data-i18n="filter_commercial">Commercial</button>
-            <button class="filter-tab" data-filter="personal" data-i18n="filter_personal">Personal</button>
-            <button class="filter-tab" data-filter="freelance" data-i18n="filter_freelance">Freelance</button>
-        </div>
+                process_badge: "How I Work",
+                process_title: "The Engineering Process",
+                process_desc: "A battle-tested 5-step methodology that guarantees quality, reliability, and on-time delivery.",
+                proc_1_title: "Discovery & Scope",
+                proc_1_desc: "Analyzing business goals, user personas, required features, and creating an actionable project timeline.",
+                proc_2_title: "Architecture Design",
+                proc_2_desc: "Selecting state management (BLoC), defining data contracts, and setting up clean code architecture layers.",
+                proc_3_title: "Agile Development",
+                proc_3_desc: "Building pixel-perfect UI screens, connecting APIs, and delivering weekly testable build milestones.",
+                proc_4_title: "QA & Performance",
+                proc_4_desc: "Profiling app memory, ensuring 60fps frame rate, and eliminating bugs across real Android & iOS devices.",
+                proc_5_title: "Store Launch & CI/CD",
+                proc_5_desc: "App Store and Google Play deployment, automated CI/CD pipelines, and post-launch maintenance.",
 
-        <!-- Projects Showcase Container -->
-        <div class="showcase-container" id="firestoreProjects">
-            <div class="spinner"></div>
-        </div>
-    </div>
-</section>
+                skills_badge: "Core Capabilities",
+                skills_title: "Technical Expertise Matrix",
+                skills_desc: "A comprehensive view of technologies and tools I leverage to build robust software.",
+                matrix_domain_1: "Flutter & Mobile",
+                matrix_domain_2: "State & Architecture",
+                matrix_domain_3: "Backend & Cloud",
+                matrix_domain_4: "Tools & Quality",
 
-<section id="contact">
-    <div class="container">
-        <div class="contact-wrapper">
-            <div class="contact-info-side">
-                <h2 data-i18n="contact_title">Let's Build Something Great.</h2>
-                <p style="color:var(--text-dim); margin-bottom: 30px;" data-i18n="contact_sub">Available for freelance projects and full-time roles.</p>
-                <div class="contact-details">
-                    <a href="mailto:mohamedsolaiman707@gmail.com" class="contact-item">
-                        <i class="fa-solid fa-envelope"></i>
-                        <span>mohamedsolaiman707@gmail.com</span>
-                    </a>
-                    <a href="tel:+201014250577" class="contact-item">
-                        <i class="fa-solid fa-phone"></i>
-                        <span>+20 101 425 0577</span>
-                    </a>
-                </div>
-                <div class="social-links">
-                    <a href="https://github.com/mohamedSolaiman11/" target="_blank" class="social-btn"><i class="fa-brands fa-github"></i></a>
-                    <a href="https://www.linkedin.com/in/mohamed-solaiman-a2b9921b4" target="_blank" class="social-btn"><i class="fa-brands fa-linkedin"></i></a>
-                    <a href="https://wa.me/201014250577" target="_blank" class="social-btn"><i class="fa-brands fa-whatsapp"></i></a>
-                </div>
-            </div>
-            <form action="https://formspree.io/f/xnqkrjyg" method="POST" class="contact-form">
-                <input type="text" name="name" id="f-name" required class="form-input">
-                <input type="email" name="email" id="f-email" required class="form-input">
-                <textarea name="message" id="f-msg" rows="5" required class="form-input"></textarea>
-                <button type="submit" class="btn-primary" id="f-btn" style="width: 100%;" data-i18n="f_btn">Send Message</button>
-            </form>
-        </div>
-    </div>
-</section>
+                impact_store: "App Store & Play Store Approved",
+                impact_fps: "Guaranteed Fluid Motion",
+                impact_projects: "Shipped Modules & Apps",
+                impact_client: "Client Satisfaction & Support",
 
-<footer style="padding: 50px 0; text-align: center; border-top: 1px solid var(--border-color);">
-    <p style="color: var(--text-dim); font-size: 0.9rem; font-weight: 600;">&copy; 2026 Mohamed Solaiman. All Rights Reserved.</p>
-</footer>
+                projects_badge: "Production-Ready Applications",
+                projects_title: "Featured Work & Case Studies",
+                projects_desc: "Real-world Flutter apps engineered for high performance, intuitive UX, and clean scalable architecture.",
+                filter_all: "All Projects", filter_commercial: "Commercial", filter_personal: "Personal", filter_freelance: "Freelance",
+                btn_download: "Get App", btn_github: "Source Code", btn_video: "Watch Demo", btn_live_preview: "Live App Demo",
+                btn_case: "Case Study Details →",
+                no_projects: "No projects found under this category.",
+                contact_title: "Let's Build Something Great.", contact_sub: "Available for freelance projects and full-time roles.",
+                f_name: "Full Name", f_email: "Email Address", f_msg: "Tell me about your project...", f_btn: "Send Message"
+            },
+            ar: {
+                nav_home: "الرئيسية", nav_about: "عني", nav_services: "خدماتي", nav_process: "منهجية العمل", nav_skills: "المهارات", nav_projects: "المشاريع", nav_contact: "تواصل", nav_admin: "لوحة التحكم",
+                nav_status: "متاح للمشاريع الجديدة",
+                hero_badge: "مهندس تطبيقات موبايل وخبير فلاتر",
+                hero_title: "أبني تطبيقات موبايل استثنائية وسريعة",
+                hero_desc: "متخصص في بناء تطبيقات موبايل عالية الأداء لأنظمة iOS و Android بمعمارية نظيفة وإدارة حالة متقدمة (BLoC).",
+                btn_projects: "استكشف أبرز الأعمال", btn_cv: "تحميل السيرة الذاتية",
+                stat_exp: "سنوات خبرة فلاتر", stat_clean: "معمارية كود نظيفة", stat_perf: "أداء سلس 60 إطار/ث",
 
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-    import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+                about_badge_exp: "خبير فلاتر وموبايل",
+                about_tag: "فلسفة التطوير",
+                about_title: "أبني مستقبل تطبيقات الهواتف الذكية",
+                about_desc: "مهندس تطبيقات موبايل شغوف متخصص في تطوير التطبيقات متعددة المنصات باستخدام Flutter & Dart. أركز على دمج روعة التصميم مع صلابة المعمارية البرمجية: BLoC، مبادئ SOLID، التخزين المؤقت Offline-First، ومعدل إطارات سلس دون تقطيع.",
+                about_b1: "معمارية نظيفة وإدارة حالة BLoC",
+                about_b2: "واجهات فائقة الدقة متجاوبة",
+                about_b3: "نشر كامل على App Store و Google Play",
+                about_b4: "ربط متكامل مع Firebase و REST APIs",
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyAFGihdfZEWJM7iJYh45wRWYCYphVG4-G0",
-        authDomain: "portfolio-9fd63.firebaseapp.com",
-        projectId: "portfolio-9fd63",
-        storageBucket: "portfolio-9fd63.appspot.com",
-        messagingSenderId: "562837517190",
-        appId: "1:562837517190:web:173b5edb9f4ebdafdf7207"
-    };
+                services_badge: "ماذا أقدم",
+                services_title: "حلول برمجية متكاملة للموبايل",
+                services_desc: "تسليم تطبيقات بجودة إنتاجية عالية تتوسع بسلاسة من نموذج أولي (MVP) إلى مشاريع مؤسسية ضخمة.",
+                ser_1_title: "تطوير تطبيقات متعددة المنصات",
+                ser_1_desc: "بناء تطبيقات لنظامي iOS و Android من قاعدة كود فلاتر موحدة، مما يوفر 50% من الوقت دون أدنى مساومة على الأداء.",
+                ser_1_f1: "تجميع أصلي Native لأنظمة iOS و Android",
+                ser_1_f2: "أنيميشن فائق السلاسة بمعدل 60 إطار/ثانية",
+                ser_2_title: "تحويل التصاميم إلى واجهات حقيقية",
+                ser_2_desc: "تحويل ملفات Figma و Adobe XD إلى شاشات فلاتر تفاعلية متجاوبة وسريعة بدقة بيكسل متناهية.",
+                ser_2_f1: "تجاوب كامل مع مختلف مقاسات الهواتف والتابلت",
+                ser_2_f2: "حركات تفاعلية دقيقة Micro-interactions",
+                ser_3_title: "معمارية برمجية وإدارة حالة BLoC",
+                ser_3_desc: "هيكلة المشاريع بنمط Clean Architecture وفصل المهام لبناء كود قابل للفحص والصيانة والتوسع المؤسسي.",
+                ser_3_f1: "إدارة حالة متقدمة بـ BLoC و Cubit",
+                ser_3_f2: "بنية برمجية معيارية قابلة للاختبار",
+                ser_4_title: "ربط السيرفر والـ APIs والسحابة",
+                ser_4_desc: "توصيل سلس مع واجهات REST APIs و GraphQL وخدمات Firebase Authentication و Firestore والإشعارات وقواعد البيانات المحلية.",
+                ser_4_f1: "بيئة Firebase و Supabase السحابية",
+                ser_4_f2: "إشعارات فورية وتخزين محلي Offline",
 
-    const app = initializeApp(firebaseConfig);
-    const db = getFirestore(app);
+                process_badge: "كيف أعمل",
+                process_title: "منهجية وهندسة العمل",
+                process_desc: "خطة عمل احترافية من 5 خطوات تضمن أعلى معايير الجودة، الاستقرار، والالتزام الصارم بالمواعيد.",
+                proc_1_title: "تحليل الفكرة والنطاق",
+                proc_1_desc: "دراسة أهداف المشروع، شريحة المستخدمين، والميزات المطلوبة بدقة وتحديد جدول زمني محكم.",
+                proc_2_title: "تصميم المعمارية البرمجية",
+                proc_2_desc: "اختيار نمط إدارة الحالة وتحديد هيكل البيانات وطبقات الكود النظيف القابل للتوسع.",
+                proc_3_title: "التطوير والبرمجة الرشيقة",
+                proc_3_desc: "بناء الشاشات وربط الـ APIs وإرسال نسخ تجريبية أسبوعية للعميل لمتابعة التقدم أولاً بأول.",
+                proc_4_title: "فحص الجودة واختبار الأداء",
+                proc_4_desc: "مراقبة استهلاك الذاكرة، وضمان ثبات معدل 60 إطار/ث، وفحص التطبيق على هواتف أندرويد و iOS حقيقية.",
+                proc_5_title: "النشر على المتاجر والدعم",
+                proc_5_desc: "رفع التطبيق على App Store و Google Play وضبط خطوط CI/CD مع المتابعة والصيانة.",
 
-    const translations = {
-        en: {
-            nav_home: "Home", nav_about: "About", nav_services: "Services", nav_process: "Process", nav_skills: "Skills", nav_projects: "Projects", nav_contact: "Contact", nav_admin: "Admin",
-            nav_status: "Available for Projects",
-            hero_badge: "Senior Flutter & Mobile Application Engineer", 
-            hero_title: "Crafting Scalable Apps That Users Love", 
-            hero_desc: "Specializing in high-performance iOS & Android mobile applications built with Clean Architecture, BLoC, and pixel-perfect design.",
-            btn_projects: "Explore Featured Work", btn_cv: "Download Resume",
-            stat_exp: "Years Flutter Exp", stat_clean: "Clean Architecture", stat_perf: "Smooth Performance",
-            
-            about_badge_exp: "Flutter Specialist",
-            about_tag: "Engineering Philosophy",
-            about_title: "Building The Future Of Mobile Applications",
-            about_desc: "Passionate Mobile Application Engineer specializing in cross-platform development with Flutter & Dart. I focus on bridging design and rock-solid architecture: BLoC, SOLID principles, offline-first caching, and sub-16ms frame rendering.",
-            about_b1: "Clean Architecture & BLoC",
-            about_b2: "Pixel-Perfect Responsive UI",
-            about_b3: "Full-Cycle Store Deployment",
-            about_b4: "Firebase & REST Integrations",
+                skills_badge: "القدرات التقنية",
+                skills_title: "مصفوفة المهارات والخبرات",
+                skills_desc: "نظرة شاملة على التقنيات والأدوات التي أعتمد عليها في بناء التطبيقات عالية الاعتمادية.",
+                matrix_domain_1: "فلاتر والموبايل",
+                matrix_domain_2: "المعمارية وإدارة الحالة",
+                matrix_domain_3: "الباك إند والسحابة",
+                matrix_domain_4: "الأدوات وجودة الكود",
 
-            services_badge: "What I Deliver",
-            services_title: "End-to-End Mobile Solutions",
-            services_desc: "Delivering production-grade applications that scale seamlessly from MVP to enterprise.",
-            ser_1_title: "Cross-Platform App Development",
-            ser_1_desc: "Native iOS and Android apps built with single codebase Flutter, saving 50% development time without sacrificing performance.",
-            ser_1_f1: "iOS & Android Native compilation",
-            ser_1_f2: "Zero frame-drop 60fps animations",
-            ser_2_title: "Pixel-Perfect UI/UX Implementation",
-            ser_2_desc: "Translating Figma, Adobe XD, or Sketch designs into fluid, responsive, accessible Flutter interactive interfaces.",
-            ser_2_f1: "Adaptive tablet & mobile layouts",
-            ser_2_f2: "Custom animations & micro-interactions",
-            ser_3_title: "Clean Architecture & State Management",
-            ser_3_desc: "Structuring projects with BLoC/Cubit, separation of concerns, and testable codebases ready for enterprise scaling.",
-            ser_3_f1: "BLoC, Cubit, Provider & GetX",
-            ser_3_f2: "Modular & test-driven architecture",
-            ser_4_title: "Backend, APIs & Cloud Integration",
-            ser_4_desc: "Seamless connectivity with REST APIs, GraphQL, Firebase Auth, Firestore, Cloud Functions, and offline Hive databases.",
-            ser_4_f1: "Firebase & Supabase Ecosystem",
-            ser_4_f2: "Push Notifications & Local Caching",
+                impact_store: "معتمدة على App Store و Google Play",
+                impact_fps: "حركة فائقة السلاسة 60 إطار/ث",
+                impact_projects: "+15 تطبيقاً وموديول برمجي",
+                impact_client: "رضا تام ودعم فني مستمر",
 
-            process_badge: "How I Work",
-            process_title: "The Engineering Process",
-            process_desc: "A battle-tested 5-step methodology that guarantees quality, reliability, and on-time delivery.",
-            proc_1_title: "Discovery & Scope",
-            proc_1_desc: "Analyzing business goals, user personas, required features, and creating an actionable project timeline.",
-            proc_2_title: "Architecture Design",
-            proc_2_desc: "Selecting state management (BLoC), defining data contracts, and setting up clean code architecture layers.",
-            proc_3_title: "Agile Development",
-            proc_3_desc: "Building pixel-perfect UI screens, connecting APIs, and delivering weekly testable build milestones.",
-            proc_4_title: "QA & Performance",
-            proc_4_desc: "Profiling app memory, ensuring 60fps frame rate, and eliminating bugs across real Android & iOS devices.",
-            proc_5_title: "Store Launch & CI/CD",
-            proc_5_desc: "App Store and Google Play deployment, automated CI/CD pipelines, and post-launch maintenance.",
-
-            skills_badge: "Core Capabilities",
-            skills_title: "Technical Expertise Matrix",
-            skills_desc: "A comprehensive view of technologies and tools I leverage to build robust software.",
-            matrix_domain_1: "Flutter & Mobile",
-            matrix_domain_2: "State & Architecture",
-            matrix_domain_3: "Backend & Cloud",
-            matrix_domain_4: "Tools & Quality",
-
-            impact_store: "App Store & Play Store Approved",
-            impact_fps: "Guaranteed Fluid Motion",
-            impact_projects: "Shipped Modules & Apps",
-            impact_client: "Client Satisfaction & Support",
-
-            projects_badge: "Production-Ready Applications",
-            projects_title: "Featured Work & Case Studies",
-            projects_desc: "Real-world Flutter apps engineered for high performance, intuitive UX, and clean scalable architecture.",
-            filter_all: "All Projects", filter_commercial: "Commercial", filter_personal: "Personal", filter_freelance: "Freelance",
-            btn_download: "Get App", btn_github: "Source Code", btn_video: "Watch Demo", btn_live_preview: "Live App Demo",
-            btn_case: "Case Study Details →",
-            no_projects: "No projects found under this category.",
-            contact_title: "Let's Build Something Great.", contact_sub: "Available for freelance projects and full-time roles.",
-            f_name: "Full Name", f_email: "Email Address", f_msg: "Tell me about your project...", f_btn: "Send Message"
-        },
-        ar: {
-            nav_home: "الرئيسية", nav_about: "عني", nav_services: "خدماتي", nav_process: "منهجية العمل", nav_skills: "المهارات", nav_projects: "المشاريع", nav_contact: "تواصل", nav_admin: "لوحة التحكم",
-            nav_status: "متاح للمشاريع الجديدة",
-            hero_badge: "مهندس تطبيقات موبايل وخبير فلاتر", 
-            hero_title: "أبني تطبيقات موبايل استثنائية وسريعة", 
-            hero_desc: "متخصص في بناء تطبيقات موبايل عالية الأداء لأنظمة iOS و Android بمعمارية نظيفة وإدارة حالة متقدمة (BLoC).",
-            btn_projects: "استكشف أبرز الأعمال", btn_cv: "تحميل السيرة الذاتية",
-            stat_exp: "سنوات خبرة فلاتر", stat_clean: "معمارية كود نظيفة", stat_perf: "أداء سلس 60 إطار/ث",
-            
-            about_badge_exp: "خبير فلاتر وموبايل",
-            about_tag: "فلسفة التطوير",
-            about_title: "أبني مستقبل تطبيقات الهواتف الذكية",
-            about_desc: "مهندس تطبيقات موبايل شغوف متخصص في تطوير التطبيقات متعددة المنصات باستخدام Flutter & Dart. أركز على دمج روعة التصميم مع صلابة المعمارية البرمجية: BLoC، مبادئ SOLID، التخزين المؤقت Offline-First، ومعدل إطارات سلس دون تقطيع.",
-            about_b1: "معمارية نظيفة وإدارة حالة BLoC",
-            about_b2: "واجهات فائقة الدقة متجاوبة",
-            about_b3: "نشر كامل على App Store و Google Play",
-            about_b4: "ربط متكامل مع Firebase و REST APIs",
-
-            services_badge: "ماذا أقدم",
-            services_title: "حلول برمجية متكاملة للموبايل",
-            services_desc: "تسليم تطبيقات بجودة إنتاجية عالية تتوسع بسلاسة من نموذج أولي (MVP) إلى مشاريع مؤسسية ضخمة.",
-            ser_1_title: "تطوير تطبيقات متعددة المنصات",
-            ser_1_desc: "بناء تطبيقات لنظامي iOS و Android من قاعدة كود فلاتر موحدة، مما يوفر 50% من الوقت دون أدنى مساومة على الأداء.",
-            ser_1_f1: "تجميع أصلي Native لأنظمة iOS و Android",
-            ser_1_f2: "أنيميشن فائق السلاسة بمعدل 60 إطار/ثانية",
-            ser_2_title: "تحويل التصاميم إلى واجهات حقيقية",
-            ser_2_desc: "تحويل ملفات Figma و Adobe XD إلى شاشات فلاتر تفاعلية متجاوبة وسريعة بدقة بيكسل متناهية.",
-            ser_2_f1: "تجاوب كامل مع مختلف مقاسات الهواتف والتابلت",
-            ser_2_f2: "حركات تفاعلية دقيقة Micro-interactions",
-            ser_3_title: "معمارية برمجية وإدارة حالة BLoC",
-            ser_3_desc: "هيكلة المشاريع بنمط Clean Architecture وفصل المهام لبناء كود قابل للفحص والصيانة والتوسع المؤسسي.",
-            ser_3_f1: "إدارة حالة متقدمة بـ BLoC و Cubit",
-            ser_3_f2: "بنية برمجية معيارية قابلة للاختبار",
-            ser_4_title: "ربط السيرفر والـ APIs والسحابة",
-            ser_4_desc: "توصيل سلس مع واجهات REST APIs و GraphQL وخدمات Firebase Authentication و Firestore والإشعارات وقواعد البيانات المحلية.",
-            ser_4_f1: "بيئة Firebase و Supabase السحابية",
-            ser_4_f2: "إشعارات فورية وتخزين محلي Offline",
-
-            process_badge: "كيف أعمل",
-            process_title: "منهجية وهندسة العمل",
-            process_desc: "خطة عمل احترافية من 5 خطوات تضمن أعلى معايير الجودة، الاستقرار، والالتزام الصارم بالمواعيد.",
-            proc_1_title: "تحليل الفكرة والنطاق",
-            proc_1_desc: "دراسة أهداف المشروع، شريحة المستخدمين، والميزات المطلوبة بدقة وتحديد جدول زمني محكم.",
-            proc_2_title: "تصميم المعمارية البرمجية",
-            proc_2_desc: "اختيار نمط إدارة الحالة وتحديد هيكل البيانات وطبقات الكود النظيف القابل للتوسع.",
-            proc_3_title: "التطوير والبرمجة الرشيقة",
-            proc_3_desc: "بناء الشاشات وربط الـ APIs وإرسال نسخ تجريبية أسبوعية للعميل لمتابعة التقدم أولاً بأول.",
-            proc_4_title: "فحص الجودة واختبار الأداء",
-            proc_4_desc: "مراقبة استهلاك الذاكرة، وضمان ثبات معدل 60 إطار/ث، وفحص التطبيق على هواتف أندرويد و iOS حقيقية.",
-            proc_5_title: "النشر على المتاجر والدعم",
-            proc_5_desc: "رفع التطبيق على App Store و Google Play وضبط خطوط CI/CD مع المتابعة والصيانة.",
-
-            skills_badge: "القدرات التقنية",
-            skills_title: "مصفوفة المهارات والخبرات",
-            skills_desc: "نظرة شاملة على التقنيات والأدوات التي أعتمد عليها في بناء التطبيقات عالية الاعتمادية.",
-            matrix_domain_1: "فلاتر والموبايل",
-            matrix_domain_2: "المعمارية وإدارة الحالة",
-            matrix_domain_3: "الباك إند والسحابة",
-            matrix_domain_4: "الأدوات وجودة الكود",
-
-            impact_store: "معتمدة على App Store و Google Play",
-            impact_fps: "حركة فائقة السلاسة 60 إطار/ث",
-            impact_projects: "+15 تطبيقاً وموديول برمجي",
-            impact_client: "رضا تام ودعم فني مستمر",
-
-            projects_badge: "تطبيقات موبايل متكاملة",
-            projects_title: "أبرز الأعمال وتفاصيل المشاريع",
-            projects_desc: "تطبيقات فلاتر حقيقية تم بناؤها بمعايير أداء فائقة، معمارية نظيفة وتجربة مستخدم متميزة.",
-            filter_all: "جميع المشاريع", filter_commercial: "تطبيقات تجارية", filter_personal: "مشاريع شخصية", filter_freelance: "مشاريع حرة",
-            btn_download: "تحميل التطبيق", btn_github: "كود المشروع", btn_video: "معاينة بالفيديو", btn_live_preview: "معاينة حية للتطبيق",
-            btn_case: "عرض دراسة الحالة والتفاصيل ←",
-            no_projects: "لا توجد مشاريع مضافة في هذا التصنيف حالياً.",
-            contact_title: "لنقم ببناء شيء رائع.", contact_sub: "متاح للمشاريع الحرة والوظائف بدوام كامل.",
-            f_name: "الاسم الكامل", f_email: "البريد الإلكتروني", f_msg: "حدثني عن مشروعك...", f_btn: "إرسال الرسالة"
-        }
-    };
-
-    let currentLang = localStorage.getItem('portfolio_lang') || 'en';
-    let currentTheme = localStorage.getItem('portfolio_theme') || 'dark';
-    let allProjectsData = [];
-    let activeFilter = 'all';
-
-    function updateUI() {
-        document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-        document.documentElement.lang = currentLang;
-        document.getElementById('lang-toggle').innerText = currentLang === 'en' ? 'AR' : 'EN';
-        
-        document.querySelectorAll('[data-i18n]').forEach(el => {
-            const key = el.getAttribute('data-i18n');
-            if (translations[currentLang] && translations[currentLang][key]) {
-                el.innerText = translations[currentLang][key];
+                projects_badge: "تطبيقات موبايل متكاملة",
+                projects_title: "أبرز الأعمال وتفاصيل المشاريع",
+                projects_desc: "تطبيقات فلاتر حقيقية تم بناؤها بمعايير أداء فائقة، معمارية نظيفة وتجربة مستخدم متميزة.",
+                filter_all: "جميع المشاريع", filter_commercial: "تطبيقات تجارية", filter_personal: "مشاريع شخصية", filter_freelance: "مشاريع حرة",
+                btn_download: "تحميل التطبيق", btn_github: "كود المشروع", btn_video: "معاينة بالفيديو", btn_live_preview: "معاينة حية للتطبيق",
+                btn_case: "عرض دراسة الحالة والتفاصيل ←",
+                no_projects: "لا توجد مشاريع مضافة في هذا التصنيف حالياً.",
+                contact_title: "لنقم ببناء شيء رائع.", contact_sub: "متاح للمشاريع الحرة والوظائف بدوام كامل.",
+                f_name: "الاسم الكامل", f_email: "البريد الإلكتروني", f_msg: "حدثني عن مشروعك...", f_btn: "إرسال الرسالة"
             }
+        };
+
+        let currentLang = localStorage.getItem('portfolio_lang') || 'en';
+        let currentTheme = localStorage.getItem('portfolio_theme') || 'dark';
+        let allProjectsData = [];
+        let activeFilter = 'all';
+
+        function updateUI() {
+            document.body.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            document.documentElement.lang = currentLang;
+            document.getElementById('lang-toggle').innerText = currentLang === 'en' ? 'AR' : 'EN';
+
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (translations[currentLang] && translations[currentLang][key]) {
+                    el.innerText = translations[currentLang][key];
+                }
+            });
+
+            document.getElementById('f-name').placeholder = translations[currentLang].f_name;
+            document.getElementById('f-email').placeholder = translations[currentLang].f_email;
+            document.getElementById('f-msg').placeholder = translations[currentLang].f_msg;
+
+            document.body.setAttribute('data-theme', currentTheme);
+            document.getElementById('theme-toggle').innerHTML = currentTheme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+
+            renderFilteredProjects();
+        }
+
+        document.getElementById('lang-toggle').onclick = () => {
+            currentLang = currentLang === 'en' ? 'ar' : 'en';
+            localStorage.setItem('portfolio_lang', currentLang);
+            updateUI();
+        };
+
+        document.getElementById('theme-toggle').onclick = () => {
+            currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            localStorage.setItem('portfolio_theme', currentTheme);
+            updateUI();
+        };
+
+        // Filter Buttons logic
+        document.querySelectorAll('#portfolioFilters .filter-tab').forEach(btn => {
+            btn.onclick = () => {
+                document.querySelectorAll('#portfolioFilters .filter-tab').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                activeFilter = btn.getAttribute('data-filter');
+                renderFilteredProjects();
+            };
         });
 
-        document.getElementById('f-name').placeholder = translations[currentLang].f_name;
-        document.getElementById('f-email').placeholder = translations[currentLang].f_email;
-        document.getElementById('f-msg').placeholder = translations[currentLang].f_msg;
-
-        document.body.setAttribute('data-theme', currentTheme);
-        document.getElementById('theme-toggle').innerHTML = currentTheme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
-        
-        renderFilteredProjects();
-    }
-
-    document.getElementById('lang-toggle').onclick = () => {
-        currentLang = currentLang === 'en' ? 'ar' : 'en';
-        localStorage.setItem('portfolio_lang', currentLang);
-        updateUI();
-    };
-
-    document.getElementById('theme-toggle').onclick = () => {
-        currentTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        localStorage.setItem('portfolio_theme', currentTheme);
-        updateUI();
-    };
-
-    // Filter Buttons logic
-    document.querySelectorAll('#portfolioFilters .filter-tab').forEach(btn => {
-        btn.onclick = () => {
-            document.querySelectorAll('#portfolioFilters .filter-tab').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            activeFilter = btn.getAttribute('data-filter');
-            renderFilteredProjects();
-        };
-    });
-
-    async function loadProjects() {
-        const container = document.getElementById("firestoreProjects");
-        if(!container) return;
-        try {
-            const querySnapshot = await getDocs(collection(db, "projects"));
-            allProjectsData = [];
-            querySnapshot.forEach((docSnap) => {
-                allProjectsData.push({
-                    id: docSnap.id,
-                    data: docSnap.data()
+        async function loadProjects() {
+            const container = document.getElementById("firestoreProjects");
+            if (!container) return;
+            try {
+                const querySnapshot = await getDocs(collection(db, "projects"));
+                allProjectsData = [];
+                querySnapshot.forEach((docSnap) => {
+                    allProjectsData.push({
+                        id: docSnap.id,
+                        data: docSnap.data()
+                    });
                 });
-            });
-            renderFilteredProjects();
-        } catch (err) {
-            console.error("Firebase Error:", err);
-            container.innerHTML = `
+                renderFilteredProjects();
+            } catch (err) {
+                console.error("Firebase Error:", err);
+                container.innerHTML = `
                 <div style="text-align:center; padding: 40px; color: #ef4444;">
                     <i class="fa-solid fa-triangle-exclamation" style="font-size: 2rem; margin-bottom: 10px;"></i>
                     <p>Failed to load projects from Firestore.</p>
                 </div>
             `;
-        }
-    }
-
-    function renderFilteredProjects() {
-        const container = document.getElementById("firestoreProjects");
-        if(!container) return;
-
-        if (allProjectsData.length === 0) {
-            return;
+            }
         }
 
-        const filtered = allProjectsData.filter(item => {
-            if (activeFilter === 'all') return true;
-            const cat = (item.data.category || '').toLowerCase();
-            return cat.includes(activeFilter.toLowerCase());
-        });
+        function renderFilteredProjects() {
+            const container = document.getElementById("firestoreProjects");
+            if (!container) return;
 
-        if (filtered.length === 0) {
-            container.innerHTML = `
+            if (allProjectsData.length === 0) {
+                return;
+            }
+
+            const filtered = allProjectsData.filter(item => {
+                if (activeFilter === 'all') return true;
+                const cat = (item.data.category || '').toLowerCase();
+                return cat.includes(activeFilter.toLowerCase());
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `
                 <div style="text-align:center; padding: 60px 20px; background: var(--surface-card); border-radius: 28px; border: 1px solid var(--border-color); grid-column: 1/-1;">
                     <i class="fa-solid fa-folder-open" style="font-size: 2.8rem; color: var(--primary-light); margin-bottom: 15px; display:block;"></i>
                     <p style="color: var(--text-dim); font-size: 1.1rem; font-weight: 600;">${translations[currentLang].no_projects}</p>
                 </div>
             `;
-            return;
+                return;
+            }
+
+            container.innerHTML = filtered.map(item => createProjectShowcaseHTML(item.id, item.data)).join('');
         }
 
-        container.innerHTML = filtered.map(item => createProjectShowcaseHTML(item.id, item.data)).join('');
-    }
+        function createProjectShowcaseHTML(id, p) {
+            const appName = (currentLang === 'ar' && p.appName_ar) ? p.appName_ar : (p.appName || p.name || 'Mobile Application');
+            const tagline = (currentLang === 'ar' && p.tagline_ar) ? p.tagline_ar : (p.tagline || p.desc || 'High-performance mobile application engineered with Flutter.');
+            const category = p.category || 'Mobile';
+            const status = p.status || 'Production Ready';
+            const platforms = p.platforms || 'Android / iOS';
 
-    function createProjectShowcaseHTML(id, p) {
-        const appName = (currentLang === 'ar' && p.appName_ar) ? p.appName_ar : (p.appName || p.name || 'Mobile Application');
-        const tagline = (currentLang === 'ar' && p.tagline_ar) ? p.tagline_ar : (p.tagline || p.desc || 'High-performance mobile application engineered with Flutter.');
-        const category = p.category || 'Mobile';
-        const status = p.status || 'Production Ready';
-        const platforms = p.platforms || 'Android / iOS';
-        
-        const techArray = p.techStack ? p.techStack.split(',').map(t => t.trim()).filter(Boolean) : ['Flutter', 'Dart', 'BLoC'];
-        const techPills = techArray.map(t => `<span class="tech-capsule">${t}</span>`).join('');
-        
-        const coverImg = p.coverImage || p.imageUrl || 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&auto=format&fit=crop&q=80';
-        
-        const problemText = (currentLang === 'ar' && p.problem_ar) ? p.problem_ar : p.problem;
-        const summaryBox = problemText ? `
+            const techArray = p.techStack ? p.techStack.split(',').map(t => t.trim()).filter(Boolean) : ['Flutter', 'Dart', 'BLoC'];
+            const techPills = techArray.map(t => `<span class="tech-capsule">${t}</span>`).join('');
+
+            const coverImg = p.coverImage || p.imageUrl || 'https://images.unsplash.com/photo-1551650975-87deedd944c3?w=600&auto=format&fit=crop&q=80';
+
+            const problemText = (currentLang === 'ar' && p.problem_ar) ? p.problem_ar : p.problem;
+            const summaryBox = problemText ? `
             <div class="showcase-summary-box">
                 <strong>${currentLang === 'ar' ? 'التحدي والحل:' : 'Challenge & Solution:'}</strong> 
                 ${problemText.substring(0, 150)}${problemText.length > 150 ? '...' : ''}
             </div>
         ` : '';
 
-        const downloadBtn = p.downloadLink ? `
+            const downloadBtn = p.downloadLink ? `
             <a href="${p.downloadLink}" target="_blank" class="btn-action-icon" title="${translations[currentLang].btn_download}">
                 <i class="fa-solid fa-download"></i>
             </a>` : '';
 
-        const githubBtn = p.githubLink ? `
+            const githubBtn = p.githubLink ? `
             <a href="${p.githubLink}" target="_blank" class="btn-action-icon" title="${translations[currentLang].btn_github}">
                 <i class="fa-brands fa-github"></i>
             </a>` : '';
 
-        const isVideo = isVideoLink(p.videoLink);
-        const videoBtn = p.videoLink ? `
+            const isVideo = isVideoLink(p.videoLink);
+            const videoBtn = p.videoLink ? `
             <button onclick="window.openQuickModal('${isVideo ? 'video' : 'web'}', '${p.videoLink}', '${appName}')" class="btn-action-icon" style="cursor:pointer;" title="${isVideo ? translations[currentLang].btn_video : translations[currentLang].btn_live_preview}">
                 <i class="fa-solid fa-${isVideo ? 'play' : 'mobile-screen'}"></i>
             </button>` : '';
 
-        return `
+            return `
             <div class="showcase-card reveal-on-scroll">
                 <div class="showcase-content-side">
                     <div class="showcase-meta-row">
@@ -1610,35 +2780,35 @@
                 </div>
             </div>
         `;
-    }
+        }
 
-    function isVideoLink(url) {
-        if (!url) return false;
-        const clean = url.trim().toLowerCase();
-        return clean.includes('youtube.com') ||
-               clean.includes('youtu.be') ||
-               clean.includes('vimeo.com') ||
-               /\.(mp4|webm|mov|avi)(\?|$)/i.test(clean);
-    }
+        function isVideoLink(url) {
+            if (!url) return false;
+            const clean = url.trim().toLowerCase();
+            return clean.includes('youtube.com') ||
+                clean.includes('youtu.be') ||
+                clean.includes('vimeo.com') ||
+                /\.(mp4|webm|mov|avi)(\?|$)/i.test(clean);
+        }
 
-    // Modal Interaction
-    window.openQuickModal = (type, content, title) => {
-        const modal = document.getElementById('quickModal');
-        const modalBody = document.getElementById('quickModalBody');
-        const modalTitle = document.getElementById('quickModalTitle');
-        if (!modal || !modalBody) return;
-        
-        modalTitle.innerText = title || (currentLang === 'ar' ? 'معاينة التطبيق' : 'Application Preview');
-        if (type === 'video') {
-            let videoSrc = content;
-            if (content.includes('watch?v=')) {
-                videoSrc = content.replace('watch?v=', 'embed/');
-            } else if (content.includes('youtu.be/')) {
-                videoSrc = content.replace('youtu.be/', 'youtube.com/embed/');
-            }
-            modalBody.innerHTML = `<iframe src="${videoSrc}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
-        } else if (type === 'web') {
-            modalBody.innerHTML = `
+        // Modal Interaction
+        window.openQuickModal = (type, content, title) => {
+            const modal = document.getElementById('quickModal');
+            const modalBody = document.getElementById('quickModalBody');
+            const modalTitle = document.getElementById('quickModalTitle');
+            if (!modal || !modalBody) return;
+
+            modalTitle.innerText = title || (currentLang === 'ar' ? 'معاينة التطبيق' : 'Application Preview');
+            if (type === 'video') {
+                let videoSrc = content;
+                if (content.includes('watch?v=')) {
+                    videoSrc = content.replace('watch?v=', 'embed/');
+                } else if (content.includes('youtu.be/')) {
+                    videoSrc = content.replace('youtu.be/', 'youtube.com/embed/');
+                }
+                modalBody.innerHTML = `<iframe src="${videoSrc}?autoplay=1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+            } else if (type === 'web') {
+                modalBody.innerHTML = `
                 <div style="display:flex; flex-direction:column; align-items:center; gap:16px; padding:10px 0;">
                     <div class="phone-mockup-frame" style="width:310px; height:620px; margin:0 auto; cursor:default;">
                         <div class="phone-island"><div class="island-lens"></div></div>
@@ -1651,95 +2821,103 @@
                     </a>
                 </div>
             `;
-        } else {
-            modalBody.innerHTML = `<img src="${content}" alt="App Screen">`;
-        }
-        modal.classList.add('active');
-        document.body.style.overflow = 'hidden';
-    };
-
-    window.closeQuickModal = () => {
-        const modal = document.getElementById('quickModal');
-        if (!modal) return;
-        modal.classList.remove('active');
-        const modalBody = document.getElementById('quickModalBody');
-        if (modalBody) modalBody.innerHTML = '';
-        document.body.style.overflow = '';
-    };
-
-    document.getElementById('quickModalClose')?.addEventListener('click', window.closeQuickModal);
-    document.getElementById('quickModal')?.addEventListener('click', (e) => {
-        if (e.target.id === 'quickModal') window.closeQuickModal();
-    });
-
-    // 3D Perspective Tilt on Mouse Movement
-    document.addEventListener('mousemove', (e) => {
-        document.querySelectorAll('.phone-mockup-frame, .console-card').forEach(card => {
-            const rect = card.getBoundingClientRect();
-            const centerX = rect.left + rect.width / 2;
-            const centerY = rect.top + rect.height / 2;
-            const deltaX = e.clientX - centerX;
-            const deltaY = e.clientY - centerY;
-            const distance = Math.hypot(deltaX, deltaY);
-            
-            if (distance < 450) {
-                const tiltX = (deltaY / 28).toFixed(2);
-                const tiltY = (-(deltaX / 28)).toFixed(2);
-                card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
             } else {
-                card.style.transform = '';
+                modalBody.innerHTML = `<img src="${content}" alt="App Screen">`;
             }
-        });
-    });
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        };
 
-    // Scroll Reveal Observer
-    const initScrollObserver = () => {
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('is-revealed');
+        window.closeQuickModal = () => {
+            const modal = document.getElementById('quickModal');
+            if (!modal) return;
+            modal.classList.remove('active');
+            const modalBody = document.getElementById('quickModalBody');
+            if (modalBody) modalBody.innerHTML = '';
+            document.body.style.overflow = '';
+        };
+
+        document.getElementById('quickModalClose')?.addEventListener('click', window.closeQuickModal);
+        document.getElementById('quickModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'quickModal') window.closeQuickModal();
+        });
+
+        // 3D Perspective Tilt on Mouse Movement
+        document.addEventListener('mousemove', (e) => {
+            document.querySelectorAll('.phone-mockup-frame, .console-card').forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const centerX = rect.left + rect.width / 2;
+                const centerY = rect.top + rect.height / 2;
+                const deltaX = e.clientX - centerX;
+                const deltaY = e.clientY - centerY;
+                const distance = Math.hypot(deltaX, deltaY);
+
+                if (distance < 450) {
+                    const tiltX = (deltaY / 28).toFixed(2);
+                    const tiltY = (-(deltaX / 28)).toFixed(2);
+                    card.style.transform = `perspective(1000px) rotateX(${tiltX}deg) rotateY(${tiltY}deg) scale3d(1.02, 1.02, 1.02)`;
+                } else {
+                    card.style.transform = '';
                 }
             });
-        }, { threshold: 0.08 });
-
-        document.querySelectorAll('section, .service-card-modern, .process-card, .matrix-domain-card, .showcase-card, .impact-stats-card').forEach(el => {
-            el.classList.add('reveal-on-scroll');
-            observer.observe(el);
         });
-    };
 
-    loadProjects().then(() => {
-        setTimeout(initScrollObserver, 400);
-    });
+        // Scroll Reveal Observer
+        const initScrollObserver = () => {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                    }
+                });
+            }, { threshold: 0.08 });
 
-    updateUI();
+            document.querySelectorAll('section, .service-card-modern, .process-card, .matrix-domain-card, .showcase-card, .impact-stats-card').forEach(el => {
+                el.classList.add('reveal-on-scroll');
+                observer.observe(el);
+            });
+        };
 
-    document.getElementById('mobile-menu').onclick = (e) => {
-        e.stopPropagation();
-        document.getElementById('nav-links').classList.toggle('active');
-    };
+        loadProjects().then(() => {
+            setTimeout(initScrollObserver, 400);
+        });
 
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        const navLinks = document.getElementById('nav-links');
-        if (!navLinks.contains(e.target) && navLinks.classList.contains('active')) {
-            navLinks.classList.remove('active');
-        }
-    });
-</script>
+        updateUI();
 
-<!-- Quick Preview Glass Modal -->
-<div id="quickModal" class="quick-modal-backdrop">
-    <div class="quick-modal-box">
-        <div class="quick-modal-header">
-            <h3 id="quickModalTitle" class="quick-modal-title">App Preview</h3>
-            <button class="modal-close-btn" id="quickModalClose">&times;</button>
-        </div>
-        <div class="quick-modal-body" id="quickModalBody">
-            <!-- Modal Body Content -->
+        document.getElementById('mobile-menu').onclick = (e) => {
+            e.stopPropagation();
+            document.getElementById('nav-links').classList.toggle('active');
+        };
+
+        // Close menu when clicking any nav link
+        document.querySelectorAll('#nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                document.getElementById('nav-links').classList.remove('active');
+            });
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const navLinks = document.getElementById('nav-links');
+            if (!navLinks.contains(e.target) && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
+        });
+    </script>
+
+    <!-- Quick Preview Glass Modal -->
+    <div id="quickModal" class="quick-modal-backdrop">
+        <div class="quick-modal-box">
+            <div class="quick-modal-header">
+                <h3 id="quickModalTitle" class="quick-modal-title">App Preview</h3>
+                <button class="modal-close-btn" id="quickModalClose">&times;</button>
+            </div>
+            <div class="quick-modal-body" id="quickModalBody">
+                <!-- Modal Body Content -->
+            </div>
         </div>
     </div>
-</div>
 
 </body>
+
 </html>
