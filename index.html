@@ -1261,36 +1261,7 @@
             }
 
             nav ul {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                max-width: 320px;
-                height: 100vh;
-                background: var(--surface-dark);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                transition: 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-                z-index: 2000;
-                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
-                border-left: 1px solid var(--border-color);
-            }
-
-            [dir="rtl"] nav ul {
-                right: auto;
-                left: -100%;
-                border-left: none;
-                border-right: 1px solid var(--border-color);
-                box-shadow: 10px 0 30px rgba(0, 0, 0, 0.5);
-            }
-
-            nav ul.active {
-                right: 0;
-            }
-
-            [dir="rtl"] nav ul.active {
-                left: 0;
+                display: none !important;
             }
 
             .contact-wrapper {
@@ -1908,6 +1879,314 @@
                 transform: rotate(360deg);
             }
         }
+
+        /* ====================================================
+           Mobile Modern Drawer (Agency-Grade)
+        ==================================================== */
+        @media (min-width: 993px) {
+            .drawer-backdrop,
+            .mobile-drawer {
+                display: none !important;
+            }
+        }
+
+        .drawer-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(3, 7, 18, 0.72);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            z-index: 2998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.35s ease, visibility 0.35s ease;
+        }
+
+        .drawer-backdrop.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .mobile-drawer {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 86%;
+            max-width: 360px;
+            height: 100vh;
+            height: 100dvh;
+            background: linear-gradient(180deg, #0d1527 0%, #070b13 100%);
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: -15px 0 45px rgba(0, 0, 0, 0.75);
+            z-index: 2999;
+            display: flex;
+            flex-direction: column;
+            padding: 24px 20px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1), left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [dir="rtl"] .mobile-drawer {
+            right: auto;
+            left: -100%;
+            border-left: none;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 15px 0 45px rgba(0, 0, 0, 0.75);
+        }
+
+        .mobile-drawer.active {
+            right: 0;
+        }
+
+        [dir="rtl"] .mobile-drawer.active {
+            left: 0;
+        }
+
+        /* Light Theme Drawer */
+        :root[data-theme="light"] .mobile-drawer {
+            background: linear-gradient(180deg, #ffffff 0%, #f1f5f9 100%);
+            border-color: rgba(0, 0, 0, 0.08);
+            box-shadow: -15px 0 45px rgba(0, 0, 0, 0.15);
+        }
+
+        :root[data-theme="light"] .drawer-backdrop {
+            background: rgba(15, 23, 42, 0.45);
+        }
+
+        /* Drawer Header */
+        .drawer-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding-bottom: 18px;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 16px;
+        }
+
+        .drawer-brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .drawer-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 2px solid var(--primary-light);
+            box-shadow: 0 0 15px rgba(2, 132, 199, 0.35);
+            flex-shrink: 0;
+        }
+
+        .drawer-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .drawer-brand-info h4 {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--text-main);
+            margin-bottom: 2px;
+            line-height: 1.2;
+        }
+
+        .drawer-brand-info span {
+            font-size: 0.75rem;
+            color: var(--primary-light);
+            font-weight: 600;
+        }
+
+        .drawer-close-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-dim);
+            font-size: 1.15rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .drawer-close-btn:hover {
+            color: #ef4444;
+            border-color: rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.1);
+            transform: rotate(90deg);
+        }
+
+        /* Status pill inside drawer */
+        .drawer-status-pill {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            padding: 8px 14px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #10b981;
+            margin-bottom: 18px;
+        }
+
+        /* Menu Links List */
+        .drawer-menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            flex-grow: 1;
+        }
+
+        .drawer-link {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 10px 14px;
+            border-radius: 14px;
+            color: var(--text-dim);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            background: transparent;
+            border: 1px solid transparent;
+        }
+
+        .drawer-link .link-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 10px;
+            background: var(--surface-dark);
+            border: 1px solid var(--border-color);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary-light);
+            font-size: 0.9rem;
+            transition: var(--transition);
+            flex-shrink: 0;
+        }
+
+        :root[data-theme="light"] .drawer-link .link-icon {
+            background: #e2e8f0;
+            border-color: rgba(0, 0, 0, 0.06);
+        }
+
+        .drawer-link .link-label {
+            flex-grow: 1;
+            color: var(--text-main);
+        }
+
+        .drawer-link .link-chevron {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            opacity: 0.4;
+            transition: var(--transition);
+        }
+
+        [dir="rtl"] .drawer-link .link-chevron {
+            transform: rotate(180deg);
+        }
+
+        .drawer-link:hover,
+        .drawer-link:active {
+            background: rgba(2, 132, 199, 0.08);
+            border-color: rgba(56, 189, 248, 0.2);
+            color: var(--text-main);
+            transform: translateX(4px);
+        }
+
+        [dir="rtl"] .drawer-link:hover,
+        [dir="rtl"] .drawer-link:active {
+            transform: translateX(-4px);
+        }
+
+        .drawer-link:hover .link-icon {
+            background: var(--primary-color);
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+        }
+
+        .drawer-link:hover .link-chevron {
+            opacity: 1;
+            color: var(--primary-light);
+            transform: translateX(3px);
+        }
+
+        [dir="rtl"] .drawer-link:hover .link-chevron {
+            transform: rotate(180deg) translateX(3px);
+        }
+
+        /* Drawer Footer */
+        .drawer-footer {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .drawer-resume-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: var(--primary-gradient);
+            color: #fff !important;
+            padding: 12px 18px;
+            border-radius: 14px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.92rem;
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.35);
+            transition: var(--transition);
+        }
+
+        .drawer-resume-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(2, 132, 199, 0.5);
+        }
+
+        .drawer-socials {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .drawer-social-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 11px;
+            background: var(--surface-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-dim);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .drawer-social-btn:hover {
+            border-color: var(--primary-light);
+            color: var(--primary-light);
+            transform: translateY(-2px);
+            background: rgba(2, 132, 199, 0.1);
+        }
     </style>
 </head>
 
@@ -2441,6 +2720,7 @@
 
         const translations = {
             en: {
+                drawer_role: "Senior Flutter & Mobile Engineer",
                 nav_home: "Home", nav_about: "About", nav_services: "Services", nav_process: "Process", nav_skills: "Skills", nav_projects: "Projects", nav_contact: "Contact", nav_admin: "Admin",
                 nav_status: "Available for Projects",
                 hero_badge: "Senior Flutter & Mobile Application Engineer",
@@ -2516,6 +2796,7 @@
                 f_name: "Full Name", f_email: "Email Address", f_msg: "Tell me about your project...", f_btn: "Send Message"
             },
             ar: {
+                drawer_role: "مهندس تطبيقات فلاتر وموبايل",
                 nav_home: "الرئيسية", nav_about: "عني", nav_services: "خدماتي", nav_process: "منهجية العمل", nav_skills: "المهارات", nav_projects: "المشاريع", nav_contact: "تواصل", nav_admin: "لوحة التحكم",
                 nav_status: "متاح للمشاريع الجديدة",
                 hero_badge: "مهندس تطبيقات موبايل وخبير فلاتر",
@@ -2884,25 +3165,122 @@
 
         updateUI();
 
-        document.getElementById('mobile-menu').onclick = (e) => {
-            e.stopPropagation();
-            document.getElementById('nav-links').classList.toggle('active');
+        // Mobile Drawer Controller
+        const mobileDrawer = document.getElementById('mobileDrawer');
+        const drawerBackdrop = document.getElementById('drawerBackdrop');
+        const drawerCloseBtn = document.getElementById('drawerCloseBtn');
+        const mobileMenuBtn = document.getElementById('mobile-menu');
+
+        const openDrawer = () => {
+            mobileDrawer?.classList.add('active');
+            drawerBackdrop?.classList.add('active');
+            document.body.style.overflow = 'hidden';
         };
 
-        // Close menu when clicking any nav link
-        document.querySelectorAll('#nav-links a').forEach(link => {
-            link.addEventListener('click', () => {
-                document.getElementById('nav-links').classList.remove('active');
-            });
+        const closeDrawer = () => {
+            mobileDrawer?.classList.remove('active');
+            drawerBackdrop?.classList.remove('active');
+            document.body.style.overflow = '';
+        };
+
+        mobileMenuBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            openDrawer();
         });
 
-        // Close menu when clicking outside
-        document.addEventListener('click', (e) => {
-            const navLinks = document.getElementById('nav-links');
-            if (!navLinks.contains(e.target) && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-            }
+        drawerCloseBtn?.addEventListener('click', closeDrawer);
+        drawerBackdrop?.addEventListener('click', closeDrawer);
+
+        // Close when clicking any link inside drawer
+        document.querySelectorAll('.drawer-link, .drawer-resume-btn').forEach(link => {
+            link.addEventListener('click', closeDrawer);
         });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeDrawer();
+        });
+    </script>
+
+    <!-- Mobile Modern Drawer & Backdrop -->
+    <div class="drawer-backdrop" id="drawerBackdrop"></div>
+    <div class="mobile-drawer" id="mobileDrawer">
+        <div class="drawer-header">
+            <div class="drawer-brand">
+                <div class="drawer-avatar">
+                    <img src="images/profile_studio_enhanced.png" alt="Mohamed Solaiman" onerror="this.src='images/finalImg.png'">
+                </div>
+                <div class="drawer-brand-info">
+                    <h4>Mohamed Solaiman</h4>
+                    <span data-i18n="drawer_role">Senior Flutter & Mobile Engineer</span>
+                </div>
+            </div>
+            <button class="drawer-close-btn" id="drawerCloseBtn" aria-label="Close menu">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+
+        <div class="drawer-status-pill">
+            <span class="status-pulse-dot"></span>
+            <span data-i18n="nav_status">Available for Projects</span>
+        </div>
+
+        <div class="drawer-menu-list">
+            <a href="#header" class="drawer-link">
+                <span class="link-icon"><i class="fa-solid fa-house"></i></span>
+                <span class="link-label" data-i18n="nav_home">Home</span>
+                <i class="fa-solid fa-chevron-right link-chevron"></i>
+            </a>
+            <a href="#about" class="drawer-link">
+                <span class="link-icon"><i class="fa-solid fa-user-astronaut"></i></span>
+                <span class="link-label" data-i18n="nav_about">About</span>
+                <i class="fa-solid fa-chevron-right link-chevron"></i>
+            </a>
+            <a href="#services" class="drawer-link">
+                <span class="link-icon"><i class="fa-solid fa-screwdriver-wrench"></i></span>
+                <span class="link-label" data-i18n="nav_services">Services</span>
+                <i class="fa-solid fa-chevron-right link-chevron"></i>
+            </a>
+            <a href="#process" class="drawer-link">
+                <span class="link-icon"><i class="fa-solid fa-diagram-project"></i></span>
+                <span class="link-label" data-i18n="nav_process">Process</span>
+                <i class="fa-solid fa-chevron-right link-chevron"></i>
+            </a>
+            <a href="#skills" class="drawer-link">
+                <span class="link-icon"><i class="fa-solid fa-microchip"></i></span>
+                <span class="link-label" data-i18n="nav_skills">Skills</span>
+                <i class="fa-solid fa-chevron-right link-chevron"></i>
+            </a>
+            <a href="#portfolio" class="drawer-link">
+                <span class="link-icon"><i class="fa-solid fa-mobile-screen"></i></span>
+                <span class="link-label" data-i18n="nav_projects">Projects</span>
+                <i class="fa-solid fa-chevron-right link-chevron"></i>
+            </a>
+            <a href="#contact" class="drawer-link">
+                <span class="link-icon"><i class="fa-solid fa-paper-plane"></i></span>
+                <span class="link-label" data-i18n="nav_contact">Contact</span>
+                <i class="fa-solid fa-chevron-right link-chevron"></i>
+            </a>
+            <a href="admin.html" class="drawer-link">
+                <span class="link-icon"><i class="fa-solid fa-shield-halved"></i></span>
+                <span class="link-label" data-i18n="nav_admin">Admin</span>
+                <i class="fa-solid fa-chevron-right link-chevron"></i>
+            </a>
+        </div>
+
+        <div class="drawer-footer">
+            <a href="images/updatedCv.pdf" download class="drawer-resume-btn">
+                <i class="fa-solid fa-file-arrow-down"></i>
+                <span data-i18n="btn_cv">Download Resume</span>
+            </a>
+            <div class="drawer-socials">
+                <a href="https://github.com/mohamedsolaiman11" target="_blank" class="drawer-social-btn" title="GitHub"><i class="fa-brands fa-github"></i></a>
+                <a href="https://linkedin.com/in/mohamed-solaiman-60714b225" target="_blank" class="drawer-social-btn" title="LinkedIn"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://wa.me/201014250577" target="_blank" class="drawer-social-btn" title="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+                <a href="mailto:mohamedsolaiman708@gmail.com" class="drawer-social-btn" title="Email"><i class="fa-solid fa-envelope"></i></a>
+            </div>
+        </div>
+    </div>
     </script>
 
     <!-- Quick Preview Glass Modal -->
