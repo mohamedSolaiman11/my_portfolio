@@ -2704,7 +2704,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-app.js";
-        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
+        import { getFirestore, collection, getDocs, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.14.1/firebase-firestore.js";
 
         const firebaseConfig = {
             apiKey: "AIzaSyAFGihdfZEWJM7iJYh45wRWYCYphVG4-G0",
@@ -3162,6 +3162,24 @@
         loadProjects().then(() => {
             setTimeout(initScrollObserver, 400);
         });
+
+        // Sync Latest Resume URL from Firebase Firestore
+        const syncResumeUrl = async () => {
+            try {
+                const resumeSnap = await getDoc(doc(db, "settings", "resume"));
+                if (resumeSnap.exists() && resumeSnap.data().url) {
+                    const resumeUrl = resumeSnap.data().url;
+                    document.querySelectorAll('a[href*="updatedCv.pdf"]').forEach(btn => {
+                        btn.href = resumeUrl;
+                        btn.target = "_blank";
+                        btn.removeAttribute('download');
+                    });
+                }
+            } catch (err) {
+                console.warn("Using local fallback CV:", err);
+            }
+        };
+        syncResumeUrl();
 
         updateUI();
 
