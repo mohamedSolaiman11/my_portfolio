@@ -977,11 +977,11 @@
                 <div class="card-header">
                     <div class="card-header-title">
                         <i class="fa-solid fa-file-pdf" style="color: #ef4444;"></i>
-                        <h3>Manage Resume (CV) Link</h3>
+                        <h3>Upload Resume (CV) to Firestore</h3>
                     </div>
                     <span class="badge-cms"
                         style="background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3);">
-                        <i class="fa-solid fa-database"></i> Firestore Managed
+                        <i class="fa-solid fa-database"></i> Firestore Stored
                     </span>
                 </div>
 
@@ -989,39 +989,37 @@
                     style="display: grid; grid-template-columns: 1.25fr 1fr; gap: 28px; align-items: start;">
                     <div>
                         <p style="color: var(--text-dim); font-size: 0.92rem; margin-bottom: 20px; line-height: 1.7;">
-                            Set your latest Resume URL here (e.g. <strong>Google Drive</strong>,
-                            <strong>Dropbox</strong>, or any direct PDF link). It will be saved directly into
-                            <strong>Firestore Database</strong> and automatically update the "Download Resume" buttons
-                            across your portfolio.
+                            Choose your PDF resume directly from your device. It will be encoded and stored right inside your <strong>Firestore Database</strong> document without requiring external hosting or storage buckets.
                         </p>
 
-                        <!-- Resume Link Input -->
-                        <div style="margin-bottom: 20px;">
-                            <label
-                                style="display: block; margin-bottom: 8px; font-size: 0.88rem; font-weight: 700;">Resume
-                                Public Link (PDF / Google Drive / Dropbox) *</label>
-                            <div class="input-wrapper">
-                                <input type="url" id="cv-url-input" class="form-input"
-                                    placeholder="https://drive.google.com/file/d/.../view or direct link" required>
-                                <i class="fa-solid fa-link"></i>
+                        <!-- PDF File Input & Drop Area -->
+                        <div style="margin-bottom: 22px;">
+                            <label style="display: block; margin-bottom: 8px; font-size: 0.88rem; font-weight: 700;">Select Resume PDF File (Max 800 KB) *</label>
+                            <div class="file-upload-box" id="cv-drop-zone">
+                                <input type="file" id="cv-file-input" accept="application/pdf" style="display: none;">
+                                <i class="fa-solid fa-cloud-arrow-up" style="font-size: 2.2rem; color: var(--primary-light); margin-bottom: 10px;"></i>
+                                <span id="cv-chosen-name" style="font-size: 0.95rem; font-weight: 700; color: var(--text-main);">Click to browse PDF file from device</span>
+                                <span id="cv-chosen-size" style="font-size: 0.78rem; color: var(--text-dim); margin-top: 4px;">PDF format only (recommended under 800 KB for Firestore)</span>
                             </div>
-                            <span
-                                style="font-size: 0.75rem; color: var(--text-muted); display: block; margin-top: 6px;">
-                                <i class="fa-solid fa-circle-info" style="color: var(--primary-light);"></i> If you
-                                paste a Google Drive link, make sure access is set to <strong>"Anyone with the link can
-                                    view"</strong>.
-                            </span>
+                        </div>
+
+                        <!-- Progress indicator -->
+                        <div id="cv-upload-progress" style="display: none; margin-bottom: 20px; padding: 14px; background: rgba(2, 132, 199, 0.1); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 14px;">
+                            <div style="display: flex; align-items: center; gap: 10px; font-size: 0.85rem; font-weight: 700; color: #38bdf8;">
+                                <i class="fa-solid fa-spinner fa-spin"></i>
+                                <span id="cv-progress-text">Encoding PDF and saving to Firestore...</span>
+                            </div>
                         </div>
 
                         <!-- Action Buttons -->
                         <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
-                            <button type="button" id="btn-save-cv-url" class="btn btn-primary"
+                            <button type="button" id="btn-upload-cv" class="btn btn-primary"
                                 style="padding: 13px 26px;">
-                                <i class="fa-solid fa-floppy-disk"></i> Save Resume Link
+                                <i class="fa-solid fa-cloud-arrow-up"></i> Upload & Save to Firestore
                             </button>
-                            <a href="images/updatedCv.pdf" target="_blank" id="cv-current-link-btn"
+                            <a href="images/updatedCv.pdf" download="Mohamed_Solaiman_CV.pdf" id="cv-current-link-btn"
                                 class="btn btn-outline" style="padding: 13px 20px;">
-                                <i class="fa-solid fa-arrow-up-right-from-square"></i> Test Open Link
+                                <i class="fa-solid fa-file-arrow-down"></i> Download Current CV
                             </a>
                         </div>
                     </div>
@@ -1032,7 +1030,7 @@
                         <h4
                             style="font-size: 0.95rem; font-weight: 800; margin-bottom: 16px; color: var(--text-main); display: flex; align-items: center; gap: 8px;">
                             <i class="fa-solid fa-database" style="font-size: 1.15rem; color: #10b981;"></i>
-                            Firestore Configuration
+                            Firestore Storage Details
                         </h4>
 
                         <div style="display: flex; flex-direction: column; gap: 12px; font-size: 0.85rem;">
@@ -1044,19 +1042,18 @@
                             </div>
                             <div
                                 style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
-                                <span style="color: var(--text-dim);">Document ID:</span>
+                                <span style="color: var(--text-dim);">Document:</span>
                                 <strong
                                     style="font-family: 'JetBrains Mono', monospace; color: var(--text-main);">resume</strong>
                             </div>
                             <div
                                 style="display: flex; justify-content: space-between; border-bottom: 1px solid var(--border-color); padding-bottom: 10px;">
-                                <span style="color: var(--text-dim);">Field:</span>
-                                <strong style="font-family: 'JetBrains Mono', monospace; color: #f59e0b;">url
-                                    (string)</strong>
+                                <span style="color: var(--text-dim);">Storage Mode:</span>
+                                <strong style="font-family: 'JetBrains Mono', monospace; color: #10b981;">Base64 (data URI)</strong>
                             </div>
                             <div style="display: flex; justify-content: space-between; padding-bottom: 4px;">
-                                <span style="color: var(--text-dim);">Fallback:</span>
-                                <span style="color: var(--text-muted); font-size: 0.8rem;">images/updatedCv.pdf</span>
+                                <span style="color: var(--text-dim);">Doc Size Limit:</span>
+                                <span style="color: #f59e0b; font-weight: 700;">1 MB Max</span>
                             </div>
                         </div>
 
@@ -1066,14 +1063,10 @@
                             <div
                                 style="color: #10b981; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px;">
                                 <i class="fa-solid fa-circle-check"></i>
-                                <span>Active Link in Firestore</span>
+                                <span>Active CV in Firestore</span>
                             </div>
-                            <p id="cv-active-updated" style="color: var(--text-dim); margin-bottom: 6px;">Loading
-                                current link...</p>
-                            <a id="cv-active-url" href="images/updatedCv.pdf" target="_blank"
-                                style="color: #38bdf8; word-break: break-all; text-decoration: none; font-size: 0.75rem;">
-                                images/updatedCv.pdf (Local Fallback)
-                            </a>
+                            <p id="cv-active-name" style="color: var(--text-main); font-weight: 700; margin-bottom: 2px;">Checking Firestore...</p>
+                            <p id="cv-active-updated" style="color: var(--text-dim); margin-bottom: 0;">No upload detected yet.</p>
                         </div>
                     </div>
                 </div>
@@ -1355,54 +1348,97 @@
         document.getElementById('btn-cancel').onclick = resetForm;
 
         // ========================================
-        // Resume (CV) Firestore Controller
+        // Resume (CV) Firestore Direct Storage
         // ========================================
-        const cvUrlInput = document.getElementById('cv-url-input');
-        const btnSaveCvUrl = document.getElementById('btn-save-cv-url');
+        const cvFileInput = document.getElementById('cv-file-input');
+        const cvDropZone = document.getElementById('cv-drop-zone');
+        const cvChosenName = document.getElementById('cv-chosen-name');
+        const cvChosenSize = document.getElementById('cv-chosen-size');
+        const btnUploadCv = document.getElementById('btn-upload-cv');
+        const cvProgress = document.getElementById('cv-upload-progress');
+        const cvProgressText = document.getElementById('cv-progress-text');
+        const cvActiveName = document.getElementById('cv-active-name');
         const cvActiveUpdated = document.getElementById('cv-active-updated');
-        const cvActiveUrl = document.getElementById('cv-active-url');
         const cvCurrentLinkBtn = document.getElementById('cv-current-link-btn');
 
-        // Fetch current active resume URL from Firestore
+        let selectedCvFile = null;
+
+        // Fetch current active resume from Firestore
         async function loadActiveResume() {
             try {
                 const docSnap = await getDoc(doc(db, "settings", "resume"));
-                if (docSnap.exists() && docSnap.data().url) {
+                if (docSnap.exists()) {
                     const data = docSnap.data();
-                    const url = data.url;
                     const dateStr = data.updatedAt ? new Date(data.updatedAt).toLocaleDateString() : 'Active';
-                    cvUrlInput.value = url;
-                    cvActiveUpdated.innerText = `Last updated: ${dateStr}`;
-                    cvActiveUrl.href = url;
-                    cvActiveUrl.innerText = url;
-                    cvCurrentLinkBtn.href = url;
+                    const nameStr = data.fileName || 'Mohamed_Solaiman_CV.pdf';
+                    const sizeKb = data.fileSize ? `(${(data.fileSize / 1024).toFixed(1)} KB)` : '';
+
+                    cvActiveName.innerText = `${nameStr} ${sizeKb}`;
+                    cvActiveUpdated.innerText = `Uploaded: ${dateStr}`;
+
+                    if (data.data) {
+                        cvCurrentLinkBtn.href = data.data;
+                        cvCurrentLinkBtn.download = nameStr;
+                    } else if (data.url) {
+                        cvCurrentLinkBtn.href = data.url;
+                    }
                 } else {
-                    cvActiveUpdated.innerText = "No custom link saved yet (Using images/updatedCv.pdf).";
+                    cvActiveName.innerText = "images/updatedCv.pdf";
+                    cvActiveUpdated.innerText = "Default local fallback file active.";
                 }
             } catch (err) {
-                console.warn("Could not fetch active resume settings:", err);
+                console.warn("Could not fetch active resume from Firestore:", err);
             }
         }
         loadActiveResume();
 
-        // Helper to format Google Drive links to direct view/download format
-        function cleanResumeUrl(rawUrl) {
-            let url = rawUrl.trim();
-            if (url.includes('drive.google.com/file/d/')) {
-                const fileIdMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
-                if (fileIdMatch && fileIdMatch[1]) {
-                    const fileId = fileIdMatch[1];
-                    return `https://drive.google.com/file/d/${fileId}/view?usp=sharing`;
-                }
+        // Drag & Drop / Click for CV input
+        cvDropZone.addEventListener('click', () => cvFileInput.click());
+
+        cvDropZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            cvDropZone.classList.add('dragover');
+        });
+
+        cvDropZone.addEventListener('dragleave', () => {
+            cvDropZone.classList.remove('dragover');
+        });
+
+        cvDropZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            cvDropZone.classList.remove('dragover');
+            if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+                handleSelectedFile(e.dataTransfer.files[0]);
             }
-            return url;
+        });
+
+        cvFileInput.addEventListener('change', (e) => {
+            if (e.target.files && e.target.files[0]) {
+                handleSelectedFile(e.target.files[0]);
+            }
+        });
+
+        function handleSelectedFile(file) {
+            if (file.type !== 'application/pdf' && !file.name.toLowerCase().endsWith('.pdf')) {
+                showToast("Only PDF files are supported.", true);
+                return;
+            }
+            // Firestore document limit is 1MB. Base64 adds ~33% overhead. Max ~780KB.
+            if (file.size > 780 * 1024) {
+                showToast("File is too large for Firestore document (Max 780 KB). Please compress it first.", true);
+                return;
+            }
+            selectedCvFile = file;
+            cvChosenName.innerHTML = `<i class="fa-solid fa-file-pdf" style="color:#ef4444; margin-right:6px;"></i> ${file.name}`;
+            const sizeInKb = (file.size / 1024).toFixed(1);
+            cvChosenSize.innerText = `${sizeInKb} KB - Perfect size for Firestore!`;
+            cvDropZone.style.borderColor = 'var(--primary-light)';
+            cvDropZone.style.background = 'rgba(2, 132, 199, 0.08)';
         }
 
-        btnSaveCvUrl.addEventListener('click', async () => {
-            const rawUrl = cvUrlInput.value.trim();
-            if (!rawUrl) {
-                showToast("Please enter a valid Resume URL.", true);
-                cvUrlInput.focus();
+        btnUploadCv.addEventListener('click', async () => {
+            if (!selectedCvFile) {
+                showToast("Please choose a PDF file first.", true);
                 return;
             }
 
@@ -1411,30 +1447,57 @@
                 return;
             }
 
-            btnSaveCvUrl.disabled = true;
-            btnSaveCvUrl.style.opacity = '0.6';
+            btnUploadCv.disabled = true;
+            btnUploadCv.style.opacity = '0.6';
+            cvProgress.style.display = 'block';
+            cvProgressText.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Encoding PDF to Base64 and saving to Firestore...`;
 
             try {
-                const formattedUrl = cleanResumeUrl(rawUrl);
+                // Convert file to Base64 Data URL
+                const base64DataUri = await new Promise((resolve, reject) => {
+                    const reader = new FileReader();
+                    reader.onload = () => resolve(reader.result);
+                    reader.onerror = reject;
+                    reader.readAsDataURL(selectedCvFile);
+                });
 
+                // Save directly to Firestore doc settings/resume
                 await setDoc(doc(db, "settings", "resume"), {
-                    url: formattedUrl,
+                    data: base64DataUri,
+                    fileName: selectedCvFile.name,
+                    fileSize: selectedCvFile.size,
                     updatedAt: new Date().toISOString()
                 }, { merge: true });
 
-                showToast("Resume URL saved to Firestore successfully!");
-                cvActiveUpdated.innerText = `Last updated: Just now (${new Date().toLocaleDateString()})`;
-                cvActiveUrl.href = formattedUrl;
-                cvActiveUrl.innerText = formattedUrl;
-                cvCurrentLinkBtn.href = formattedUrl;
-                cvUrlInput.value = formattedUrl;
+                showToast("Resume saved directly into Firestore successfully!");
+                cvProgressText.innerHTML = `<span style="color:#10b981;"><i class="fa-solid fa-circle-check"></i> Live in Firestore document!</span>`;
+
+                // Update UI status box
+                const sizeKb = (selectedCvFile.size / 1024).toFixed(1);
+                cvActiveName.innerText = `${selectedCvFile.name} (${sizeKb} KB)`;
+                cvActiveUpdated.innerText = `Uploaded: Just now (${new Date().toLocaleDateString()})`;
+                cvCurrentLinkBtn.href = base64DataUri;
+                cvCurrentLinkBtn.download = selectedCvFile.name;
+
+                // Reset picker
+                selectedCvFile = null;
+                cvFileInput.value = '';
+                cvChosenName.innerText = "Click to browse another PDF";
+                cvChosenSize.innerText = "PDF format only (recommended under 800 KB for Firestore)";
+                cvDropZone.style.borderColor = 'var(--border-glow)';
+                cvDropZone.style.background = 'rgba(2, 132, 199, 0.04)';
+
+                setTimeout(() => {
+                    cvProgress.style.display = 'none';
+                }, 5000);
 
             } catch (err) {
                 console.error("Firestore Save Error:", err);
                 showToast(`Failed to save: ${err.message}`, true);
+                cvProgressText.innerHTML = `<span style="color:#ef4444;"><i class="fa-solid fa-circle-xmark"></i> ${err.message}</span>`;
             } finally {
-                btnSaveCvUrl.disabled = false;
-                btnSaveCvUrl.style.opacity = '1';
+                btnUploadCv.disabled = false;
+                btnUploadCv.style.opacity = '1';
             }
         });
     </script>

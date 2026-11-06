@@ -3163,17 +3163,27 @@
             setTimeout(initScrollObserver, 400);
         });
 
-        // Sync Latest Resume URL from Firebase Firestore
+        // Sync Latest Resume (CV) from Firebase Firestore (Base64 or External Link)
         const syncResumeUrl = async () => {
             try {
                 const resumeSnap = await getDoc(doc(db, "settings", "resume"));
-                if (resumeSnap.exists() && resumeSnap.data().url) {
-                    const resumeUrl = resumeSnap.data().url;
-                    document.querySelectorAll('a[href*="updatedCv.pdf"]').forEach(btn => {
-                        btn.href = resumeUrl;
-                        btn.target = "_blank";
-                        btn.removeAttribute('download');
-                    });
+                if (resumeSnap.exists()) {
+                    const rData = resumeSnap.data();
+                    const resumeSrc = rData.data || rData.url;
+                    const fileName = rData.fileName || "Mohamed_Solaiman_CV.pdf";
+
+                    if (resumeSrc) {
+                        document.querySelectorAll('a[href*="updatedCv.pdf"], .drawer-resume-btn').forEach(btn => {
+                            btn.href = resumeSrc;
+                            if (rData.data) {
+                                btn.setAttribute('download', fileName);
+                                btn.removeAttribute('target');
+                            } else {
+                                btn.target = "_blank";
+                                btn.removeAttribute('download');
+                            }
+                        });
+                    }
                 }
             } catch (err) {
                 console.warn("Using local fallback CV:", err);
